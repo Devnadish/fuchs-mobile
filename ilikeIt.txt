@@ -1,0 +1,1 @@
+npx expo start --localhost --android >>>> to run on real devicea

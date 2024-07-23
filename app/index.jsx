@@ -1,98 +1,41 @@
-import "react-native-gesture-handler";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { colors, icons } from "../constants";
-import { LinearGradient } from "expo-linear-gradient";
-import Input from "../components/shared/Input";
 import Btn from "../components/shared/Btn";
-import Seprator from "../components/shared/Seprator";
-import { Image } from "expo-image";
+import HeaderWithImage from "../components/auth_screen/HeaderWithImage";
+
+import BottomSingInComponent from "../components/auth_screen/sign_up/BottomSingInComponent";
+import SignUpComponent from "../components/auth_screen/sign_up/SignUpComponent";
+
+import SafeArea from "../components/shared/SafeArea";
+import { StatusBar } from "react-native";
+
 export default function App() {
   return (
-    <View
-      style={{ flex: 1, justifyContent: "space-between", alignItems: "center" }}
-    >
-      {/* head image */}
-      <LinearGradient
-        colors={["#ffffff", colors.primary]}
-        start={{ x: 1, y: 0 }}
-        end={{ x: 1, y: 0.8 }}
-        // locations={[0.2, 0.6, 0.8]}
-        style={{
-          // position: "absolute",
-          // top: 0,
-          // left: 0,
-          backgroundColor: colors.primary,
-          width: "100%",
-          height: "20%",
-          borderBottomLeftRadius: 100,
-          borderBottomRightRadius: 100,
-          overflow: "hidden",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Image
-          source={require("../assets/images/service/oneStop.png")}
-          // placeholder={{ blurhash }}
-          contentFit="cover"
-          transition={1000}
-          style={{
-            width: "100%",
-            height: "100%",
-            alignSelf: "center",
-            aspectRatio: 1,
-          }}
-          // resizeMode="contain" // deprecated from expo-image
-        />
-      </LinearGradient>
-      {/* login form */}
+    <SafeArea>
+      <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
       <View
         style={{
-          flexGrow: 1,
-          width: "100%",
-          // height: "70%",
-          overflow: "hidden",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 10,
-          flexGrow: 1,
-
-          // backgroundColor: colors.primary,
+          flex: 1,
         }}
       >
-        {/* login Form And ForgetPassword  */}
-        <InputForm />
-        <LoginBtn />
-        <Seprator />
-        <AuthLogin />
-        <RegisterBtn />
-      </View>
-    </View>
+        {/* header */}
 
-    // <Redirect href="/Booking" />
+        <View style={styles.header}>
+          <HeaderWithImage />
+        </View>
+        {/* body */}
+        <View style={styles.body}>
+          <SignUpComponent />
+        </View>
+
+        {/* footer */}
+        <View style={styles.footer}>
+          <BottomSingInComponent />
+        </View>
+      </View>
+    </SafeArea>
   );
 }
-
-// const styles = StyleSheet.create({subCont})
-
-const InputForm = () => {
-  return (
-    <View
-      style={{
-        width: "100%",
-        // height: "20%",
-        overflow: "hidden",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: colors.gray,
-      }}
-    >
-      <Input label="Email" placeholder="Enter Email" />
-      <Input label="Password" placeholder="Enter Password" />
-      <ForgetPassword />
-    </View>
-  );
-};
 
 const ForgetPassword = () => {
   return (
@@ -210,3 +153,28 @@ const RegisterBtn = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 0.25,
+    backgroundColor: colors.backgroundColor,
+  },
+  body: {
+    flex: 0.6,
+
+    backgroundColor: colors.backgroundColor,
+    height: "100%",
+  },
+  footer: {
+    flex: 0.15,
+    width: Dimensions.get("screen").width,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    // flex: 1,
+    width: "100%",
+    height: "auto",
+    backgroundColor: "black",
+  },
+});

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Setting() {
   return (
-    <View className="flex-1">
+    <View>
       <Text>setting khalid nadish</Text>
     </View>
   );

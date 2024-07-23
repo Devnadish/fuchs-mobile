@@ -5,6 +5,7 @@ import {
   Image,
   View,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import { colors } from "../../constants";
 
@@ -20,13 +21,15 @@ const Btn = ({
 }) => {
   if (type === "link") {
     return (
-      <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.7}
-        style={[styles.linkBtnStyle]}
-      >
-        <Text style={[styles.linkText]}>{title}</Text>
-      </TouchableOpacity>
+      <View style={[styles.linkViewStyle, containerStyles]}>
+        <TouchableOpacity
+          onPress={handlePress}
+          activeOpacity={0.7}
+          style={[styles.linkBtnStyle]}
+        >
+          <Text style={[styles.linkText, textStyles]}>{title}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
   return (
@@ -77,6 +80,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    marginHorizontal: 20,
+    height: 50,
   },
   innerView: {
     width: "100%",
@@ -87,11 +92,17 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: colors.primary,
+    color: colors.backgroundColor,
     fontSize: 14,
   },
   linkText: {
     color: colors.linkColor,
+    fontWeight: "bold",
     fontSize: 16,
+  },
+  linkViewStyle: {
+    width: Dimensions.get("screen").width * 0.7,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

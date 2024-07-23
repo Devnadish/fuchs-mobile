@@ -54,7 +54,7 @@ const Home = () => {
         </View>
         <Button title="Close" onPress={() => setShow(false)} />
       </Modal>
-      <View className="flex-row items-center h-12 justify-between bg-white w-[90%]">
+      <View>
         <TouchableOpacity
           onPress={() => {
             setShow(true);

@@ -30,7 +30,6 @@ import axios from "axios";
 
 export default function Profile() {
   const [imagePublicId, setImagePublicId] = useState(null);
-  console.log({ imagePublicId });
   const myImage = cld.image("oneStop/users/avatar/gtczrd103ifkktxqv1hx");
   // Apply the transformation.
   myImage
@@ -85,7 +84,7 @@ export default function Profile() {
     const addUserNewuser = await axios
       .post(url, userData)
       .then((response) => {
-        console.log("response", response.data);
+        // console.log("response", response.data);
       })
       .catch((error) => {
         console.error({ error });

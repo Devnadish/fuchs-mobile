@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function Reigster() {
+export default function SignInComponent() {
   return (
     <View>
-      <Text>Reigster</Text>
+      <Text>Component</Text>
     </View>
   );
 }

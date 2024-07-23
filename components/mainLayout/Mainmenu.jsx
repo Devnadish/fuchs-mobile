@@ -5,7 +5,7 @@ import { colors } from "../../constants";
 
 export default function MainMenu() {
   return (
-    <View className="w-7 h-7 rounded-full bg-white">
+    <View>
       <TouchableOpacity onPress={() => {}}>
         <MaterialCommunityIcons name="menu" size={24} color={colors.primary} />
       </TouchableOpacity>

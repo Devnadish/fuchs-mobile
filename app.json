@@ -9,14 +9,14 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
       "splash": {
         "image": "./assets/splash.png",
-        "resizeMode": "contain",
+        "resizeMode": "cover",
         "backgroundColor": "#000000"
       }
     },
@@ -28,8 +28,11 @@
       "softwareKeyboardLayoutMode": "pan" // Just show the keyborad remove the tab bar
     },
     "web": {
+      "bundler": "metro",
+      // "output": "static",
       "favicon": "./assets/favicon.png"
     },
+
     "extra": {
       // "supportsRTL": true
       // "forcesRTL": true

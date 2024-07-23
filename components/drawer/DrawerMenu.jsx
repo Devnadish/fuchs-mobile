@@ -18,7 +18,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 const DrawerMenu = (props) => {
   const { top, bottom } = useSafeAreaInsets();
-  console.log({ top, bottom });
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView

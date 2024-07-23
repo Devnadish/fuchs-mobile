@@ -1,23 +1,12 @@
 import React from "react";
 import { Stack } from "expo-router";
 
-const UserLayout = () => {
-  return (
-    <Stack>
-      <Stack.Screen
-        name="Reigster"
-        options={{
-          headerStyle: {
-            backgroundColor: "#f45115",
-          },
-          headerTintColor: "#f00",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      />
-    </Stack>
-  );
-};
+const AuthLayout = () => (
+  <Stack screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="register" />
+    <Stack.Screen name="otpScreen" />
+    <Stack.Screen name="login" />
+  </Stack>
+);
 
-export default UserLayout;
+export default AuthLayout;

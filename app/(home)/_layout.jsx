@@ -134,7 +134,6 @@ export default function DrawerLayout() {
           options={{
             title: "Home Page",
             headerTitle: "Home",
-            // drawerItemPressed: () => console.log("Pressed"),
             drawerIcon: ({ size, color }) => (
               <Ionicons name="home" size={size} color={color} />
             ),
