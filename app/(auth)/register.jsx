@@ -5,12 +5,13 @@ import { colors } from "../../constants";
 import RegisterForm from "../../components/auth_screen/create_account/RegisterForm";
 import AddImage from "../../components/auth_screen/create_account/AddImage";
 import Btn from "../../components/shared/Btn";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import SafeArea from "../../components/shared/SafeArea";
+import BackBtn from "../../components/shared/BackBtn";
 
 export default function Reigster() {
   const [image, setImage] = useState(null);
-  const router = useRouter();
+
   return (
     <SafeArea>
       <View
@@ -21,7 +22,10 @@ export default function Reigster() {
         {/* header */}
 
         <View style={styles.header}>
-          <HeaderWithImage back={true} />
+          {/* <HeaderWithImage back={true} /> */}
+          <Text style={styles.title}>Create New Account</Text>
+          <BackBtn />
+          <AddImage image={image} setImage={setImage} />
         </View>
 
         {/* body */}
@@ -32,21 +36,17 @@ export default function Reigster() {
               justifyContent: "center",
             }}
           >
-            <Text style={styles.title}>Create New Account</Text>
-            <AddImage image={image} setImage={setImage} />
             <RegisterForm />
-
-            <View style={styles.footer}>
-              <Btn
-                title="Next"
-                handlePress={() => {
-                  router.push("/(auth)/otpScreen");
-                }}
-              />
-            </View>
           </ScrollView>
         </View>
-
+        <View style={styles.footer}>
+          <Btn
+            title="Next"
+            handlePress={() => {
+              router.push("/(auth)/otpScreen");
+            }}
+          />
+        </View>
         {/* footer */}
       </View>
     </SafeArea>
@@ -55,19 +55,24 @@ export default function Reigster() {
 
 const styles = StyleSheet.create({
   header: {
-    flex: 0.25,
+    flex: 0.2,
     backgroundColor: colors.backgroundColor,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    gap: 5,
   },
   body: {
-    flex: 1,
-    backgroundColor: colors.backgroundColor,
-    height: "100%",
+    flex: 0.7,
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
   },
   footer: {
-    flex: 0.25,
+    flex: 0.1,
     backgroundColor: colors.backgroundColor,
+    alignContent: "center",
+    justifyContent: "center",
   },
   title: {
     color: colors.textColor,

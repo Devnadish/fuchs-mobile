@@ -3,8 +3,6 @@ import { colors } from "../../constants";
 import { Link } from "expo-router";
 
 const Xlink = ({ title, containerStyles, textStyles, href }) => {
-  console.log(title);
-
   return (
     <Link href={href} asChild style={styles.linkStyle}>
       <TouchableOpacity activeOpacity={0.7} style={styles.btnStyle}>

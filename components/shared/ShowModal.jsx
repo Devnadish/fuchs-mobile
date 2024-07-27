@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, forwardRef, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert, Modal } from "react-native";
 import {
   BottomSheetBackdrop,
   BottomSheetView,
@@ -10,10 +10,8 @@ import { colors } from "../../constants";
 import { AntDesign } from "@expo/vector-icons";
 
 const CloseBtn = () => {
-  const { close } = useBottomSheet();
-
   return (
-    <Pressable style={styles.closeBtn} onPress={() => close()}>
+    <Pressable style={styles.closeBtn} onPress={() => {}}>
       <View>
         <AntDesign name="closecircle" size={24} color={colors.muteColor} />
       </View>
@@ -21,9 +19,9 @@ const CloseBtn = () => {
   );
 };
 
-const ModelSheet = forwardRef(function ModelSheet(props, ref) {
-  // ref
+const ShowModal = ({ children, title = "khalid nadish" }) => {
   const snapPoints = useMemo(() => ["25%", "50%", "75%"], []);
+
   const [modalVisible, setModalVisible] = useState(true);
 
   // callbacks
@@ -45,28 +43,28 @@ const ModelSheet = forwardRef(function ModelSheet(props, ref) {
   // renders
   return (
     <View style={styles.container}>
-      <BottomSheetModal
-        ref={ref}
+      <Modal
         enableDynamicSizing
         style={{ shadowColor: "#000", elevation: 10 }}
         enablePanDownToClose={false}
         enableOverDrag={false}
         snapPoints={snapPoints}
-        index={props.indexOpen || 0} // default 0
+        // index={props.indexOpen || 0} // default 0
         backdropComponent={renderBackDrop}
-        onChange={handleSheetChanges}
-        {...props}
+        // onChange={handleSheetChanges}
+        // {...props}
       >
-        <BottomSheetView style={styles.contentContainer}>
-          <Text style={styles.containerHeadline}>{props.title}</Text>
+        <View style={styles.contentContainer}>
+          <Text style={styles.containerHeadline}>{title}</Text>
           <CloseBtn />
-        </BottomSheetView>
+        </View>
 
-        {props.children}
-      </BottomSheetModal>
+        {children}
+      </Modal>
     </View>
   );
-});
+};
+export default ShowModal;
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -107,5 +105,3 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust the color as needed
   },
 });
-
-export default ModelSheet;

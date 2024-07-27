@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Platform } from "react-native";
 import React, { useContext } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewStyle from "../../util/MapViewStyle.json";
@@ -17,15 +17,6 @@ export default function BookingMapView() {
     router.push("/home");
   };
   const GoRegister = () => {};
-
-  // console.log(location);
-
-  // console.log({ location });
-  // 21.540571161178363, 39.205667847890616;
-
-  // useEffect(() => {
-  //   location && getNearLocations();
-  // }, [location]);
 
   const getNearLocations = () => {
     data = {

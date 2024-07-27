@@ -1,42 +1,24 @@
-export const citys = [
+export const enCitys = [
+  { id: "1", value: "Abha", label: "Abha" },
+  { id: "2", value: "Al-Baḥah", label: "Al-Baḥah" },
+  { id: "3", value: "Al-Dammām", label: "Al-Dammām" },
+  { id: "4", value: "Al-Khubar", label: "Al-Khubar" },
+  { id: "5", value: "Al-Ṭaif", label: "Al-Ṭaif" },
+  { id: "6", value: "Buraydah", label: "Buraydah" },
+  { id: "7", value: "Dhahran", label: "Dhahran" },
+  { id: "8", value: "Hail", label: "Hail" },
+  { id: "9", value: "Jeddah", label: "Jeddah" },
+  { id: "10", value: "Jizan", label: "Jizan" },
+  { id: "11", value: "Khamis Mushayt", label: "Khamis Mushayt" },
   {
-    label: "Ghana",
-    value: "gh",
-    flag: "🇬🇭",
+    id: "12",
+    value: "King Khalīd Military City",
+    label: "King Khalīd Military City",
   },
-  {
-    label: "Nigeria",
-    value: "ng",
-    flag: "🇳🇬",
-  },
-  {
-    label: "Kenya",
-    value: "ky",
-    flag: "🇰🇪",
-  },
-  {
-    label: "United States",
-    value: "us",
-    flag: "🇺🇸",
-  },
-  {
-    label: "Pakistan",
-    value: "pk",
-    flag: "🇵🇰",
-  },
-  {
-    label: "India",
-    value: "in",
-    flag: "🇮🇳",
-  },
-  {
-    label: "Finland",
-    value: "fn",
-    flag: "🇫🇮",
-  },
-  {
-    label: "France",
-    value: "fr",
-    flag: "🇫🇷",
-  },
+  { id: "13", value: "Mecca", label: "Mecca" },
+  { id: "14", value: "Medina", label: "Medina" },
+  { id: "15", value: "Najrān", label: "Najrān" },
+  { id: "16", value: "Riyadh", label: "Riyadh" },
+  { id: "17", value: "Tabuk", label: "Tabuk" },
+  { id: "18", value: "Yanbu", label: "Yanbu" },
 ];

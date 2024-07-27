@@ -4,16 +4,40 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  Text,
+  View,
 } from "react-native";
 import { colors } from "../../constants";
 
-const FormContainer = ({ children }) => {
+const FormContainer = ({ title, icon, children }) => {
   return (
     <KeyboardAvoidingView
-      enabled
+      // enabled
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 10,
+          marginBottom: 10,
+          width: "100%",
+        }}
+        s
+      >
+        {icon && icon}
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "bold",
+            color: colors.primary,
+          }}
+        >
+          {title && title}
+        </Text>
+      </View>
       {children}
     </KeyboardAvoidingView>
   );
@@ -21,9 +45,10 @@ const FormContainer = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get("window").width - 10,
+    width: Dimensions.get("window").width - 20,
     backgroundColor: colors.backgroundColor,
     padding: 20,
+    gap: 10,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,

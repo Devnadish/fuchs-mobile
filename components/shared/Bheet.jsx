@@ -20,9 +20,7 @@ const Bsheet = forwardRef(function Bsheet(props, ref) {
   const snapPoints = useMemo(() => ["25%", "50%", "70%", "90%", "100%"], []);
 
   // callbacks
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const handleSheetChanges = useCallback((index) => {}, []);
 
   const renderBackdrop = useCallback(
     (props) => (

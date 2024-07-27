@@ -25,17 +25,24 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "softwareKeyboardLayoutMode": "pan" // Just show the keyborad remove the tab bar
+      "softwareKeyboardLayoutMode": "pan",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
-      // "output": "static",
       "favicon": "./assets/favicon.png"
     },
-
     "extra": {
-      // "supportsRTL": true
-      // "forcesRTL": true
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "bae9a49d-ff20-45fc-b53a-99f0d4967d3a"
+      }
     },
     "plugins": [
       "expo-router",

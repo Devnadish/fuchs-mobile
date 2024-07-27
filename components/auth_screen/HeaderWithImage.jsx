@@ -3,9 +3,10 @@ import React from "react";
 import { Image } from "expo-image";
 import imageHeader from "../../assets/images/authHeaderImag.webp";
 import avatrHeader from "../../assets/images/fucksAvatar.png";
-import { Ionicons } from "@expo/vector-icons";
+
 import { colors } from "../../constants";
 import { useRouter } from "expo-router";
+import BackBtn from "../shared/BackBtn";
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 export default function HeaderWithImage({ back = false }) {
@@ -36,20 +37,6 @@ export default function HeaderWithImage({ back = false }) {
   );
 }
 
-const BackBtn = () => {
-  router = useRouter();
-  const goBack = () => {
-    router.back();
-  };
-  return (
-    <View style={styles.backBtn} onPress={goBack}>
-      <Button title="Back" onPress={goBack} />
-      {/* <Ionicons name="arrow-back" size={24} color="black" /> */}
-      {/* </Button> */}
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   header: {
     width: "100%",
@@ -74,17 +61,5 @@ const styles = StyleSheet.create({
     width: 150, // Ensures image stretches to header width
     height: 150, // Ensures image fills header height proportionally
     resizeMode: "cover", // Ensure image covers the space
-  },
-  backBtn: {
-    position: "absolute",
-    top: "30%",
-    left: 10,
-    zIndex: 1,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.backgroundColor,
   },
 });

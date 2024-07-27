@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useRef } from "react";
 import { colors } from "../../../constants";
 import Btn from "../../shared/Btn";
@@ -6,6 +6,8 @@ import { showToast } from "../../../lib/nadish";
 import Xlink from "../../shared/Xlink";
 import ModelSheet from "../../shared/ModelSheet";
 import { AntDesign } from "@expo/vector-icons";
+import { whyilogin } from "../../../constants/textData/whyilogin";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 export default function SignUpComponent() {
   const infoModelSheet = useRef(null);
@@ -40,7 +42,20 @@ export default function SignUpComponent() {
           showToast("Continue as Guest");
         }}
       />
-      <ModelSheet ref={infoModelSheet} title={"Why Should I Sign Up?"} />
+      <ModelSheet ref={infoModelSheet} title={"Why Should I Sign Up?"}>
+        <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+          <Text
+            style={{
+              padding: 10,
+              flexWrap: "wrap",
+              fontSize: 16,
+              lineHeight: 22,
+            }}
+          >
+            {whyilogin}
+          </Text>
+        </BottomSheetScrollView>
+      </ModelSheet>
     </View>
   );
 }
@@ -67,6 +82,14 @@ const SignUp = ({ handleOpenPress }) => {
 };
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 40,
+    marginBottom: 10,
+  },
   containter: {
     flex: 1,
     justifyContent: "center",

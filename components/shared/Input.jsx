@@ -54,9 +54,7 @@ const styles = StyleSheet.create({
   viewStyle: {
     width: Dimensions.get("screen").width * 0.9,
     // backgroundColor: colors.primary,
-    marginBottom: 5,
     padding: 4,
-    gap: 1,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    // borderColor: colors.borderColor,
     backgroundColor: colors.white,
     borderRadius: 5,
   },
