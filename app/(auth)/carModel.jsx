@@ -16,7 +16,6 @@ import { AntDesign } from "@expo/vector-icons";
 
 export default function CarModel() {
   const params = useLocalSearchParams();
-  console.log("parmetre from car:>>>", params);
   return (
     <View style={{ flex: 1 }}>
       {/* Cancel button in backdraw */}
@@ -209,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   contentContainer: {
-    backgroundColor: colors.mu,
+    backgroundColor: colors.muteColor,
     padding: 10,
   },
   input: {

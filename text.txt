@@ -1,0 +1,1 @@
+npm i expo-localization i18n-js i18next react-i18next

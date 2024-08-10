@@ -1,63 +1,38 @@
 {
   "expo": {
-    "name": "fox",
-    "slug": "fox",
-    "scheme": "fox",
+    "name": "FoucsReact",
+    "slug": "FoucsReact",
+    "scheme": "foucsreact",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "splash": {
-        "image": "./assets/splash.png",
-        "resizeMode": "cover",
-        "backgroundColor": "#000000"
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "softwareKeyboardLayoutMode": "pan",
-      "permissions": [
-        "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION",
-        "android.permission.RECORD_AUDIO"
-      ]
+      }
     },
     "web": {
-      "bundler": "metro",
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "bae9a49d-ff20-45fc-b53a-99f0d4967d3a"
-      }
     },
     "plugins": [
       "expo-router",
-      "expo-localization",
-      [
-        "expo-location",
-        {
-          "locationAlwaysAndWhenInUsePermission": "Allow OneStop to use your location."
-        }
-      ],
+
       "expo-localization",
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "The app accesses your Camera>"
         }
       ]
     ]
