@@ -3,4 +3,5 @@ FIXME: Remove gorham lib and update whyiRegester component
 FIXME: refactore the login from the component
 FIXME: refactore index file in root dir to be as register or search for solution
 TODO: Create Global style
-TODO:
+TODO:Refactoe pressapale butune to be reusabla
+TODO: Refactore them

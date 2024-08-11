@@ -13,7 +13,6 @@ const RootLayout = () => {
   check
     ? showToast("Server is reachable and responsive")
     : showToast("Server is not reachable or unresponsive");
-  console.log("RootLayout rendered");
   return (
     <UserAuthProvider>
       <GestureHandlerRootView>

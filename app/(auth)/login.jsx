@@ -22,6 +22,7 @@ import { HEADER_IMAGE } from "../../constants/images";
 export default function Login() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
+  const { loginFunction } = useContext(userAuthContext);
   return (
     <View style={styles.container}>
       <HeadrImage />
@@ -31,7 +32,11 @@ export default function Login() {
         password={password}
         setPassword={setPassword}
       />
-      <Buttuns mobile={mobile} password={password} />
+      <Buttuns
+        mobile={mobile}
+        password={password}
+        loginFunction={loginFunction}
+      />
       <CreateAccount />
     </View>
   );
@@ -96,9 +101,7 @@ const LoginForm = ({ mobile, setMobile, password, setPassword }) => {
   );
 };
 
-const Buttuns = ({ mobile, password }) => {
-  const { login } = useContext(userAuthContext);
-
+const Buttuns = ({ mobile, password, loginFunction }) => {
   const handleLogin = async () => {
     if (!mobile || !password) {
       showToast("Please Fill all the fields");
@@ -122,7 +125,7 @@ const Buttuns = ({ mobile, password }) => {
       mobile: DoLogin.mobile,
       avatar: DoLogin.profile.avatar,
     };
-    login(userInformation);
+    await loginFunction(userInformation);
     router.push("/(home)/home");
   };
 

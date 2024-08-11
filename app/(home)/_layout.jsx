@@ -14,7 +14,6 @@ import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { LOGO_IMAGE, ONESTOP } from "../../constants/images";
 
 const TabsLayout = () => {
-  const { avatar } = useContext(userAuthContext);
   const { t } = useTranslation();
   return (
     <Tabs
@@ -31,7 +30,12 @@ const TabsLayout = () => {
         },
 
         headerTitle: () => (
-          <Image source={{ uri: ONESTOP }} style={{ width: 60, height: 40 }} />
+          <Image
+            source={{
+              uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + ONESTOP,
+            }}
+            style={{ width: 60, height: 40 }}
+          />
         ),
         headerRight: () => <ActiveBooking />,
         headerLeft: () => <UserAvatar />,
@@ -41,7 +45,7 @@ const TabsLayout = () => {
         name="home"
         options={{
           title: t("tab.home"),
-          // headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ color, focused }) => (
             <Entypo
               name="home"

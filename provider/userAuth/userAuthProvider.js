@@ -17,49 +17,53 @@ export const UserAuthProvider = ({ children }) => {
 
   const checkLoginStatus = async () => {
     console.log("check login status");
-    const userToken = await AsyncStorage.getItem("userToken");
-    if (userToken) {
+    const userData = await AsyncStorage.getItem("userData");
+    console.log("userData from loacl storage: ", userData);
+    if (userData) {
       setIsLogin(true);
-
-      // Fetch and set user details
-      const userData = await AsyncStorage.getItem("userData");
-      if (userData) {
-        const { name, email, mobile, avatar } = JSON.parse(userData);
-        setUserName(name);
-        setUserEmail(email);
-        setUserMobile(mobile);
-        setUserAvatar(avatar);
-      }
+      const { name, email, mobile, avatar } = JSON.parse(userData);
+      setUserName(name);
+      setUserEmail(email);
+      setUserMobile(mobile);
+      setUserAvatar(avatar);
+    } else {
+      setIsLogin(false);
     }
   };
 
-  const login = async (userData) => {
-    // Perform login logic (e.g., validate credentials)
-    await AsyncStorage.setItem("userToken", "dummyToken");
+  const loginFunction = async (userData) => {
     await AsyncStorage.setItem("userData", JSON.stringify(userData));
+    console.log("userData from loacl storage: ", userData);
+    const { name, email, avatar, mobile } = userData;
+    setUserName(name);
+    setUserEmail(email);
+    setUserMobile(mobile);
+    // setUserAvatar(process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + avatar);
+    setUserAvatar(avatar);
+    setIsLogin(true);
+    console.log("Login successful");
+    console.log("userAvatar from loacl storage: ", userAvatar);
+  };
 
+  const updateProfile = async (userData) => {
+    await AsyncStorage.clear();
+    await AsyncStorage.setItem("userData", JSON.stringify(userData));
     const { name, email, avatar, mobile } = userData;
     setUserName(name);
     setUserEmail(email);
     setUserMobile(mobile);
     setUserAvatar(avatar);
-
     setIsLogin(true);
-
-    console.log("Login successful");
+    console.log("update successful");
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem("userToken");
-    await AsyncStorage.removeItem("userData");
-
+    await AsyncStorage.clear();
     setUserName("");
     setUserEmail("");
     setUserAvatar("");
     setUserMobile("");
-
     setIsLogin(false);
-
     console.log("Logout successful");
   };
 
@@ -72,8 +76,9 @@ export const UserAuthProvider = ({ children }) => {
         userAvatar,
         userMobile,
         setUserMobile,
-        login,
+        loginFunction,
         logout,
+        updateProfile,
       }}
     >
       {children}

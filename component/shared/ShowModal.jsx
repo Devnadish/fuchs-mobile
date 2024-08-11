@@ -6,26 +6,23 @@ export default function ShowModal({ visible, setVisible, header, children }) {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <Pressable style={{ flex: 1 }} onPress={() => setVisible(false)}>
-        <View style={styles.backDrop}>
-          <View style={styles.bodyStyle}>
-            <View style={styles.headerStyle}>
-              <Text>{header}</Text>
-
-              <Pressable
-                onPress={() => setVisible(false)}
-                style={styles.closeButton}
-              >
-                <Text
-                  style={{ color: "white", fontWeight: "bold", fontSize: 20 }}
-                >
-                  X
-                </Text>
-              </Pressable>
-            </View>
-            <View style={styles.childrenStyle}>{children}</View>
-          </View>
-        </View>
+        <View style={styles.backDrop} />
       </Pressable>
+      <View style={styles.bodyStyle}>
+        <View style={styles.headerStyle}>
+          <Text>{header}</Text>
+
+          <Pressable
+            onPress={() => setVisible(false)}
+            style={styles.closeButton}
+          >
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>
+              X
+            </Text>
+          </Pressable>
+        </View>
+        <View style={styles.childrenStyle}>{children}</View>
+      </View>
     </Modal>
   );
 }
@@ -62,8 +59,8 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     backgroundColor: colors.danger,
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",

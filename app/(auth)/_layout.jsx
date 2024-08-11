@@ -7,7 +7,6 @@ import {
 } from "../../constants/headerBarStyle";
 import { NewUserProvider } from "../../provider/newUserProvider/newUserProvider";
 import { colors } from "../../constants";
-import WhyIregister from "../../component/auth/WhyIregister";
 import Logout from "../../component/auth/Logout";
 
 const AuthLayout = () => (
@@ -46,16 +45,6 @@ const AuthLayout = () => (
           animation: "slide_from_bottom",
           animationTypeForReplace: "pop",
           headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="profile"
-        options={{
-          headerShown: true,
-          title: "Profile",
-          headerTitleAlign: "center",
-          headerTintColor: colors.linkColor,
-          headerRight: () => <Logout />,
         }}
       />
     </Stack>

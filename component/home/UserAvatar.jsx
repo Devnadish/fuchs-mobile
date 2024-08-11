@@ -1,45 +1,50 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import React, { useContext, useState } from "react";
 import { AdvancedImage } from "cloudinary-react-native";
 import { cld } from "../../util/cloudinary";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LOGO_IMAGE } from "../../constants/images";
 import { router } from "expo-router";
-const imageLink =
-  "https://res.cloudinary.com/dhyh7aufp/image/upload/v1722634810/oneStop/users/avatar/ilbfgof0n6sftmrurham.jpg";
-const imageLink1 = "oneStop/users/avatar/ilbfgof0n6sftmrurham.jpg";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { colors } from "../../constants";
+
 export default function UserAvatar() {
-  const [userAvatar, setUserAvatar] = useState(null);
+  const { userAvatar, userName } = useContext(userAuthContext);
   const [loading, setLoading] = useState(true);
+  console.log("image url from user Avatar in home bar", userAvatar);
 
-  const getUserAvatar = async () => {
-    const userData = await AsyncStorage.getItem("userData");
-    if (userData) {
-      const { avatar } = JSON.parse(userData);
-      setUserAvatar(avatar);
-    }
-  };
+  let myimage;
+  if (userAvatar) {
+    myimage = cld.image(userAvatar);
+    myimage.resize(
+      thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
+    );
+  } else {
+    myimage = cld.image(LOGO_IMAGE);
+  }
 
-  useEffect(() => {
-    getUserAvatar();
-  }, []);
-
-  const myimage = cld.image(imageLink1);
-
-  myimage.resize(
-    thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
-  );
   return (
-    <View style={{ marginLeft: 10 }}>
+    <View style={styles.container}>
       {loading && (
         <View style={styles.imageContainer}>
-          {/* <Text>loading</Text> */}
-          <Image source={{ uri: LOGO_IMAGE }} style={styles.image} />
+          <ActivityIndicator
+            animating={loading}
+            color={colors.primary}
+            size="small"
+          />
+          {/* <Image source={{ uri: LOGO_IMAGE }} style={styles.image} /> */}
         </View>
       )}
+
       <Pressable onPress={() => router.push("/(profile)/profile")}>
         <View style={styles.imageContainer}>
           <AdvancedImage
@@ -50,11 +55,27 @@ export default function UserAvatar() {
           {/* <Image source={{ uri: userAvatar }} style={styles.image} /> */}
         </View>
       </Pressable>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "flex-end",
+        }}
+      >
+        <Text style={{ fontWeight: "bold" }}>Hi.. </Text>
+        <Text>{userName}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginLeft: 10,
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 10,
+  },
   imageContainer: {
     width: 40,
     height: 40,

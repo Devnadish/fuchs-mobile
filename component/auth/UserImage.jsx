@@ -3,10 +3,13 @@ import { StyleSheet, View, Image, Pressable, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { colors } from "../../constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-
-const imagePlaceholder = require("../../assets/icons/avatarPlaceHolder.png");
+import { useState } from "react";
 
 const UserImage = ({ userAvatar, setuserAvatar }) => {
+  // const [image, setImage] = useState(
+  //   process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + userAvatar
+  // );
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -16,6 +19,8 @@ const UserImage = ({ userAvatar, setuserAvatar }) => {
     });
     if (!result.canceled) {
       setuserAvatar(result.assets[0].uri);
+
+      // setImage(result.assets[0].uri);
     }
   };
 

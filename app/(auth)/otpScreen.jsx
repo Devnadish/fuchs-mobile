@@ -1,13 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-  Image,
-  ImageBackground,
-} from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import React, { useContext, useState } from "react";
 import { colors } from "../../constants";
 import OtpForm from "../../component/auth/OtpForm";
 import { router, useLocalSearchParams } from "expo-router";
@@ -17,8 +9,6 @@ import { newUserContext } from "../../provider/newUserProvider/newUserProvider";
 import { showToast } from "../../lib/nadish";
 import { createNewuser } from "../../api/createNewuser";
 import { checkisExisit } from "../../api/checkUserIsExist";
-import { cld } from "../../util/cloudinary";
-import { AdvancedImage, upload } from "cloudinary-react-native";
 import { uploadImageToCloudnary } from "../../util/uploadImageToCloudnary";
 
 export default function OtpScreen() {

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import { colors } from "../../constants";
 import BottomSingInComponent from "../../component/auth/BottomSingInComponent";
+import { showToast } from "../../lib/nadish";
 
 // import SafeArea from "../components/shared/SafeArea";
 import { StatusBar } from "expo-status-bar";
@@ -10,30 +11,42 @@ import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { router } from "expo-router";
 import Btn from "../../component/shared/Btn";
 import Xlink from "../../component/shared/Xlink";
+import WhyIregister from "../../component/auth/WhyIregister";
 
 export default function HomePage() {
-  const { userMobile, isLogin, userName } = useContext(userAuthContext);
+  const { isLogin, userName } = useContext(userAuthContext);
 
   return (
-    <>
-      {/* {userMobile && <Redirect href="/(auth)/home" />} */}
-      <View style={styles.container}>
-        <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
-        <View>
-          <Image source={{ uri: HEADER_IMAGE }} style={styles.headerImage} />
-          <Image source={{ uri: LOGO_IMAGE }} style={styles.logoImage} />
-        </View>
-        <View style={styles.loginContainer}>
-          {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
-          <LoginAsGuest />
-        </View>
-        <BottomSingInComponent />
+    <View style={styles.container}>
+      <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
+
+      <View>
+        <Image
+          source={{
+            uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
+          }}
+          style={styles.headerImage}
+        />
+        <Image
+          source={{
+            uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + LOGO_IMAGE,
+          }}
+          style={styles.logoImage}
+        />
       </View>
-    </>
+      <View style={styles.loginContainer}>
+        {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
+        <LoginAsGuest />
+      </View>
+      <BottomSingInComponent />
+    </View>
   );
 }
 
 function LoginAs({ userName }) {
+  const handleLogin = async () => {
+    router.push("/(home)/home");
+  };
   return (
     <View>
       <Btn
@@ -46,7 +59,7 @@ function LoginAs({ userName }) {
           color: colors.backgroundColor,
         }}
         handlePress={() => {
-          router.push("/(home)/home");
+          handleLogin();
         }}
       />
     </View>
@@ -64,6 +77,7 @@ const SignUp = () => {
       }}
     >
       <Xlink href={"/(auth)/register"} title="Sign Up With Email" />
+      <WhyIregister />
     </View>
   );
 };
@@ -75,6 +89,7 @@ function LoginAsGuest() {
         containerStyles={{
           backgroundColor: colors.backgroundColor,
           borderColor: colors.muteColor,
+          borderWidth: 1,
         }}
         textStyles={{
           color: colors.textColor,

@@ -1,16 +1,17 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useRef, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { whyilogin } from "../../constants/textData/whyilogin";
-import ModelSheet from "../../component/shared/ModelSheet";
 import { colors } from "../../constants";
-import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import ShowModal from "../shared/ShowModal";
 export default function WhyIregister() {
   //  const headerHeight = useHeaderHeight();
+  const [visible, setVisible] = useState(false);
 
   const infoModelSheet = useRef(null);
   const handleOpenPress = () => {
     infoModelSheet.current?.present();
+    setVisible(true);
   };
 
   return (
@@ -20,20 +21,31 @@ export default function WhyIregister() {
           <AntDesign name="infocirlce" size={24} color={colors.muteColor} />
         </View>
       </Pressable>
-      <ModelSheet ref={infoModelSheet} title={"Why Should I Sign Up?"}>
-        <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
-          <Text
-            style={{
-              padding: 10,
-              flexWrap: "wrap",
-              fontSize: 16,
-              lineHeight: 22,
-            }}
-          >
-            {whyilogin}
-          </Text>
-        </BottomSheetScrollView>
-      </ModelSheet>
+
+      <ShowModal
+        visible={visible}
+        setVisible={setVisible}
+        header={"Why Should I Sign Up?"}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        >
+          <View>
+            <Text
+              style={{
+                padding: 10,
+                flexWrap: "wrap",
+                fontSize: 16,
+                lineHeight: 22,
+              }}
+            >
+              {whyilogin}
+            </Text>
+          </View>
+        </ScrollView>
+      </ShowModal>
     </View>
   );
 }
@@ -47,7 +59,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     marginBottom: 10,
   },
-
+  scroll: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   whyBtn: {
     width: 40,
     borderColor: colors.muteColor,

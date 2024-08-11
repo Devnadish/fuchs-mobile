@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { colors } from "../../constants";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 
 export default function ActiveBooking() {
   const [active, setActive] = useState(true);
+  const { logout } = useContext(userAuthContext);
   return (
     <View style={styles.container}>
+      <Text onPress={logout}>logout</Text>
       {active ? (
         <FontAwesome name="calendar-check-o" size={24} color={colors.danger} />
       ) : (

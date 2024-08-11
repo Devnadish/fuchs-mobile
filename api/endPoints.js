@@ -7,3 +7,5 @@ export const CREATE_NEW_USER = UrlEndPoint + "/api/user/registerNewUser";
 export const USER_LOGIN = UrlEndPoint + "/api/user/login";
 export const GET_USER = UrlEndPoint + "/api/user/update";
 export const GET_USER_BY_MOBILE = UrlEndPoint + "/api/user/get_by_mobile";
+export const UPDATE_USER_PROFILE =
+  UrlEndPoint + "/api/user/update/updateprofile";

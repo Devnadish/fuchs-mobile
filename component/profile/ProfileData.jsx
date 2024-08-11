@@ -1,13 +1,11 @@
-import {
-  Button,
-  FlatList,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import FormContainer from "../shared/FormContainer";
 import Input from "../shared/Input";
 import Feather from "@expo/vector-icons/Feather";
@@ -16,6 +14,10 @@ import UserImage from "../auth/UserImage";
 import { enCitys } from "../../constants/City";
 import ShowModal from "../shared/ShowModal";
 import { Entypo } from "@expo/vector-icons";
+import { updateUserProfile } from "../../api/updateUserProvider";
+import Btn from "../shared/Btn";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { uploadImageToCloudnary } from "../../util/uploadImageToCloudnary";
 
 export default function ProfileData({
   name,
@@ -31,13 +33,40 @@ export default function ProfileData({
   const [newMobile, setNewMobile] = useState(mobile);
   const [newEmail, setNewEmail] = useState(email);
   const [newCity, setNewCity] = useState(city || "Select Your City");
-  const [newAvatar, setnewAvatar] = useState(avatar);
-  const handleUpdate = () => {
-    if (!newName || !newMobile || !newEmail || !newPassWord) {
-      setErrorMsg("Please Fill all the fields");
-      return;
+  const [loading, setLoading] = useState(false);
+  const [newAvatar, setnewAvatar] = useState(
+    process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + avatar
+  );
+  const { updateProfile } = useContext(userAuthContext);
+  const handleUpdate = async () => {
+    setLoading(true);
+    //TODO: add validation
+
+    let imagePublicId;
+    try {
+      imagePublicId = await uploadImageToCloudnary(
+        newAvatar,
+        "oneStopUserAvatar", // cloudainary preset name
+        "userAvatar"
+      );
+    } catch (error) {
+      console.error("Error uploading image:", error);
     }
+
+    const userInformation = {
+      name: newName,
+      mobile: newMobile,
+      email: newEmail,
+      password: newPassWord,
+      city: newCity,
+      avatar: imagePublicId.public_id || avatar,
+    };
+
+    const updateUser = await updateUserProfile(userInformation);
+    await updateProfile(userInformation); // update user context
+    setLoading(false);
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
@@ -82,22 +111,23 @@ export default function ProfileData({
           maxLength={10}
         />
       </FormContainer>
-      <SelectCity cityInfo={city} />
-
-      <Pressable
-        style={styles.loginButton}
-        onPress={() => {
-          handleUpdate();
-        }}
-      >
-        <Text style={{ color: colors.white }}>Save Changes</Text>
-      </Pressable>
+      <SelectCity selectedValue={newCity} setSelectedValue={setNewCity} />
+      <View style={styles.footer}>
+        <Btn
+          title="Update Profile"
+          handlePress={() => {
+            handleUpdate();
+          }}
+          isLoading={loading}
+          loadingText="Update  Profile"
+          containerStyles={{ backgroundColor: colors.danger }}
+        />
+      </View>
     </View>
   );
 }
 
-const SelectCity = ({ cityInfo }) => {
-  const [selectedValue, setSelectedValue] = useState(cityInfo);
+const SelectCity = ({ selectedValue, setSelectedValue }) => {
   const [visible, setVisible] = useState(false);
 
   const memoriedCallBack = useCallback((item) => {

@@ -59,12 +59,7 @@ const Btn = ({
           <Text style={[styles.text, textStyles]}>{title}</Text>
         )}
         {isLoading && (
-          <ActivityIndicator
-            animating={isLoading}
-            color="#fff"
-            size="small"
-            className="ml-2"
-          />
+          <ActivityIndicator animating={isLoading} color="#fff" size="small" />
         )}
       </View>
     </TouchableOpacity>
@@ -82,8 +77,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryBtn,
     padding: 5,
     borderRadius: 5,
-    borderColor: colors.primary,
-    borderWidth: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

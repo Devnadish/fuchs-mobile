@@ -45,10 +45,10 @@ const FormContainer = ({ title, icon, children, errorBorder }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get("window").width - 20,
+    width: Dimensions.get("window").width - 30,
     backgroundColor: colors.white,
-    padding: 20,
-    gap: 10,
+    padding: 30,
+    gap: 8,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 2,
   },
 });
 
