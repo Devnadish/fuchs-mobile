@@ -33,7 +33,7 @@ export default function UserAvatar() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.avatarContainer}>
       {loading && (
         <View style={styles.imageContainer}>
           <ActivityIndicator
@@ -70,7 +70,7 @@ export default function UserAvatar() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  avatarContainer: {
     marginLeft: 10,
     alignItems: "center",
     flexDirection: "row",

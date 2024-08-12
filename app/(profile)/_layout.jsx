@@ -13,7 +13,7 @@ const TabsLayout = () => {
         headerTitleAlign: "center",
         headerTintColor: colors.linkColor,
         headerStyle: {
-          backgroundColor: colors.backgroundColor,
+          backgroundColor: colors.primary,
         },
 
         headerRight: () => <GoHome />,

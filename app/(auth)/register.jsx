@@ -10,6 +10,7 @@ import { regesiterValidation } from "../../lib/registeraValidation";
 import { checkisExisit } from "../../api/checkUserIsExist";
 import { otpSms } from "../../util/otp/sendSmsOpt";
 import { showToast } from "../../lib/nadish";
+import { globalStyle } from "../../styles/globalStyle";
 
 export default function Reigster() {
   const [name, setName] = useState("");
@@ -66,34 +67,36 @@ export default function Reigster() {
   };
 
   return (
-    <View style={styles.container}>
-      <UserImage userAvatar={userAvatar} setuserAvatar={setuserAvatar} />
-
+    <>
       <ScrollView
-        contentContainerStyle={styles.scroll}
+        contentContainerStyle={globalStyle.scroll}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <RegisterForm
-          name={name}
-          setName={setName}
-          mobile={mobile}
-          setMobile={setMobile}
-          email={email}
-          setEmail={setEmail}
-          passWord={passWord}
-          setPassWord={setPassWord}
-          city={city}
-          setCity={setCity}
-          car={car}
-          setCar={setCar}
-          carModel={carModel}
-          setCarModel={setCarModel}
-          carYear={carYear}
-          setCarYear={setCarYear}
-          errorMsg={errorMsg}
-        />
+        <View>
+          <UserImage userAvatar={userAvatar} setuserAvatar={setuserAvatar} />
+          <RegisterForm
+            name={name}
+            setName={setName}
+            mobile={mobile}
+            setMobile={setMobile}
+            email={email}
+            setEmail={setEmail}
+            passWord={passWord}
+            setPassWord={setPassWord}
+            city={city}
+            setCity={setCity}
+            car={car}
+            setCar={setCar}
+            carModel={carModel}
+            setCarModel={setCarModel}
+            carYear={carYear}
+            setCarYear={setCarYear}
+            errorMsg={errorMsg}
+          />
+        </View>
       </ScrollView>
+
       <View style={styles.changeButonContainer}>
         <Btn
           title="Next"
@@ -102,37 +105,16 @@ export default function Reigster() {
           loadingText="data Process..."
         />
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: colors.backgroundColor,
-    justifyContent: "space-between",
-  },
-  scroll: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
   changeButonContainer: {
-    flexDirection: "row",
-    elevation: 4,
     width: "100%",
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: colors.muteColor,
     height: 60,
     alignItems: "center",
     justifyContent: "center",
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 23,
   },
 });

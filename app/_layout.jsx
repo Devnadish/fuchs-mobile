@@ -4,7 +4,6 @@ import { Stack } from "expo-router";
 import { LanguageProvider } from "../provider/languageProvider/languageProvider";
 import { UserAuthProvider } from "../provider/userAuth/userAuthProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { indexBarStyle } from "../constants/headerBarStyle";
 import { pingServer, showToast } from "../lib/nadish";
 
@@ -16,17 +15,14 @@ const RootLayout = () => {
   return (
     <UserAuthProvider>
       <GestureHandlerRootView>
-        <BottomSheetModalProvider>
-          <LanguageProvider>
-            <Stack>
-              <Stack.Screen name="index" options={indexBarStyle} />
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen name="(home)" options={{ headerShown: false }} />
-              <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-              {/* <Stack.Screen name="(user)" /> */}
-            </Stack>
-          </LanguageProvider>
-        </BottomSheetModalProvider>
+        <LanguageProvider>
+          <Stack>
+            <Stack.Screen name="index" options={indexBarStyle} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(home)" options={{ headerShown: false }} />
+            <Stack.Screen name="(profile)" options={{ headerShown: false }} />
+          </Stack>
+        </LanguageProvider>
       </GestureHandlerRootView>
     </UserAuthProvider>
   );

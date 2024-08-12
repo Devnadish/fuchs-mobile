@@ -4,6 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { whyilogin } from "../../constants/textData/whyilogin";
 import { colors } from "../../constants";
 import ShowModal from "../shared/ShowModal";
+import { globalStyle } from "../../styles/globalStyle";
 export default function WhyIregister() {
   //  const headerHeight = useHeaderHeight();
   const [visible, setVisible] = useState(false);
@@ -33,16 +34,7 @@ export default function WhyIregister() {
           showsHorizontalScrollIndicator={false}
         >
           <View>
-            <Text
-              style={{
-                padding: 10,
-                flexWrap: "wrap",
-                fontSize: 16,
-                lineHeight: 22,
-              }}
-            >
-              {whyilogin}
-            </Text>
+            <Text style={globalStyle.paragraph}>{whyilogin}</Text>
           </View>
         </ScrollView>
       </ShowModal>

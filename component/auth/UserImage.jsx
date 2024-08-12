@@ -3,13 +3,9 @@ import { StyleSheet, View, Image, Pressable, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { colors } from "../../constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useState } from "react";
+import { globalStyle } from "../../styles/globalStyle";
 
 const UserImage = ({ userAvatar, setuserAvatar }) => {
-  // const [image, setImage] = useState(
-  //   process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + userAvatar
-  // );
-
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -19,13 +15,13 @@ const UserImage = ({ userAvatar, setuserAvatar }) => {
     });
     if (!result.canceled) {
       setuserAvatar(result.assets[0].uri);
-
-      // setImage(result.assets[0].uri);
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{ alignItems: "center", justifyContent: "center", padding: 10 }}
+    >
       <View style={styles.imageContainer}>
         {!userAvatar ? (
           <FontAwesome name="user-circle" size={120} color={colors.muteColor} />
@@ -42,13 +38,6 @@ const UserImage = ({ userAvatar, setuserAvatar }) => {
 export default UserImage;
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.backgroundColor,
-    width: "100%",
-    padding: 10,
-  },
   imageContainer: {
     width: 120,
     height: 120,

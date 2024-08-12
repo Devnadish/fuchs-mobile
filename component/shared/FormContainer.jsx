@@ -14,7 +14,7 @@ const FormContainer = ({ title, icon, children, errorBorder }) => {
     <KeyboardAvoidingView
       // enabled
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container]}
+      style={[styles.formContainer]}
     >
       <View
         style={{
@@ -44,7 +44,7 @@ const FormContainer = ({ title, icon, children, errorBorder }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  formContainer: {
     width: Dimensions.get("window").width - 30,
     backgroundColor: colors.white,
     padding: 30,

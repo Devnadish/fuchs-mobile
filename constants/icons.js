@@ -12,7 +12,6 @@ import login from "../assets/icons/login.png";
 import register from "../assets/icons/register.png";
 import visitor from "../assets/icons/visitor.png";
 import menu from "../assets/icons/menu.png";
-import google from "../assets/icons/google.png";
 import apple from "../assets/icons/apple.png";
 export default {
   home,
@@ -28,6 +27,5 @@ export default {
   register,
   visitor,
   MaterialIcons,
-  google,
   apple,
 };

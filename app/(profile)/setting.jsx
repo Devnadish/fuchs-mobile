@@ -10,13 +10,14 @@ import {
 import RadioButton from "../../component/shared/RadioButton";
 import FormContainer from "../../component/shared/FormContainer";
 import { colors } from "../../constants";
+import { globalStyle } from "../../styles/globalStyle";
 
 export default function Setting() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyle.container}>
       <Language />
       <ThemeToggle
         isEnabled={isEnabled}
@@ -85,13 +86,6 @@ const SaveChanges = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    gap: 20,
-  },
   logoutBtn: {
     backgroundColor: "red",
     padding: 10,

@@ -18,14 +18,16 @@ import { userLogin } from "../../api/login";
 import { router } from "expo-router";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { HEADER_IMAGE } from "../../constants/images";
+import { globalStyle } from "../../styles/globalStyle";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Login() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const { loginFunction } = useContext(userAuthContext);
   return (
-    <View style={styles.container}>
-      <HeadrImage />
+    <View style={[globalStyle.container]}>
+      {/* <HeadrImage /> */}
       <LoginForm
         mobile={mobile}
         setMobile={setMobile}
@@ -37,7 +39,17 @@ export default function Login() {
         password={password}
         loginFunction={loginFunction}
       />
-      <CreateAccount />
+      <View
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "center",
+          width: "100%",
+          position: "absolute",
+          bottom: 0,
+        }}
+      >
+        <CreateAccount />
+      </View>
     </View>
   );
 }
@@ -45,7 +57,12 @@ export default function Login() {
 const HeadrImage = () => {
   return (
     <View style={styles.imagecontainer}>
-      <Image source={{ uri: HEADER_IMAGE }} style={styles.headerImage} />
+      <Image
+        source={{
+          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
+        }}
+        style={styles.headerImage}
+      />
     </View>
   );
 };
@@ -179,17 +196,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+
   imagecontainer: {
     width: "100%",
     height: 200,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1,
   },
   lockIcon: {
     position: "absolute",
@@ -202,6 +219,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 5,
+
     marginBottom: 20,
   },
   loginViewButton: {

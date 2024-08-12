@@ -1,15 +1,10 @@
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { getUserByMobile } from "../../api/getUserByMobile";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { colors } from "../../constants";
 import CarData from "../../component/profile/CarData";
+import { globalStyle } from "../../styles/globalStyle";
 
 export default function Car() {
   const [user, setUser] = useState({});
@@ -33,7 +28,7 @@ export default function Car() {
   return (
     <>
       <ScrollView
-        contentContainerStyle={styles.scroll}
+        contentContainerStyle={globalStyle.scroll}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
@@ -53,17 +48,3 @@ export default function Car() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.backgroundColor,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  scroll: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

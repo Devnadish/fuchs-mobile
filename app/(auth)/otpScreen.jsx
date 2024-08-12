@@ -10,6 +10,7 @@ import { showToast } from "../../lib/nadish";
 import { createNewuser } from "../../api/createNewuser";
 import { checkisExisit } from "../../api/checkUserIsExist";
 import { uploadImageToCloudnary } from "../../util/uploadImageToCloudnary";
+import { globalStyle } from "../../styles/globalStyle";
 
 export default function OtpScreen() {
   const params = useLocalSearchParams();
@@ -72,7 +73,7 @@ export default function OtpScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyle.container}>
       <View style={styles.header}>
         <UserInformation params={params} userAvatar={userAvatar} />
         <Pressable
@@ -155,9 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     backgroundColor: colors.primary,
   },
-  container: {
-    flex: 1,
-  },
+
   updtaeBtn: {
     backgroundColor: colors.white,
     borderRadius: 5,

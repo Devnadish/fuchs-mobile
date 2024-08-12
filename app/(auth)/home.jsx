@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Image } from "react-native";
 import { colors } from "../../constants";
 import BottomSingInComponent from "../../component/auth/BottomSingInComponent";
 import { showToast } from "../../lib/nadish";
-
-// import SafeArea from "../components/shared/SafeArea";
 import { StatusBar } from "expo-status-bar";
 import { HEADER_IMAGE, LOGO_IMAGE } from "../../constants/images";
 import { useContext } from "react";
@@ -12,28 +10,15 @@ import { router } from "expo-router";
 import Btn from "../../component/shared/Btn";
 import Xlink from "../../component/shared/Xlink";
 import WhyIregister from "../../component/auth/WhyIregister";
+import { globalStyle } from "../../styles/globalStyle";
 
 export default function HomePage() {
   const { isLogin, userName } = useContext(userAuthContext);
 
   return (
-    <View style={styles.container}>
+    <View style={[globalStyle.container, { justifyContent: "flex-between" }]}>
       <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
-
-      <View>
-        <Image
-          source={{
-            uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
-          }}
-          style={styles.headerImage}
-        />
-        <Image
-          source={{
-            uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + LOGO_IMAGE,
-          }}
-          style={styles.logoImage}
-        />
-      </View>
+      <HeaderIMage />
       <View style={styles.loginContainer}>
         {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
         <LoginAsGuest />
@@ -43,6 +28,24 @@ export default function HomePage() {
   );
 }
 
+const HeaderIMage = () => {
+  return (
+    <View>
+      <Image
+        source={{
+          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
+        }}
+        style={styles.headerImage}
+      />
+      <Image
+        source={{
+          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + LOGO_IMAGE,
+        }}
+        style={styles.logoImage}
+      />
+    </View>
+  );
+};
 function LoginAs({ userName }) {
   const handleLogin = async () => {
     router.push("/(home)/home");
@@ -104,15 +107,10 @@ function LoginAsGuest() {
 
 const styles = StyleSheet.create({
   loginContainer: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     gap: 20,
-  },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: colors.backgroundColor,
-    justifyContent: "space-between",
   },
   logoImage: {
     width: 120,
@@ -128,7 +126,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 0.6,
-
     backgroundColor: colors.primary,
     height: "100%",
   },

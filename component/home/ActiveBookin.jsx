@@ -8,7 +8,7 @@ export default function ActiveBooking() {
   const [active, setActive] = useState(true);
   const { logout } = useContext(userAuthContext);
   return (
-    <View style={styles.container}>
+    <View style={styles.booking}>
       <Text onPress={logout}>logout</Text>
       {active ? (
         <FontAwesome name="calendar-check-o" size={24} color={colors.danger} />
@@ -24,7 +24,7 @@ export default function ActiveBooking() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  booking: {
     width: 40,
     height: 40,
     borderRadius: 50,

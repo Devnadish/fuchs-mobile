@@ -250,11 +250,7 @@ const styles = StyleSheet.create({
   itemStyle: {
     height: 50, // Set the desired height for the items
   },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   label: {
     fontSize: 16,
     marginBottom: 10,
@@ -285,12 +281,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 20,
   },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-  },
+
   closeButton: {
     backgroundColor: colors.danger,
     padding: 10,
