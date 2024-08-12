@@ -26,25 +26,23 @@ export default function Car() {
   if (!user) return null;
 
   return (
-    <>
-      <ScrollView
-        contentContainerStyle={globalStyle.scroll}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-      >
-        <ActivityIndicator
-          animating={loading}
-          color={colors.primary}
-          size="large"
+    <ScrollView
+      contentContainerStyle={globalStyle.scroll}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+    >
+      <ActivityIndicator
+        animating={loading}
+        color={colors.primary}
+        size="large"
+      />
+      {!loading && user && (
+        <CarData
+          car={user?.Car?.car}
+          carModel={user?.Car?.carModel}
+          carYear={user?.Car?.carYear}
         />
-        {!loading && user && (
-          <CarData
-            car={user?.Car?.car}
-            carModel={user?.Car?.carModel}
-            carYear={user?.Car?.carYear}
-          />
-        )}
-      </ScrollView>
-    </>
+      )}
+    </ScrollView>
   );
 }

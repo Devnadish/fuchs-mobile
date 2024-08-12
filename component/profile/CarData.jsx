@@ -25,7 +25,9 @@ export default function CarData({ car, carModel, carYear }) {
 
   // get car model information as an array of objects based on the car id
   useEffect(() => {
-    setCarModelData(carsModel.filter((c) => c.carFactoryId === newCar.id));
+    if (newCar) {
+      setCarModelData(carsModel.filter((c) => c.carFactoryId === newCar.id));
+    }
   }, [newCar]);
 
   return (
@@ -45,11 +47,13 @@ export default function CarData({ car, carModel, carYear }) {
         <SelectCar
           selectedValue={newCar}
           setSelectedValue={setNewCar}
+          setCarmodel={setNewCarModel}
           data={cars}
         />
         <SelectCarModel
           selectedValue={newCarModel}
           setSelectedValue={setNewCarModel}
+          setCarYear={setNewCarYear}
           data={carModelData}
         />
         <SelectCarYear
@@ -69,19 +73,26 @@ export default function CarData({ car, carModel, carYear }) {
     </View>
   );
 }
-
-const SelectCarModel = ({ selectedValue, setSelectedValue, data }) => {
+const SelectCar = ({ selectedValue, setSelectedValue, setCarmodel, data }) => {
   const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    setCarmodel("");
+  }, [selectedValue]);
 
   return (
     <View>
       <View>
-        <Text>Car Model</Text>
+        <Text>Select Car</Text>
         <Pressable
           onPress={() => setVisible(true)}
           style={styles.pressTochange}
         >
-          <Text>{selectedValue}</Text>
+          {selectedValue ? (
+            <Text>{selectedValue?.label}</Text>
+          ) : (
+            <Text>Select Car You Car</Text>
+          )}
+
           <Entypo name="select-arrows" size={24} color={colors.muteColor} />
         </Pressable>
       </View>
@@ -100,19 +111,37 @@ const SelectCarModel = ({ selectedValue, setSelectedValue, data }) => {
   );
 };
 
-const SelectCar = ({ selectedValue, setSelectedValue, data }) => {
-  const [visible, setVisible] = useState(false);
+const SelectCarModel = ({
+  selectedValue,
+  setSelectedValue,
+  setCarYear,
+  data,
+}) => {
+  // const { label } = selectedValue;
 
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    setCarYear("");
+  }, [selectedValue]);
   return (
-    <View>
-      <View>
-        <Text>Select Car</Text>
+    <>
+      <View style={{ width: "100%" }}>
+        <Text>Car Model</Text>
         <Pressable
           onPress={() => setVisible(true)}
           style={styles.pressTochange}
         >
-          <Text>{selectedValue?.label}</Text>
-          <Entypo name="select-arrows" size={24} color={colors.muteColor} />
+          {selectedValue ? (
+            <Text>{selectedValue.label}</Text>
+          ) : (
+            <Text>Select Car Model</Text>
+          )}
+          <Entypo
+            name="select-arrows"
+            size={24}
+            color={colors.muteColor}
+            style={{ alignSelf: "center" }}
+          />
         </Pressable>
       </View>
       <ShowModal
@@ -126,7 +155,7 @@ const SelectCar = ({ selectedValue, setSelectedValue, data }) => {
           setVisible={setVisible}
         />
       </ShowModal>
-    </View>
+    </>
   );
 };
 
@@ -158,7 +187,11 @@ const SelectCarYear = ({ selectedValue, setSelectedValue, data }) => {
           onPress={() => setVisible(true)}
           style={styles.pressTochange}
         >
-          <Text>{selectedValue}</Text>
+          {selectedValue ? (
+            <Text>{selectedValue}</Text>
+          ) : (
+            <Text>Select Car Year</Text>
+          )}
           <Entypo name="select-arrows" size={24} color={colors.muteColor} />
         </Pressable>
       </View>
