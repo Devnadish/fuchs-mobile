@@ -10,6 +10,12 @@ export const indexBarStyle = {
   headerTintColor: colors.linkColor,
   headerRight: () => <WhyIregister />,
 };
+export const carBarStyle = {
+  title: "Cars",
+  headerShown: true,
+  headerTitleAlign: "center",
+  headerTintColor: colors.danger,
+};
 export const createNewUser = {
   title: "Create Account",
   headerShown: true,

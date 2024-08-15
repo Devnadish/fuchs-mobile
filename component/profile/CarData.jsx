@@ -1,5 +1,11 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import FormContainer from "../shared/FormContainer";
 import { Entypo } from "@expo/vector-icons";
 import ShowModal from "../shared/ShowModal";
@@ -7,13 +13,24 @@ import { colors } from "../../constants";
 import { cars, carsModel } from "../../constants/cars";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showToast } from "../../lib/nadish";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { updateUserCar } from "../../api/updateUserCar";
 export default function CarData({ car, carModel, carYear }) {
+  const { userMobile } = useContext(userAuthContext);
   const [newCar, setNewCar] = useState({});
   const [newCarModel, setNewCarModel] = useState(carModel);
   const [newCarYear, setNewCarYear] = useState(carYear);
   const [carModelData, setCarModelData] = useState([]); // flter based on car id
   const currentYear = new Date().getFullYear();
-  const handleUpdate = () => {
+
+  const handleUpdate = async () => {
+    const usrCar = {
+      mobile: userMobile,
+      car: newCar.label,
+      carModel: newCarModel.label,
+      carYear: newCarYear.toString(),
+    };
+    const data = await updateUserCar(usrCar);
     showToast("Car Updated");
   };
   // get car information as an object

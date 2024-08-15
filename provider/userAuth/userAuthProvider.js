@@ -10,6 +10,11 @@ export const UserAuthProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userMobile, setUserMobile] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
+  const [userCar, setUserCar] = useState("");
+  const [userCarModel, setUserCarModel] = useState("");
+  const [userCarYear, setUserCarYear] = useState("");
+  const [userLanguage, setUserLanguage] = useState("");
+  const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
     checkLoginStatus();
@@ -38,7 +43,6 @@ export const UserAuthProvider = ({ children }) => {
     setUserName(name);
     setUserEmail(email);
     setUserMobile(mobile);
-    // setUserAvatar(process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + avatar);
     setUserAvatar(avatar);
     setIsLogin(true);
     console.log("Login successful");
@@ -79,6 +83,16 @@ export const UserAuthProvider = ({ children }) => {
         loginFunction,
         logout,
         updateProfile,
+        userCar,
+        setUserCar,
+        userCarModel,
+        setUserCarModel,
+        userCarYear,
+        setUserCarYear,
+        userLanguage,
+        setUserLanguage,
+        userTheme,
+        setUserTheme,
       }}
     >
       {children}

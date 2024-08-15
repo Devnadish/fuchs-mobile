@@ -38,9 +38,9 @@ export default function Car() {
       />
       {!loading && user && (
         <CarData
-          car={user?.Car?.car}
-          carModel={user?.Car?.carModel}
-          carYear={user?.Car?.carYear}
+          car={user?.car?.car}
+          carModel={user?.car?.carModel}
+          carYear={user?.car?.carYear}
         />
       )}
     </ScrollView>

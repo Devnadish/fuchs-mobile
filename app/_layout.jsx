@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import { LanguageProvider } from "../provider/languageProvider/languageProvider";
 import { UserAuthProvider } from "../provider/userAuth/userAuthProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { indexBarStyle } from "../constants/headerBarStyle";
+import { carBarStyle, indexBarStyle } from "../constants/headerBarStyle";
 import { pingServer, showToast } from "../lib/nadish";
 
 const RootLayout = () => {
@@ -18,6 +18,7 @@ const RootLayout = () => {
         <LanguageProvider>
           <Stack>
             <Stack.Screen name="index" options={indexBarStyle} />
+            <Stack.Screen name="cars" options={carBarStyle} />
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="(home)" options={{ headerShown: false }} />
             <Stack.Screen name="(profile)" options={{ headerShown: false }} />

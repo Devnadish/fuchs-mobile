@@ -20,7 +20,6 @@ import { colors } from "../../constants";
 export default function UserAvatar() {
   const { userAvatar, userName } = useContext(userAuthContext);
   const [loading, setLoading] = useState(true);
-  console.log("image url from user Avatar in home bar", userAvatar);
 
   let myimage;
   if (userAvatar) {
