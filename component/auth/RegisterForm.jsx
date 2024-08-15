@@ -47,76 +47,77 @@ export default function RegisterForm({
   }, [params.selectedCarModel]);
 
   return (
-      <ScrollView
-        contentContainerStyle={globalStyle.scroll}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
+    <ScrollView
+      contentContainerStyle={globalStyle.scroll}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+    >
+      <FormContainer
+        title={"Register"}
+        icon={<FontAwesome name="user" size={24} color={colors.muteColor} />}
       >
-        <FormContainer
-          title={"Register"}
-          icon={<FontAwesome name="user" size={24} color={colors.muteColor} />}
-        >
-          {errorMsg && <Text style={styles.errorMsg}>{errorMsg}</Text>}
-          <Input
-            label="Name"
-            placeholder="Enter Name"
-            text={name}
-            setText={setName}
-            validationMsg="Enter Valid Name"
-            reqierd
-          />
-          <Input
-            label="Mobile"
-            placeholder="Enter Mobile"
-            text={mobile}
-            setText={setMobile}
-            reqierd
-            keyboardType="numeric"
-            maxLength={10}
-            // keyboardType="phone-pad"
-          />
-          <Input
-            label="E-mail"
-            placeholder="Enter Email"
-            text={email}
-            setText={setEmail}
-            reqierd
-          />
-          <Input
-            label="Password"
-            placeholder="Enter Password"
-            text={passWord}
-            setText={setPassWord}
-            reqierd
-            secureTextEntry
-            maxLength={10}
-          />
-        </FormContainer>
+        {errorMsg && <Text style={styles.errorMsg}>{errorMsg}</Text>}
+        <Input
+          label="Name"
+          placeholder="Enter Name"
+          text={name}
+          setText={setName}
+          validationMsg="Enter Valid Name"
+          reqierd
+        />
+        <Input
+          label="Mobile"
+          placeholder="Enter Mobile"
+          text={mobile}
+          setText={setMobile}
+          reqierd
+          keyboardType="numeric"
+          maxLength={10}
+          // keyboardType="phone-pad"
+        />
+        <Input
+          label="E-mail"
+          placeholder="Enter Email"
+          text={email}
+          setText={setEmail}
+          reqierd
+        />
+        <Input
+          label="Password"
+          placeholder="Enter Password"
+          text={passWord}
+          setText={setPassWord}
+          reqierd
+          secureTextEntry
+          maxLength={10}
+        />
+      </FormContainer>
 
-        {/* selct city */}
-        <SelectCity city={city} />
+      {/* selct city */}
+      <SelectCity city={city} />
 
-        <FormContainer
-          title={"Car Details"}
-          icon={<FontAwesome5 name="car" size={24} color={colors.muteColor} />}
-        >
-          <SelectCar car={car} setCarModel={setCarModel} />
+      {/* selct car */}
+      {/* <FormContainer
+        title={"Car Details"}
+        icon={<FontAwesome5 name="car" size={24} color={colors.muteColor} />}
+      >
+        <SelectCar car={car} setCarModel={setCarModel} />
 
-          <SelectCarModel
-            car={params.selectedCar}
-            carId={params.selectedCarId}
-            carModel={carModel}
-            setCarModel={setCarModel}
-          />
+        <SelectCarModel
+          car={params.selectedCar}
+          carId={params.selectedCarId}
+          carModel={carModel}
+          setCarModel={setCarModel}
+        />
 
-          <Input
-            label="Car Year"
-            placeholder="Enter Car Year"
-            text={carYear}
-            setText={setCarYear}
-          />
-        </FormContainer>
-      </ScrollView>
+        <Input
+          label="Car Year"
+          placeholder="Enter Car Year"
+          text={carYear}
+          setText={setCarYear}
+        />
+      </FormContainer> */}
+    </ScrollView>
   );
 }
 

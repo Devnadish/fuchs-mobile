@@ -6,8 +6,6 @@ import {
   otpScreen,
 } from "../../constants/headerBarStyle";
 import { NewUserProvider } from "../../provider/newUserProvider/newUserProvider";
-import { colors } from "../../constants";
-import Logout from "../../component/auth/Logout";
 
 const AuthLayout = () => (
   <NewUserProvider>
