@@ -14,6 +14,8 @@ import { globalStyle } from "../../styles/globalStyle";
 import { ifNoCarMessage } from "../../constants/textData/ifNoCarMessage";
 import Btn from "../../component/shared/Btn";
 import PopupCars from "../../component/cars/PopupCars";
+import { updateUserCar } from "../../api/updateUserCar";
+import { showToast } from "../../lib/nadish";
 
 export default function Car() {
   const [user, setUser] = useState({});
@@ -69,6 +71,9 @@ export default function Car() {
           visible={visible}
           setVisible={setVisible}
           selectedCar={selectedCar}
+          selectedModel={selectedModel}
+          selectedYear={selectedYear}
+          userMobile={userMobile}
         />
       ) : (
         <IfNocar />
@@ -129,7 +134,26 @@ const ShowCarData = ({
   loading,
   setVisible,
   selectedCar,
+  selectedModel,
+  selectedYear,
+  userMobile,
 }) => {
+  const handleSaveCar = async () => {
+    const userCar = {
+      mobile: userMobile,
+      carId: selectedCar.carId,
+      car: selectedCar.carName,
+      carModelId: selectedModel.modelId,
+      carModel: selectedModel.ModelName,
+      carYear: selectedYear,
+    };
+
+    const updateCar = await updateUserCar(userCar);
+    if (updateUserCar) {
+      showToast("Car Updated");
+    }
+  };
+
   return (
     <View style={globalStyle.container}>
       <View style={[style.noCar, { height: "auto" }]}>
@@ -173,7 +197,9 @@ const ShowCarData = ({
       {selectedCar && (
         <Btn
           title="Save Changes"
-          handlePress={() => {}}
+          handlePress={() => {
+            handleSaveCar();
+          }}
           containerStyles={{
             width: "80%",
             marginTop: 20,
