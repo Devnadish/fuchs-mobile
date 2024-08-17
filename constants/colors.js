@@ -10,6 +10,7 @@ const inputColor = "#d3d3d380";
 const borderColor = "#00000040";
 const primaryBtn = "#007AFF";
 const linkColor = "#0124AA";
+const lightmuteColor = "#F5F5F5";
 const muteColor = "#AEAEB2";
 const textColor = "#0D0808";
 export default {
@@ -27,4 +28,5 @@ export default {
   linkColor,
   muteColor,
   textColor,
+  lightmuteColor,
 };

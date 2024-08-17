@@ -1,14 +1,20 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { colors } from "../../constants";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 
 export default function CarsModel({
   carsModel,
   selectedModel,
   setSelectedModel,
+  userLanguage,
 }) {
   const handleOnPressItemModel = (item) => {
-    setSelectedModel(item);
+    setSelectedModel({
+      modelId: item.id.toString(),
+      ModelName: userLanguage === "ar" ? item?.carModelAr : item?.carModelEn,
+    });
+    // setSelectedModel(item);
   };
 
   return (
@@ -20,17 +26,19 @@ export default function CarsModel({
           onPress={() => handleOnPressItemModel(item)}
           style={[
             styles.pressapleItemModel,
-            selectedModel && selectedModel.id === item.id
+            selectedModel && selectedModel.modelId === item.id
               ? {
-                  borderColor: colors.primary,
                   borderWidth: 1.5,
                   borderRadius: 4,
+                  backgroundColor: colors.primary,
                 }
               : null,
           ]}
         >
           <View style={styles.pressapleContainerModel}>
-            <Text style={styles.text}>{item.carModelAr}</Text>
+            <Text style={styles.text}>
+              {userLanguage === "ar" ? item.carModelAr : item.carModelEn}
+            </Text>
           </View>
         </Pressable>
       )}
@@ -43,7 +51,6 @@ export default function CarsModel({
 const styles = StyleSheet.create({
   ModelcontentContainer: {
     width: "100%",
-    // backgroundColor: colors.backgroundColor,
     padding: 10,
   },
   pressapleItemModel: {

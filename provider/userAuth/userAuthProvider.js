@@ -13,7 +13,7 @@ export const UserAuthProvider = ({ children }) => {
   const [userCar, setUserCar] = useState("");
   const [userCarModel, setUserCarModel] = useState("");
   const [userCarYear, setUserCarYear] = useState("");
-  const [userLanguage, setUserLanguage] = useState("");
+  const [userLanguage, setUserLanguage] = useState("en");
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {

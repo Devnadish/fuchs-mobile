@@ -22,7 +22,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarLabel: "Profile",
+          title: "Profile",
           tabBarIcon: ({ color, focused }) => (
             <FontAwesome5
               name="user-alt"
@@ -46,10 +46,23 @@ const TabsLayout = () => {
           ),
         }}
       />
+      {/* <Tabs.Screen
+        name="selectcar"
+        options={{
+          title: "Car",
+          tabBarIcon: ({ color, focused }) => (
+            <FontAwesome5
+              name="car"
+              size={focused ? 28 : 24}
+              color={focused ? colors.danger : colors.primary}
+            />
+          ),
+        }}
+      /> */}
       <Tabs.Screen
         name="setting"
         options={{
-          tabBarLabel: "Setting",
+          title: "Setting",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name="settings"

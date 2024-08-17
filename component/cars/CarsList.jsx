@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { colors } from "../../constants";
 import { getCarsById } from "../../api/getCarById";
 import { Image } from "expo-image";
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 
 export default function CarsList({
   cars,
@@ -11,12 +12,24 @@ export default function CarsList({
   setSelectedCar,
   setCarsModel,
   setLoadingModel,
+
+  setSelectedYear,
+  setSelectedModel,
+
+  userLanguage,
 }) {
   const handlePressItem = useCallback(async (item) => {
-    setSelectedCar(item);
+    // setSelectedCar(item);
+    setSelectedCar({
+      carId: item.id.toString(),
+      carName: userLanguage === "ar" ? item?.carAr : item?.carEn,
+    });
     setLoadingModel(true);
     const modelCarsData = await getCarsById(item.id);
     setCarsModel(modelCarsData[0].CarModel);
+
+    setSelectedYear("Select Year");
+    setSelectedModel("Select Model");
     setLoadingModel(false);
   }, []);
 
@@ -30,7 +43,9 @@ export default function CarsList({
           style={[
             styles.pressableContainer,
             selectedCar &&
-              selectedCar.id === item.id && { backgroundColor: colors.primary },
+              selectedCar.carId === item.id && {
+                backgroundColor: colors.primary,
+              },
           ]}
         >
           <View style={styles.imageContiner}>
@@ -44,7 +59,9 @@ export default function CarsList({
               style={styles.carImage}
             />
           </View>
-          <Text style={styles.text}>{item.carAr}</Text>
+          <Text style={styles.text}>
+            {userLanguage === "ar" ? item.carAr : item.carEn}
+          </Text>
         </View>
       </Pressable>
     ),
@@ -68,9 +85,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 5,
-    backgroundColor: colors.backgroundColor,
-    height: 120,
+    padding: 10,
   },
   imageContiner: { width: 60, height: 60 },
   carImage: {
@@ -81,7 +96,6 @@ const styles = StyleSheet.create({
   pressableItem: {
     width: 90,
     height: 90,
-    // margin: "auto",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -95,10 +109,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: colors.borderColor,
-    backgroundColor: colors.backgroundColor,
   },
   text: {
-    // marginLeft: 10,
     fontSize: 14,
     fontWeight: "bold",
     color: colors.textColor,

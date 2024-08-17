@@ -1,21 +1,29 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useEffect, useState } from "react";
-import { getAllCars } from "../api/getAllCars";
-import { colors } from "../constants";
-import CarsList from "../component/cars/CarsList";
-import CarsModel from "../component/cars/CarsModel";
-import CarsYear from "../component/cars/CarsYaer";
-export default function Cars() {
+import { getAllCars } from "../../api/getAllCars";
+import { colors } from "../../constants";
+import CarsList from "./CarsList";
+import CarsModel from "./CarsModel";
+import CarsYear from "./CarsYaer";
+export default function SelectCar({
+  selectedCar,
+  setSelectedCar,
+  selectedModel,
+  setSelectedModel,
+  selectedYear,
+  setSelectedYear,
+}) {
   const [cars, setCars] = useState([]);
   const [carsModel, setCarsModel] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [loadingModel, setLoadingModel] = useState(false);
-
-  const [selectedCar, setSelectedCar] = useState(null);
-  const [selectedModel, setSelectedModel] = useState(null);
-
-  const [selectedYear, setSelectedYear] = useState(null);
 
   const currentYear = new Date().getFullYear();
 
@@ -41,13 +49,14 @@ export default function Cars() {
           />
         ) : (
           <>
-            {/* <Text style={styles.text}>Select Your Car</Text> */}
             <CarsList
               cars={cars}
               selectedCar={selectedCar}
               setSelectedCar={setSelectedCar}
               setCarsModel={setCarsModel}
               setLoadingModel={setLoadingModel}
+              setSelectedYear={setSelectedYear}
+              setSelectedModel={setSelectedModel}
             />
           </>
         )}
@@ -62,7 +71,6 @@ export default function Cars() {
           />
         ) : (
           <>
-            <Text style={styles.text}>Select Your Car model</Text>
             {!selectedCar && (
               <View
                 style={{
@@ -93,8 +101,8 @@ export default function Cars() {
           </>
         )}
       </View>
+
       <View style={styles.yearContainer}>
-        <Text style={styles.text}>Select Your Car model</Text>
         <CarsYear
           selectedYear={selectedYear}
           setSelectedYear={setSelectedYear}
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     width: "100%",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -118,15 +126,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.backgroundColor,
-    height: 140,
-    elevation: 5,
+    height: 120,
+    padding: 10,
+    // elevation: 5,
   },
   modelContainer: {
     width: "100%",
     flex: 1,
     justifyContent: "center",
-    backgroundColor: colors.backgroundColor,
-    elevation: 5,
+    backgroundColor: colors.white,
   },
   yearContainer: {
     width: "100%",
@@ -134,9 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 5,
     backgroundColor: colors.backgroundColor,
-    height: 120,
-    elevation: 5,
-    // marginTop: 10,
+    height: 70,
   },
 
   text: {
@@ -149,5 +155,29 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 5,
     marginTop: 5,
+  },
+  saveContainer: {
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 5,
+    backgroundColor: colors.muteColor,
+    height: 40,
+    elevation: 5,
+  },
+  SaveChangesBtn: {
+    backgroundColor: colors.danger,
+    width: 68,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    padding: 5,
+  },
+  selectedText: {
+    color: colors.primary,
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });

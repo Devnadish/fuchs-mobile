@@ -2,8 +2,6 @@ import React, { useCallback } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { colors } from "../../constants";
-import { getCarsById } from "../../api/getCarById";
-import { Image } from "expo-image";
 
 export default function CarsYear({
   selectedYear,
@@ -59,18 +57,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
-    backgroundColor: colors.backgroundColor,
     height: 60,
-  },
-  imageContainer: { width: 60, height: 60 },
-  carImage: {
-    width: 60,
-    height: 50,
   },
 
   pressableItem: {
-    width: 90,
-    height: 50,
+    width: 80,
+    height: 40,
     margin: "auto",
     alignItems: "center",
     justifyContent: "center",
@@ -85,10 +77,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: colors.borderColor,
-    backgroundColor: colors.backgroundColor,
   },
   text: {
-    marginLeft: 10,
     fontSize: 14,
     fontWeight: "bold",
     color: colors.textColor,
