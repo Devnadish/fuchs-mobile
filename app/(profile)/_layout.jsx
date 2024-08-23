@@ -4,6 +4,7 @@ import { colors } from "../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import GoHome from "../../component/shared/GoHome";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 const TabsLayout = () => {
   return (
     <Tabs
@@ -69,6 +70,15 @@ const TabsLayout = () => {
               size={focused ? 28 : 24}
               color={focused ? colors.danger : colors.primary}
             />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="logout"
+        options={{
+          title: "Logout",
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons name="logout" size={24} color="red" />
           ),
         }}
       />

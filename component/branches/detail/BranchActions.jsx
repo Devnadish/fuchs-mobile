@@ -1,0 +1,98 @@
+import { Pressable, StyleSheet, Text, View, Linking } from "react-native";
+import React, { useCallback } from "react";
+import { colors } from "../../../constants";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import useCurrentLocation, {
+  openGoogleMapsForNavigation,
+} from "../../../hooks/useLocation";
+import { showToast } from "../../../lib/nadish";
+
+const BranchActions = React.memo(
+  ({ lat, long, brid, branchName, phoneNumber }) => {
+    const currentLocation = useCurrentLocation();
+
+    const handleGoPress = useCallback(() => {
+      if (currentLocation) {
+        const { latitude, longitude } = currentLocation;
+        openGoogleMapsForNavigation(latitude, longitude, branchName);
+      }
+    }, [currentLocation, branchName]);
+
+    const handleBookingPress = useCallback(() => {
+      showToast("Booking button pressed");
+    }, []);
+
+    const handleCall = () => {
+      Linking.openURL(`tel:${phoneNumber}`);
+    };
+
+    return (
+      <View style={styles.container}>
+        <Actions
+          icon={<FontAwesome name="road" size={24} color={colors.primary} />}
+          title="Go"
+          handleAction={handleGoPress}
+        />
+
+        <Actions
+          icon={
+            <FontAwesome name="calendar" size={24} color={colors.primary} />
+          }
+          title="Booking"
+          handleAction={handleBookingPress}
+        />
+
+        <Actions
+          icon={<FontAwesome name="phone" size={24} color={colors.primary} />}
+          title="Call"
+          handleAction={handleCall}
+        />
+      </View>
+    );
+  }
+);
+
+const Actions = ({ icon, title, handleAction }) => {
+  return (
+    <View style={styles.actionContainer}>
+      <Pressable style={[styles.button]} onPress={handleAction}>
+        <View style={styles.buttonIcons}>{icon}</View>
+      </Pressable>
+      <Text style={styles.text}>{title}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  actionContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 3,
+  },
+  container: {
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "center",
+    gap: 5,
+  },
+  button: {
+    backgroundColor: colors.backgroundColor,
+    width: 60,
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: colors.borderColor,
+  },
+  text: {
+    color: colors.textColor,
+  },
+  buttonIcons: {
+    gap: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+export default BranchActions;

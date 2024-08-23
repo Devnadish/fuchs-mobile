@@ -1,1 +1,59 @@
 npm i expo-localization i18n-js i18next react-i18next
+
+
+
+
+import {FlashList} from "@shopify/flash-list";
+
+
+ <View
+
+    style={{
+        width: WIDTH - 40,
+        height:HEIGHT,
+        marginTop: 16,
+        // borderWidth: 1,
+        // borderColor: 'red'
+    }}>
+    <FlashList
+        viewabilityConfig={{
+            waitForInteraction: true,
+            itemVisiblePercentThreshold: 50,
+            minimumViewTime: 1000,
+        }}
+        estimatedItemSize={200}
+        contentContainerStyle={{
+            paddingBottom: 150,
+            //   transform: [{scaleX: -1}],
+        }}
+        data={allComments}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => {
+            return index;
+        }}
+        renderItem={({item, index}) => {
+            return (
+                <AllComentsComponent
+                    backgroundColor={item?.status === "publish" ? Colors.dark_green : Colors.redDark}
+                    color={item?.status === "publish" ? Colors.green_darker : Colors.DustRed}
+                    borderColor={item?.status === "publish" ? Colors.dark_green : Colors.arghavani}
+                    title={item?.ContentInfo?.title}
+                    status={item.statusFa}
+                    id={index}
+                    date={item?.createdAt}
+                    description={item?.description}
+                    onPress={() => {
+                    }}
+                    // uri={{
+                    //     uri: item?.ContentInfo?.contentPoster
+                    //         ? item?.ContentInfo?.contentPoster
+                    //         : `https://reactnative-examples.com/wp-content/uploads/2021/10/cosmos.jpg`,
+                    // }}
+                />
+            )
+        }}
+        onEndReached={loadMoreData}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={renderFooter}
+    />
+</View>

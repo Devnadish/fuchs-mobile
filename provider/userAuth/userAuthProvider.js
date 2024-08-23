@@ -23,7 +23,7 @@ export const UserAuthProvider = ({ children }) => {
   const checkLoginStatus = async () => {
     console.log("check login status");
     const userData = await AsyncStorage.getItem("userData");
-    console.log("userData from loacl storage: ", userData);
+    // console.log("userData from loacl storage: ", userData);
     if (userData) {
       setIsLogin(true);
       const { name, email, mobile, avatar } = JSON.parse(userData);
@@ -38,7 +38,7 @@ export const UserAuthProvider = ({ children }) => {
 
   const loginFunction = async (userData) => {
     await AsyncStorage.setItem("userData", JSON.stringify(userData));
-    console.log("userData from loacl storage: ", userData);
+    // console.log("userData from loacl storage: ", userData);
     const { name, email, avatar, mobile } = userData;
     setUserName(name);
     setUserEmail(email);

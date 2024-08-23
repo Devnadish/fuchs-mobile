@@ -25,7 +25,6 @@ export default function Setting() {
         toggleSwitch={toggleSwitch}
       />
       <SaveChanges />
-      <Logout />
     </View>
   );
 }
@@ -70,13 +69,6 @@ const ThemeToggle = ({ isEnabled, setIsEnabled, toggleSwitch }) => {
   );
 };
 
-const Logout = () => {
-  return (
-    <Pressable style={styles.logoutBtn}>
-      <Text style={{ color: "white" }}>Logout</Text>
-    </Pressable>
-  );
-};
 const SaveChanges = () => {
   return (
     <Pressable style={styles.SaveChangesBtn}>

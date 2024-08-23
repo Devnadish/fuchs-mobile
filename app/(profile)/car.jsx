@@ -25,14 +25,12 @@ export default function Car() {
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
 
-  const [visible, setVisible] = useState(false);
-
-  console.log({ selectedCar });
-  console.log("-----------------------------");
-  console.log({ selectedModel });
-  console.log("-----------------------------");
-  console.log({ selectedYear });
-  console.log("==============================");
+  // console.log({ selectedCar });
+  // console.log("-----------------------------");
+  // console.log({ selectedModel });
+  // console.log("-----------------------------");
+  // console.log({ selectedYear });
+  // console.log("==============================");
 
   const { userMobile } = useContext(userAuthContext);
   const queryData = { mobile: userMobile };

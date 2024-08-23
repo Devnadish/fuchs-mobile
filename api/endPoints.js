@@ -13,3 +13,7 @@ export const UPDATE_USER_CAR = UrlEndPoint + "/api/user/update/updatecar";
 export const GET_ALL_CARS = UrlEndPoint + "/api/cars/getallcars";
 export const GET_CARS_BY_ID = UrlEndPoint + "/api/cars/getCarById";
 // export const GET_CARS_BY_ID = UrlEndPoint +  "/api/cars/getCarById?carId=66bb31a72b7dbdff6a173032";
+export const GROUP_BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/groupcity";
+
+export const BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/getbranchbycity";
+export const BRANCHES_DETAIL = UrlEndPoint + "/api/branches/branchdetail"; // params : brid

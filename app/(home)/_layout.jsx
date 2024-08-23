@@ -81,29 +81,16 @@ const TabsLayout = () => {
           },
           // headerShown: false,
           tabBarIcon: ({ color, focused }) => (
-            <View
-              style={{
-                borderWidth: 1,
-                borderColor: colors.primary,
-                backgroundColor: colors.primary,
-                borderRadius: 5,
-                width: 70,
-                height: 70,
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                position: "absolute",
-                bottom: 20,
-              }}
-            >
+            <>
               <FontAwesome6
                 name="calendar-plus"
                 size={focused ? 28 : 24}
-                color={focused ? colors.danger : colors.white}
+                color={focused ? colors.danger : colors.primary}
               />
-              <Text style={{ color: focused ? colors.danger : colors.white }}>
+              <Text style={{ color: focused ? colors.danger : colors.primary }}>
                 Book
               </Text>
-            </View>
+            </>
           ),
         }}
       />
