@@ -3,7 +3,6 @@ import { colors } from "../../constants";
 import BottomSingInComponent from "../../component/auth/BottomSingInComponent";
 import { showToast } from "../../lib/nadish";
 import { StatusBar } from "expo-status-bar";
-import { HEADER_IMAGE, LOGO_IMAGE } from "../../constants/images";
 import { useContext } from "react";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { router } from "expo-router";
@@ -11,6 +10,11 @@ import Btn from "../../component/shared/Btn";
 import Xlink from "../../component/shared/Xlink";
 import WhyIregister from "../../component/auth/WhyIregister";
 import { globalStyle } from "../../styles/globalStyle";
+import { HeaderImage } from "../../component/auth/HeaderImage";
+
+// TODO: sperate component
+// TODO: move styles
+// TODO: Refactore it For best practise and performance
 
 export default function HomePage() {
   const { isLogin, userName } = useContext(userAuthContext);
@@ -18,7 +22,7 @@ export default function HomePage() {
   return (
     <View style={[globalStyle.container, { justifyContent: "flex-between" }]}>
       <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
-      <HeaderIMage />
+      <HeaderImage />
       <View style={styles.loginContainer}>
         {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
         <LoginAsGuest />
@@ -28,24 +32,6 @@ export default function HomePage() {
   );
 }
 
-const HeaderIMage = () => {
-  return (
-    <View>
-      <Image
-        source={{
-          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
-        }}
-        style={styles.headerImage}
-      />
-      <Image
-        source={{
-          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + LOGO_IMAGE,
-        }}
-        style={styles.logoImage}
-      />
-    </View>
-  );
-};
 function LoginAs({ userName }) {
   const handleLogin = async () => {
     router.push("/(home)/home");
@@ -105,7 +91,7 @@ function LoginAsGuest() {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     alignItems: "center",

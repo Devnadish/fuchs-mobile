@@ -12,6 +12,7 @@ import ActiveBooking from "../../component/home/ActiveBookin";
 import UserAvatar from "../../component/home/UserAvatar";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { LOGO_IMAGE, ONESTOP } from "../../constants/images";
+import ExpoImage from "../../component/shared/ExpoImage";
 
 const TabsLayout = () => {
   const { t } = useTranslation();
@@ -30,12 +31,7 @@ const TabsLayout = () => {
         },
 
         headerTitle: () => (
-          <Image
-            source={{
-              uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + ONESTOP,
-            }}
-            style={{ width: 60, height: 40 }}
-          />
+          <ExpoImage image={ONESTOP} style={{ width: 60, height: 40 }} />
         ),
         headerRight: () => <ActiveBooking />,
         headerLeft: () => <UserAvatar />,

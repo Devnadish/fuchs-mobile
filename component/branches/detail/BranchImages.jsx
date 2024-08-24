@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useCallback, useState, useRef } from "react";
 import { Image } from "expo-image";
+import ExpoImage from "../../shared/ExpoImage";
 const blurhash = "LYLWbgui7e:5V?I:aMbIZ|I.Rknn";
 // const blurhash =
 //   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -39,13 +40,14 @@ const BranchImages = ({ images }) => {
   const renderItem = useCallback(
     ({ item }) => (
       <View style={styles.imageContainer}>
-        <Image
+        <ExpoImage image={item.image} style={styles.image} />
+        {/* <Image
           source={{ uri: item.image }}
           style={styles.image}
           transition={200}
           contentFit="cover"
           placeholder={{ blurhash }}
-        />
+        /> */}
       </View>
     ),
     []

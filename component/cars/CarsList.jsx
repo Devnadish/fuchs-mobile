@@ -5,6 +5,7 @@ import { colors } from "../../constants";
 import { getCarsById } from "../../api/getCarById";
 import { Image } from "expo-image";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import ExpoImage from "../shared/ExpoImage";
 
 export default function CarsList({
   cars,
@@ -49,7 +50,13 @@ export default function CarsList({
           ]}
         >
           <View style={styles.imageContiner}>
-            <Image
+            <ExpoImage
+              image={
+                process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + item.public_id
+              }
+              style={styles.carImage}
+            />
+            {/* <Image
               source={{
                 uri:
                   process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + item.public_id,
@@ -57,7 +64,7 @@ export default function CarsList({
               contentFit="cover"
               transition={1000}
               style={styles.carImage}
-            />
+            /> */}
           </View>
           <Text style={styles.text}>
             {userLanguage === "ar" ? item.carAr : item.carEn}

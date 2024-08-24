@@ -4,6 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import { colors } from "../../constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { globalStyle } from "../../styles/globalStyle";
+import ExpoImage from "../shared/ExpoImage";
 
 const UserImage = ({ userAvatar, setuserAvatar }) => {
   const pickImage = async () => {
@@ -26,7 +27,7 @@ const UserImage = ({ userAvatar, setuserAvatar }) => {
         {!userAvatar ? (
           <FontAwesome name="user-circle" size={120} color={colors.muteColor} />
         ) : (
-          <Image style={styles.image} source={{ uri: userAvatar }} />
+          <ExpoImage image={userAvatar} style={styles.image} />
         )}
       </View>
       <Pressable onPress={pickImage} style={styles.changeButon}>

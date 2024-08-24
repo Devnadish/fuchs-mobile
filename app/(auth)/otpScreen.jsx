@@ -111,9 +111,11 @@ const UserInformation = ({ params, userAvatar }) => {
     <View style={styles.useInfo}>
       <View style={styles.imageContainer}>
         {!userAvatar ? (
-          <Image style={styles.image} source={imagePlaceholder} />
+          <ExpoImage image={imagePlaceholder} style={styles.image} />
         ) : (
-          <Image style={styles.image} source={{ uri: userAvatar }} />
+          // <Image style={styles.image} source={imagePlaceholder} />
+          <ExpoImage image={userAvatar} style={styles.image} />
+          // <Image style={styles.image} source={{ uri: userAvatar }} />
         )}
       </View>
 

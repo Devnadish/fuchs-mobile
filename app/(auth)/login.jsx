@@ -1,11 +1,4 @@
-import {
-  Dimensions,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { colors } from "../../constants";
@@ -17,9 +10,7 @@ import { showToast } from "../../lib/nadish";
 import { userLogin } from "../../api/login";
 import { router } from "expo-router";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
-import { HEADER_IMAGE } from "../../constants/images";
 import { globalStyle } from "../../styles/globalStyle";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function Login() {
   const [mobile, setMobile] = useState("");
@@ -53,19 +44,6 @@ export default function Login() {
     </View>
   );
 }
-
-const HeadrImage = () => {
-  return (
-    <View style={styles.imagecontainer}>
-      <Image
-        source={{
-          uri: process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT + HEADER_IMAGE,
-        }}
-        style={styles.headerImage}
-      />
-    </View>
-  );
-};
 
 const LoginForm = ({ mobile, setMobile, password, setPassword }) => {
   const handleFogetPassword = () => {
