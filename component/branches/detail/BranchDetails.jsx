@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Txt from "../../shared/Txt";
 import { globalStyle } from "../../../styles/globalStyle";
+import { colors } from "../../../constants";
 
 export default function BranchDetails({ branch, userlanguage }) {
   // console.log(JSON.stringify(branch, null, 2));
@@ -24,17 +25,59 @@ export default function BranchDetails({ branch, userlanguage }) {
           title="Address"
           text={userlanguage === "ar" ? branch?.addreesAr : branch?.addreesEn}
         />
-        <Txt title="Working Hours" text={branch?.workIngHours} />
+        <WorkingHours />
         <Txt title="Note" text={branch?.Note} />
       </View>
     </ScrollView>
   );
 }
+const WorkingHours = () => {
+  return (
+    <View style={styles.WorkingHourcontainer}>
+      <Text>Working Hours</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          padding: 10,
+        }}
+      >
+        <Text>Sunday - Thursday</Text>
+        <Text>09:00 - 18:00</Text>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 10,
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          padding: 10,
+        }}
+      >
+        <Text>Friday - Saturday</Text>
+        <Text>Day Off</Text>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
     padding: 10,
     gap: 10,
+  },
+  WorkingHourcontainer: {
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: colors.lightbackgroundColor,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
   },
 });

@@ -4,6 +4,9 @@ import { colors } from "../../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
+const blurhash = "LYLWbgui7e:5V?I:aMbIZ|I.Rknn";
+// const blurhash =
+//   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const RenderBranchItem = ({ item, userLanguage }) => {
   return (
@@ -13,6 +16,7 @@ const RenderBranchItem = ({ item, userLanguage }) => {
           source={{ uri: item?.masterImage }}
           style={styles.carImage}
           transition={200}
+          placeholder={{ blurhash }}
         />
       </View>
 

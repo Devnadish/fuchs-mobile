@@ -6,11 +6,18 @@ import useCurrentLocation, {
   openGoogleMapsForNavigation,
 } from "../../../hooks/useLocation";
 import { showToast } from "../../../lib/nadish";
-
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Entypo from "@expo/vector-icons/Entypo";
 const BranchActions = React.memo(
   ({ lat, long, brid, branchName, phoneNumber }) => {
     const currentLocation = useCurrentLocation();
+    const handleRatePress = useCallback(() => {
+      showToast(`Rate button pressed for ${brid}`);
+    }, []);
 
+    const handleComplaine = () => {
+      showToast(`comaplne button pressed for ${brid}`);
+    };
     const handleGoPress = useCallback(() => {
       if (currentLocation) {
         const { latitude, longitude } = currentLocation;
@@ -47,6 +54,19 @@ const BranchActions = React.memo(
           title="Call"
           handleAction={handleCall}
         />
+        <Actions
+          icon={
+            <MaterialIcons name="star-rate" size={24} color={colors.yellow} />
+          }
+          title="Rate"
+          handleAction={handleRatePress}
+        />
+
+        <Actions
+          icon={<Entypo name="emoji-sad" size={24} color={colors.danger} />}
+          title="Complain "
+          handleAction={handleComplaine}
+        />
       </View>
     );
   }
@@ -70,6 +90,7 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   container: {
+    flexDirection: "row",
     width: "100%",
     justifyContent: "space-around",
     alignItems: "center",
@@ -77,8 +98,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.backgroundColor,
-    width: 60,
-    height: 60,
+    width: 48,
+    height: 48,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
@@ -87,6 +108,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.textColor,
+    fontSize: 12,
   },
   buttonIcons: {
     gap: 5,

@@ -20,6 +20,7 @@ import { showToast } from "../../lib/nadish";
 export default function Car() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const [selectedCar, setSelectedCar] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);

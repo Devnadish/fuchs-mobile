@@ -14,7 +14,7 @@ const BranchByCity = ({ userLanguage, selectedCity }) => {
   const [pageCount, setPageCount] = useState(0);
 
   const getBranches = async (page) => {
-    console.log("getBranches page: ", page);
+    // console.log("getBranches page: ", page);
     setLoading(true);
     const { allBranches, totalPage } = await getBranchByCity(
       userLanguage,

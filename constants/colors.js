@@ -2,6 +2,7 @@ const activeIcon = "#3b82f6"; // "#FFD0A1";
 const unActiveIcon = "#000000"; // "#FFD0A1";
 const backgroundColor = "#F2F2F7";
 const darkerbackgroundColor = "#C8C8D6";
+const lightbackgroundColor = "#f9f9f9";
 const primary = "#3b82f6";
 const secondary = "#ff7300";
 const gray = "#d4c8f9";
@@ -23,6 +24,7 @@ export default {
   primary,
   gray,
   white,
+  lightbackgroundColor,
   danger,
   inputColor,
   borderColor,

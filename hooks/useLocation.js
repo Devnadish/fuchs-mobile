@@ -7,14 +7,28 @@ const useCurrentLocation = () => {
 
   useEffect(() => {
     const getLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+      try {
+        const supported = await Location.hasServicesEnabledAsync();
+        if (!supported) {
+          console.log("This device does not support location services");
+          return;
+        }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location.coords);
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          console.log("Permission to access location was denied");
+          return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location.coords);
+      } catch (error) {
+        if (error.code === "E_LOCATION_SERVICES_DISABLED") {
+          Linking.openSettings();
+        } else {
+          console.log(error);
+        }
+      }
     };
 
     getLocation();

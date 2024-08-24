@@ -9,7 +9,9 @@ import {
 } from "react-native";
 import React, { useCallback, useState, useRef } from "react";
 import { Image } from "expo-image";
-import { colors } from "../../../constants";
+const blurhash = "LYLWbgui7e:5V?I:aMbIZ|I.Rknn";
+// const blurhash =
+//   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 // TODO: refactore the slide next and prev button & Activete rate & Complain & booking add Auto slider animation
 const BranchImages = ({ images }) => {
@@ -42,6 +44,7 @@ const BranchImages = ({ images }) => {
           style={styles.image}
           transition={200}
           contentFit="cover"
+          placeholder={{ blurhash }}
         />
       </View>
     ),
@@ -68,7 +71,7 @@ const BranchImages = ({ images }) => {
           ? `Image ${currentIndex + 1} of ${images?.length}`
           : "No images"}
       </Text> */}
-      <View style={{ flexDirection: "row", gap: 10, marginBottom: 10 }}>
+      {/* <View style={{ flexDirection: "row", gap: 10, marginBottom: 10 }}>
         <Button
           title="Prev"
           onPress={scrollToPrevItem}
@@ -79,7 +82,7 @@ const BranchImages = ({ images }) => {
           onPress={scrollToNextItem}
           disabled={currentIndex === images?.length - 1}
         />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -97,6 +100,7 @@ const styles = StyleSheet.create({
     gap: 5,
     justifyContent: "center",
     alignItems: "center",
+    padding: 10,
   },
   imageContainer: {
     borderRadius: 20,
