@@ -5,6 +5,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import GoHome from "../../component/shared/GoHome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Fontisto from "@expo/vector-icons/Fontisto";
+
 const TabsLayout = () => {
   return (
     <Tabs
@@ -47,19 +49,33 @@ const TabsLayout = () => {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="selectcar"
+
+      <Tabs.Screen
+        name="favBranches"
         options={{
-          title: "Car",
+          title: "Branches",
           tabBarIcon: ({ color, focused }) => (
-            <FontAwesome5
-              name="car"
+            <Fontisto
+              name="heart"
               size={focused ? 28 : 24}
               color={focused ? colors.danger : colors.primary}
             />
           ),
         }}
-      /> */}
+      />
+      <Tabs.Screen
+        name="pinOffers"
+        options={{
+          title: "Branches",
+          tabBarIcon: ({ color, focused }) => (
+            <Fontisto
+              name="pinboard"
+              size={focused ? 28 : 24}
+              color={focused ? colors.danger : colors.primary}
+            />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="setting"
         options={{
@@ -73,6 +89,7 @@ const TabsLayout = () => {
           ),
         }}
       />
+
       <Tabs.Screen
         name="logout"
         options={{

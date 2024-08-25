@@ -6,6 +6,8 @@ import BranchByCity from "../../component/branches/BranchByCity";
 import { groupBranchesByCity } from "../../api/groupBranchesByCity";
 import { StyleSheet, View } from "react-native";
 import { colors } from "../../constants";
+// TODO: Filter by City ==> Get client City and show it as default
+// TODO: add buttun to show all branches and back to madinaty
 
 const Branches = () => {
   const { userLanguage } = useContext(userAuthContext);

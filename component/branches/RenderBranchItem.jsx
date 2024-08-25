@@ -1,27 +1,25 @@
-import React, { memo } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { memo, useState } from "react";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { colors } from "../../constants";
 import { AntDesign } from "@expo/vector-icons";
-import { Image } from "expo-image";
 import { router } from "expo-router";
 import ExpoImage from "../shared/ExpoImage";
-const blurhash = "LYLWbgui7e:5V?I:aMbIZ|I.Rknn";
-// const blurhash =
-//   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
 
 const RenderBranchItem = ({ item, userLanguage }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ExpoImage image={item?.masterImage} style={styles.carImage} />
-        {/* <Image
-          source={{ uri: item?.masterImage }}
-          style={styles.carImage}
-          transition={200}
-          placeholder={{ blurhash }}
-        /> */}
       </View>
-
       <View style={styles.info}>
         <View style={styles.ratingIcon}>
           <AntDesign name="star" size={24} color={colors.yellow} />
@@ -45,6 +43,7 @@ const RenderBranchItem = ({ item, userLanguage }) => {
       >
         <Text style={styles.seeDetailsText}>See Details</Text>
       </Pressable>
+      <AddToFavorite />
     </View>
   );
 };
@@ -53,7 +52,50 @@ export default memo(RenderBranchItem, (prevProps, nextProps) => {
   return prevProps.item?.id === nextProps.item?.id;
 });
 
+const AddToFavorite = () => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const handlePress = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  return (
+    <TouchableOpacity
+      onPress={handlePress}
+      activeOpacity={0.7}
+      style={styles.touchable}
+    >
+      <View style={styles.Favcontainer}>
+        <Ionicons
+          name="heart"
+          size={24}
+          color={isFavorite ? colors.danger : colors.white}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
+  touchable: {
+    position: "absolute",
+    top: 5,
+    right: 5,
+    width: 48,
+    height: 48,
+  },
+  Favcontainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: colors.white,
+    opacity: 0.9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gradient: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     width: "95%",
     backgroundColor: colors.backgroundColor,
