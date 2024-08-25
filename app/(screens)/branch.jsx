@@ -36,12 +36,19 @@ export default function Bbranch() {
           width: "100%",
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: 10,
-          borderWidth: 1,
-          borderColor: "#ccc",
+
+          borderColor: colors.borderColor,
           backgroundColor: colors.white,
           alignSelf: "center",
           overflow: "hidden",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
         }}
       >
         <BranchImages images={branch?.image} />

@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.lightbackgroundColor,
     padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    borderWidth: 0.5,
+    borderColor: colors.borderColor,
     borderRadius: 5,
   },
 });

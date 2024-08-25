@@ -77,8 +77,8 @@ const Actions = ({ icon, title, handleAction }) => {
     <View style={styles.actionContainer}>
       <Pressable style={[styles.button]} onPress={handleAction}>
         <View style={styles.buttonIcons}>{icon}</View>
+        <Text style={styles.text}>{title}</Text>
       </Pressable>
-      <Text style={styles.text}>{title}</Text>
     </View>
   );
 };
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   actionContainer: {
     alignItems: "center",
     justifyContent: "center",
-    gap: 3,
+    // gap: 3,
   },
   container: {
     flexDirection: "row",
@@ -97,21 +97,21 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   button: {
-    backgroundColor: colors.backgroundColor,
+    // backgroundColor: colors.backgroundColor,
     width: 48,
     height: 48,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: colors.borderColor,
+    gap: 3,
   },
   text: {
     color: colors.textColor,
-    fontSize: 12,
+    fontSize: 10,
   },
   buttonIcons: {
-    gap: 5,
     alignItems: "center",
     justifyContent: "center",
   },

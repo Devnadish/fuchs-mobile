@@ -24,10 +24,11 @@ const TabsLayout = () => {
         headerShown: true,
         headerTitleAlign: "center",
         headerTintColor: colors.linkColor,
-
+        tabBarStyle: { height: 60 },
         // headerShadowVisible: false,
         headerStyle: {
           backgroundColor: colors.backgroundColor,
+          // height: 80,
         },
 
         headerTitle: () => (
