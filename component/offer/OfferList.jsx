@@ -98,13 +98,15 @@ const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
     // <Text>{JSON.stringify(offers)}</Text>
     <FlatList
       data={offers}
-      initialNumToRender={5}
       keyExtractor={(item, index) => item.id.toString() + index.toString()}
       renderItem={renderItem}
       contentContainerStyle={{ gap: 10, alignItems: "center" }}
       showsVerticalScrollIndicator={false}
       onEndReached={handleLoadMore}
       onEndReachedThreshold={3}
+      windowSize={1}
+      initialNumToRender={1}
+      maxToRenderPerBatch={1}
       ListFooterComponent={() => (
         <View
           style={{

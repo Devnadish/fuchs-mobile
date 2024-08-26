@@ -78,13 +78,15 @@ const BranchByCity = ({ userLanguage, selectedCity }) => {
   return (
     <FlatList
       data={branches}
-      initialNumToRender={5}
       keyExtractor={(item, index) => item.id.toString() + index.toString()}
       renderItem={renderItem}
       contentContainerStyle={{ gap: 10, alignItems: "center" }}
       showsVerticalScrollIndicator={false}
       onEndReached={handleLoadMore}
       onEndReachedThreshold={3}
+      windowSize={1}
+      initialNumToRender={1}
+      maxToRenderPerBatch={1}
       ListFooterComponent={() => (
         <View
           style={{
