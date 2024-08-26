@@ -37,7 +37,7 @@ const Input = ({
       <View style={styles.viewStyle}>
         <View style={styles.labelView}>
           <Text style={styles.labelStyle}>{label}</Text>
-          {reqierd && <Text style={styles.reqierd}>*</Text>}
+          {reqierd && <Text style={styles.reqierd}>reqierd</Text>}
         </View>
 
         <View
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
   reqierd: {
     color: "red",
-    fontSize: 14,
+    fontSize: 9,
   },
   inputStyle: {
     padding: 10,

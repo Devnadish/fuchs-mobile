@@ -5,11 +5,11 @@ import { router } from "expo-router";
 
 export default function GoHome() {
   return (
-    <View style={{ marginRight: 10 }}>
+    <View style={{ marginLeft: 10 }}>
       <Entypo
         name="home"
         size={24}
-        color="black"
+        color="white"
         onPress={() => router.push("/(home)/home")}
       />
     </View>

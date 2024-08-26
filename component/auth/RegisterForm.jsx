@@ -58,14 +58,6 @@ export default function RegisterForm({
       >
         {errorMsg && <Text style={styles.errorMsg}>{errorMsg}</Text>}
         <Input
-          label="Name"
-          placeholder="Enter Name"
-          text={name}
-          setText={setName}
-          validationMsg="Enter Valid Name"
-          reqierd
-        />
-        <Input
           label="Mobile"
           placeholder="Enter Mobile"
           text={mobile}
@@ -76,13 +68,6 @@ export default function RegisterForm({
           // keyboardType="phone-pad"
         />
         <Input
-          label="E-mail"
-          placeholder="Enter Email"
-          text={email}
-          setText={setEmail}
-          reqierd
-        />
-        <Input
           label="Password"
           placeholder="Enter Password"
           text={passWord}
@@ -90,6 +75,22 @@ export default function RegisterForm({
           reqierd
           secureTextEntry
           maxLength={10}
+        />
+        <Input
+          label="Name"
+          placeholder="Enter Name"
+          text={name}
+          setText={setName}
+          validationMsg="Enter Valid Name"
+          // reqierd
+        />
+
+        <Input
+          label="E-mail"
+          placeholder="Enter Email"
+          text={email}
+          setText={setEmail}
+          // reqierd
         />
       </FormContainer>
 

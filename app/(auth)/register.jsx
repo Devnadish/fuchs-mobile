@@ -29,7 +29,8 @@ export default function Reigster() {
 
   const handleNextButton = async () => {
     setLoading(true);
-    const goNext = regesiterValidation(email, mobile, passWord, name); // Check is Entry Valid
+    let goNext = true;
+    // const goNext = regesiterValidation(email, mobile, passWord, name); // Check is Entry Valid
     const isExist = await checkisExisit(email, mobile); // Check is exisit in Database
 
     // check in database if user already exisit

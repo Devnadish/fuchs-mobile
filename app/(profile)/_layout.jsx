@@ -19,7 +19,7 @@ const TabsLayout = () => {
           backgroundColor: colors.primary,
         },
 
-        headerRight: () => <GoHome />,
+        headerLeft: () => <GoHome />,
       }}
     >
       <Tabs.Screen
@@ -29,7 +29,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color, focused }) => (
             <FontAwesome5
               name="user-alt"
-              size={focused ? 28 : 24}
+              size={focused ? 24 : 24}
               color={focused ? colors.danger : colors.primary}
             />
           ),
@@ -39,11 +39,11 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="car"
         options={{
-          tabBarLabel: "Car",
+          title: "Modify Your Car",
           tabBarIcon: ({ color, focused }) => (
             <FontAwesome5
               name="car"
-              size={focused ? 28 : 24}
+              size={focused ? 24 : 20}
               color={focused ? colors.danger : colors.primary}
             />
           ),
@@ -53,11 +53,11 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="favBranches"
         options={{
-          title: "Branches",
+          title: "Favorite Branches ",
           tabBarIcon: ({ color, focused }) => (
             <Fontisto
               name="heart"
-              size={focused ? 28 : 24}
+              size={focused ? 24 : 20}
               color={focused ? colors.danger : colors.primary}
             />
           ),
@@ -66,11 +66,11 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="pinOffers"
         options={{
-          title: "Branches",
+          title: "Offers you like",
           tabBarIcon: ({ color, focused }) => (
             <Fontisto
               name="pinboard"
-              size={focused ? 28 : 24}
+              size={focused ? 24 : 20}
               color={focused ? colors.danger : colors.primary}
             />
           ),
@@ -83,7 +83,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name="settings"
-              size={focused ? 28 : 24}
+              size={focused ? 24 : 20}
               color={focused ? colors.danger : colors.primary}
             />
           ),
@@ -95,7 +95,7 @@ const TabsLayout = () => {
         options={{
           title: "Logout",
           tabBarIcon: ({ color, focused }) => (
-            <MaterialIcons name="logout" size={24} color="red" />
+            <MaterialIcons name="logout" size={24} color={colors.primary} />
           ),
         }}
       />

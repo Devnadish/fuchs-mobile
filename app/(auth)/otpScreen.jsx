@@ -11,6 +11,7 @@ import { createNewuser } from "../../api/createNewuser";
 import { checkisExisit } from "../../api/checkUserIsExist";
 import { uploadImageToCloudnary } from "../../util/uploadImageToCloudnary";
 import { globalStyle } from "../../styles/globalStyle";
+import ExpoImage from "../../component/shared/ExpoImage";
 
 export default function OtpScreen() {
   const params = useLocalSearchParams();
@@ -30,15 +31,18 @@ export default function OtpScreen() {
 
     setLoading(true);
     //  >>>>>>>>>>>>> 2. upload image and get image public id
-    let imagePublicId;
-    try {
-      imagePublicId = await uploadImageToCloudnary(
-        userAvatar,
-        "oneStopUserAvatar",
-        "userAvatar"
-      );
-    } catch (error) {
-      console.error("Error uploading image:", error);
+
+    let imagePublicId = "";
+    if (userAvatar) {
+      try {
+        imagePublicId = await uploadImageToCloudnary(
+          userAvatar,
+          "oneStopUserAvatar",
+          "userAvatar"
+        );
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
     }
 
     //  >>>>>>>>>>>>> 3. generate user data
@@ -52,12 +56,14 @@ export default function OtpScreen() {
       carModel: params.carModel,
       carYear: params.carYear,
       smsToken: params.smsToken,
-      avatar: imagePublicId.public_id || "null",
+      avatar: imagePublicId?.public_id || "",
     };
 
     //  >>>>>>>>>>>>> 4. recheck if user already exisit
 
-    const isExist = await checkisExisit(userData.email, userData.mobile); // Check is exisit in Database
+    // const isExist = await checkisExisit(userData.email, userData.mobile); // Check is exisit in Database
+
+    const isExist = await checkisExisit(userData.mobile); // Check is exisit By mobile only
 
     if (isExist === "exist") {
       showToast("user already exisit");
@@ -66,6 +72,7 @@ export default function OtpScreen() {
 
     //  >>>>>>>>>>>>> 5. create the user
     const createUser = await createNewuser(userData); //create new user
+    console.log({ createUser });
 
     setLoading(false);
     //  >>>>>>>>>>>>> 6. if user created go to login screen
@@ -107,10 +114,11 @@ export default function OtpScreen() {
 }
 
 const UserInformation = ({ params, userAvatar }) => {
+  console.log(userAvatar);
   return (
     <View style={styles.useInfo}>
       <View style={styles.imageContainer}>
-        {!userAvatar ? (
+        {!userAvatar || userAvatar === null ? (
           <ExpoImage image={imagePlaceholder} style={styles.image} />
         ) : (
           // <Image style={styles.image} source={imagePlaceholder} />
