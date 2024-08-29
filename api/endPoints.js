@@ -20,3 +20,5 @@ export const BRANCHES_DETAIL = UrlEndPoint + "/api/branches/branchdetail"; // pa
 export const OFFERS_DETAIL = UrlEndPoint + "/api/offer/alloffer"; // params : brid
 export const GET_ALL_SERVICES =
   UrlEndPoint + "/api/service/getallservice?language=ar";
+
+export const GET_SERVICES_INFO = UrlEndPoint + "/api/service/serviceinfo";

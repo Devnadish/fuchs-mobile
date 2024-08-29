@@ -15,16 +15,22 @@ const crd = {
   rate: "rate",
 };
 
-export default function ServiceCard({ id, title, description }) {
+export default function ServiceCard({
+  id,
+  title,
+  description,
+  userLanguage,
+  rate,
+}) {
   return (
     <View style={styles.cardContainer}>
       <Detail id={id} title={title} description={description} />
-      <Actions serviceId={id} />
+      <Actions serviceId={id} userLanguage={userLanguage} rate={rate} />
     </View>
   );
 }
 
-const Actions = ({ serviceId }) => {
+const Actions = ({ serviceId, userLanguage, rate }) => {
   console.log({ serviceId });
 
   const handlePressBooking = () => {
@@ -43,7 +49,7 @@ const Actions = ({ serviceId }) => {
   const handleInfo = () => {
     router.push({
       pathname: "/(screens)/serviceInfo",
-      params: { serviceId: serviceId },
+      params: { serviceId: serviceId, userLanguage: userLanguage },
     });
   };
 
@@ -89,8 +95,22 @@ const Actions = ({ serviceId }) => {
         activeOpacity={0.7}
         style={styles.touchable}
       >
-        <View style={styles.moreAction}>
-          <MaterialIcons name="star-rate" size={24} color={colors.primaryBtn} />
+        <View
+          style={[
+            styles.moreAction,
+            {
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "row",
+            },
+          ]}
+        >
+          <MaterialIcons name="star-rate" size={24} color={colors.yellow} />
+          <Text
+            style={{ marginLeft: 1, color: colors.muteColor, fontSize: 12 }}
+          >
+            {rate}
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -107,10 +127,11 @@ const Detail = ({ id, title, description }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: colors.backgroundColor,
     width: "100%",
+    borderWidth: 0.5,
+    borderColor: colors.muteColor,
     borderRadius: 10,
-    ...shadowStyle,
+    // ...shadowStyle,
   },
   touchable: {},
   Bookingcontainer: {

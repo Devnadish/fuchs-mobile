@@ -7,6 +7,7 @@ import { globalStyle } from "../../styles/globalStyle";
 import { colors } from "../../constants";
 import ImageSlider from "../../component/shared/ImageSlider";
 import { getAllServices } from "../../api/getAllServices";
+import { Skeleton } from "moti/skeleton";
 
 const images = [
   "https://i.imgur.com/CzXTtJV.jpg",
@@ -14,15 +15,26 @@ const images = [
   "https://farm4.staticflickr.com/3075/3168662394_7d7103de7d_z_d.jpg",
 ];
 
+const SkeletonCommonProps = {
+  colorMode: "light",
+  transition: {
+    type: "timing",
+    duration: 1500,
+  },
+  backgroundColor: colors.muteColor,
+};
 const HomePage = () => {
   const [services, setServices] = useState([]);
   const { userLanguage } = useContext(userAuthContext);
+  const [loading, setLoading] = useState(true);
 
   // Fetch all services based on user language
   const fetchServices = useCallback(async () => {
     try {
       const data = await getAllServices(userLanguage);
       setServices(data);
+      console.log(data);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to fetch services:", error);
     }
@@ -35,6 +47,7 @@ const HomePage = () => {
   return (
     <>
       <ImageSlider images={images} />
+
       <View style={styles.masterContainer}>
         <ScrollView
           contentContainerStyle={globalStyle.scroll}
@@ -55,17 +68,45 @@ const HomePage = () => {
                       : service.descriptionEn
                   }
                   id={service.id}
+                  userLanguage={userLanguage}
+                  rate={service.rate}
                 />
               ))
             ) : (
-              <View style={styles.noServicesContainer}>
-                <Text>No services available</Text>
-              </View>
+              <NoServices />
             )}
           </View>
         </ScrollView>
       </View>
     </>
+  );
+};
+
+const NoServices = ({ loading }) => {
+  return (
+    <View style={{ padding: 20, gap: 20 }}>
+      <Skeleton
+        height={130}
+        width={"100%"}
+        radius={10}
+        {...SkeletonCommonProps}
+        show={loading}
+      />
+      <Skeleton
+        height={130}
+        width={"100%"}
+        radius={10}
+        {...SkeletonCommonProps}
+        show={loading}
+      />
+      <Skeleton
+        height={130}
+        width={"100%"}
+        radius={10}
+        {...SkeletonCommonProps}
+        show={loading}
+      />
+    </View>
   );
 };
 
@@ -76,7 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 10,
     gap: 20,
   },
   masterContainer: {
@@ -89,6 +130,7 @@ const styles = StyleSheet.create({
   noServicesContainer: {
     alignItems: "center",
     justifyContent: "center",
+    gap: 20,
     padding: 20,
   },
 });

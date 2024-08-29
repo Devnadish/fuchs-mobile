@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import colors from "../../constants/colors";
 
-const BarHeader = React.memo(({ title }) => {
+const BarHeader = React.memo(({ title, icon }) => {
   const handleBackPress = useCallback(() => {
     router.back();
   }, []);
@@ -15,7 +15,10 @@ const BarHeader = React.memo(({ title }) => {
         <Ionicons name="chevron-back" size={24} color="black" />
         {/* <Text style={[styles.headerText, { fontSize: 16 }]}>Back</Text> */}
       </Pressable>
-      <Text style={styles.headerText}>{title}</Text>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+        <Text style={styles.headerText}>{title}</Text>
+        {icon && icon}
+      </View>
     </View>
   );
 });
