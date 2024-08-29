@@ -3,7 +3,7 @@ import { useLocalSearchParams } from "expo-router";
 import Containner from "../../component/shared/Containner";
 
 import { branchDetail } from "../../api/branchDetail";
-import BrHeader from "../../component/branches/detail/BrHeader";
+import BarHeader from "../../component/shared/BarHeader";
 import BranchImages from "../../component/branches/detail/BranchImages";
 import BranchActions from "../../component/branches/detail/BranchActions";
 import BranchDetails from "../../component/branches/detail/BranchDetails";
@@ -29,7 +29,7 @@ export default function Bbranch() {
   }, []);
   return (
     <Containner>
-      <BrHeader branchName={branchName} />
+      <BarHeader title={branchName} />
       <View
         style={{
           flexDirection: "row",

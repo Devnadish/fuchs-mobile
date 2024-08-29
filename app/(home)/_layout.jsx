@@ -18,17 +18,14 @@ const TabsLayout = () => {
   const { t } = useTranslation();
   return (
     <Tabs
-      // initialRouteName="branches"
       screenOptions={{
         tabBarShowLabel: true,
         headerShown: true,
         headerTitleAlign: "center",
         headerTintColor: colors.linkColor,
         tabBarStyle: { height: 60 },
-        // headerShadowVisible: false,
         headerStyle: {
           backgroundColor: colors.backgroundColor,
-          // height: 80,
         },
 
         headerTitle: () => (
@@ -71,24 +68,26 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="Booking"
         options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
           title: t("tab.booking"),
           headerTitle: null,
           tabBarLabel: () => {
             return null;
           },
           // headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
-            <>
-              <FontAwesome6
-                name="calendar-plus"
-                size={focused ? 28 : 24}
-                color={focused ? colors.danger : colors.primary}
-              />
-              <Text style={{ color: focused ? colors.danger : colors.primary }}>
-                Book
-              </Text>
-            </>
-          ),
+          // tabBarIcon: ({ color, focused }) => (
+          //   <>
+          //     <FontAwesome6
+          //       name="calendar-plus"
+          //       size={focused ? 28 : 24}
+          //       color={focused ? colors.danger : colors.primary}
+          //     />
+          //     <Text style={{ color: focused ? colors.danger : colors.primary }}>
+          //       Book
+          //     </Text>
+          //   </>
+          // ),
         }}
       />
       <Tabs.Screen
@@ -122,24 +121,3 @@ const TabsLayout = () => {
 };
 
 export default TabsLayout;
-
-{
-  /* ; */
-}
-
-// screenOptions={{
-//         tabBarActiveTintColor: colors.activeIcon,
-//         tabBarInactiveTintColor: colors.unActiveIcon,
-//         tabBarShowLabel: true,
-//         tabBarStyle: {
-//           backgroundColor: colors.backgroundColor,
-//           borderTopWidth: 1,
-//           borderTopColor: colors.activeIcon,
-//           height: 54,
-//           position: "absolute",
-//           bottom: 0,
-//           right: 0,
-//           left: 0,
-//           elevation: 0,
-//           height: Platform.OS === "ios" ? 90 : 60,
-//         },

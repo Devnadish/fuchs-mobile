@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { memo, useCallback, useState } from "react";
-import { colors } from "../../constants";
+// import { colors } from "../../constants";
 import { enCitys } from "../../constants/City";
-import { useRouter } from "expo-router";
+import { router, useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
+import { colors } from "../../constants";
 
 export default function City() {
   return (
@@ -20,6 +21,9 @@ export default function City() {
       {/* Cancel button in backdraw */}
       <Pressable style={{ flex: 1 }} onPress={() => router.back()}>
         <View />
+      </Pressable>
+      <Pressable style={{ flex: 1 }} onPress={() => setVisible(false)}>
+        <View style={styles.backDrop} />
       </Pressable>
 
       {/* BlurView handle the bottom sheet *screen*/}

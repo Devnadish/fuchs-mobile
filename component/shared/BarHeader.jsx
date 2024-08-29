@@ -2,9 +2,9 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useCallback } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
-import colors from "../../../constants/colors";
+import colors from "../../constants/colors";
 
-const BrHeader = React.memo(({ branchName }) => {
+const BarHeader = React.memo(({ title }) => {
   const handleBackPress = useCallback(() => {
     router.back();
   }, []);
@@ -12,10 +12,10 @@ const BrHeader = React.memo(({ branchName }) => {
   return (
     <View style={styles.header}>
       <Pressable style={styles.backBtn} onPress={handleBackPress}>
-        <Ionicons name="arrow-back" size={20} color="black" />
-        <Text style={[styles.headerText, { fontSize: 16 }]}>Back</Text>
+        <Ionicons name="chevron-back" size={24} color="black" />
+        {/* <Text style={[styles.headerText, { fontSize: 16 }]}>Back</Text> */}
       </Pressable>
-      <Text style={styles.headerText}>{branchName}</Text>
+      <Text style={styles.headerText}>{title}</Text>
     </View>
   );
 });
@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     elevation: 5,
     paddingHorizontal: 10,
+    position: "absolute",
+    top: 0,
+    zIndex: 1,
   },
   headerText: {
     fontSize: 16,
@@ -42,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BrHeader;
+export default BarHeader;

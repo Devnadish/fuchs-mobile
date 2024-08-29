@@ -18,3 +18,5 @@ export const GROUP_BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/groupcity";
 export const BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/getbranchbycity";
 export const BRANCHES_DETAIL = UrlEndPoint + "/api/branches/branchdetail"; // params : brid
 export const OFFERS_DETAIL = UrlEndPoint + "/api/offer/alloffer"; // params : brid
+export const GET_ALL_SERVICES =
+  UrlEndPoint + "/api/service/getallservice?language=ar";
