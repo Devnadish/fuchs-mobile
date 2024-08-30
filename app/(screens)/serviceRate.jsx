@@ -116,7 +116,7 @@ const Pageination = ({ page, setPage, pages = 1 }) => {
         onPress={handleNextPage}
         activeOpacity={0.7}
         disabled={page === pages}
-        style={{ width: 48 }}
+        style={styles.arrowButton}
       >
         <MaterialIcons
           name="arrow-circle-left"
@@ -131,7 +131,7 @@ const Pageination = ({ page, setPage, pages = 1 }) => {
         onPress={handlePreviousPage}
         activeOpacity={0.7}
         disabled={page === 1}
-        style={{ width: 48 }}
+        style={styles.arrowButton}
       >
         <MaterialIcons
           name="arrow-circle-right"
@@ -177,6 +177,12 @@ const AboutService = ({ Title, description }) => {
 };
 
 const styles = StyleSheet.create({
+  arrowButton: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   pageinationText: {
     color: colors.white,
     fontSize: 16,
