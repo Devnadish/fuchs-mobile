@@ -18,7 +18,8 @@ import { getServiceRate } from "../../api/getServiceRate";
 import { getTimeElapsed } from "../../lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-let limit = 10;
+const limit = 10;
+
 const SkeletonCommonProps = {
   colorMode: "light",
   transition: {
@@ -32,26 +33,31 @@ export default function ServiceRate() {
   const [serviceRate, setServiceRate] = useState([]);
   const [rateCategory, setRateCategory] = useState(5);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const params = useLocalSearchParams();
   const { serviceId, userLanguage } = params;
 
   const fetchRate = useCallback(async () => {
-    setLoading(true); // Start loading
-    const data = await getServiceRate(
-      serviceId,
-      page,
-      limit,
-      rateCategory,
-      userLanguage
-    );
-    setServiceRate(data);
-    setLoading(false); // End loading
+    setLoading(true);
+    try {
+      const data = await getServiceRate(
+        serviceId,
+        page,
+        limit,
+        rateCategory,
+        userLanguage
+      );
+      setServiceRate(data);
+    } catch (error) {
+      console.error("Failed to fetch service rates:", error);
+    } finally {
+      setLoading(false);
+    }
   }, [serviceId, rateCategory, userLanguage, page]);
 
   useEffect(() => {
     fetchRate();
-  }, [fetchRate]); // Only re-fetch when fetchRate changes
+  }, [fetchRate]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -60,7 +66,7 @@ export default function ServiceRate() {
           <Text style={styles.userNameAndData}>
             {item.userName || "Anonymous"}
           </Text>
-          <Text style={styles.userNameAndData}>rate: {item.rate}</Text>
+          <Text style={styles.userNameAndData}>Rate: {item.rate}</Text>
           <Text style={styles.userNameAndData}>
             {getTimeElapsed(item.updatedAt)}
           </Text>
@@ -72,7 +78,7 @@ export default function ServiceRate() {
   );
 
   const renderSkeleton = () => (
-    <View style={styles.SkeletonitemContainer}>
+    <View style={styles.skeletonItemContainer}>
       <Skeleton
         height={15}
         width={"80%"}
@@ -114,14 +120,14 @@ export default function ServiceRate() {
       />
       <View style={styles.container}>
         <FlatList
-          data={loading ? Array.from({ length: 5 }) : serviceRate.serviceRate} // Show skeletons if loading
+          data={loading ? Array.from({ length: 5 }) : serviceRate.serviceRate}
           renderItem={loading ? renderSkeleton : renderItem}
           keyExtractor={(item, index) =>
             loading ? index.toString() : item.id.toString()
-          } // Ensure key is a string
+          }
           contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false} // Hide scroll indicator for better UX
-          ItemSeparatorComponent={() => <View style={styles.separator} />} // Add separator between items
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       </View>
       <Pagination page={page} setPage={setPage} pages={serviceRate.totalPage} />
@@ -197,7 +203,7 @@ const AboutService = ({ Title, description }) => {
 };
 
 const styles = StyleSheet.create({
-  SkeletonitemContainer: {
+  skeletonItemContainer: {
     padding: 15,
     gap: 10,
   },
