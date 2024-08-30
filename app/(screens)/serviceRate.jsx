@@ -122,8 +122,8 @@ export default function ServiceRate() {
   return (
     <Container>
       <BarHeader
-        title={"Service Info"}
-        icon={<Entypo name="info" size={24} color={colors.primaryBtn} />}
+        title={"What Users Say.."}
+        icon={<Entypo name="star" size={24} color={colors.primaryBtn} />}
       />
       <AboutService
         Title={
