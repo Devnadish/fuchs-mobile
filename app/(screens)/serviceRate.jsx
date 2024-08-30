@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { shadowStyle } from "../../styles/globalStyle";
@@ -34,6 +35,7 @@ export default function ServiceRate() {
   const [rateCategory, setRateCategory] = useState(5);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [loadingPage, setLoadingPage] = useState(false); // New loading state for pagination
   const params = useLocalSearchParams();
   const { serviceId, userLanguage } = params;
 
@@ -58,6 +60,27 @@ export default function ServiceRate() {
   useEffect(() => {
     fetchRate();
   }, [fetchRate]);
+
+  const handleNextPage = () => {
+    if (page < serviceRate.totalPage) {
+      setLoadingPage(true); // Start loading for the next page
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setLoadingPage(true); // Start loading for the previous page
+      setPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (loadingPage) {
+      fetchRate();
+      setLoadingPage(false); // Reset loading state after fetching
+    }
+  }, [loadingPage, fetchRate]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -130,32 +153,43 @@ export default function ServiceRate() {
           ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       </View>
-      <Pagination page={page} setPage={setPage} pages={serviceRate.totalPage} />
+      {loadingPage && (
+        <View style={styles.loadingIndicator}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Loading...</Text>
+        </View>
+      )}
+      <Pagination
+        page={page}
+        setPage={setPage}
+        pages={serviceRate.totalPage}
+        loading={loadingPage}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+      />
     </Container>
   );
 }
 
-const Pagination = ({ page, setPage, pages = 1 }) => {
-  const handleNextPage = () => {
-    if (page < pages) setPage(page + 1);
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 1) setPage(page - 1);
-  };
-
+const Pagination = ({
+  page,
+  pages = 1,
+  loading,
+  handleNextPage,
+  handlePreviousPage,
+}) => {
   return (
     <View style={styles.paginationContainer}>
       <TouchableOpacity
         onPress={handlePreviousPage}
         activeOpacity={0.7}
-        disabled={page === 1}
+        disabled={page === 1 || loading}
         style={styles.arrowButton}
       >
         <MaterialIcons
           name="arrow-circle-left"
           size={30}
-          color={page === 1 ? colors.muteColor : colors.white}
+          color={page === 1 || loading ? colors.muteColor : colors.white}
         />
       </TouchableOpacity>
       <Text style={styles.paginationText}>
@@ -164,13 +198,13 @@ const Pagination = ({ page, setPage, pages = 1 }) => {
       <TouchableOpacity
         onPress={handleNextPage}
         activeOpacity={0.7}
-        disabled={page === pages}
+        disabled={page === pages || loading}
         style={styles.arrowButton}
       >
         <MaterialIcons
           name="arrow-circle-right"
           size={30}
-          color={page === pages ? colors.muteColor : colors.white}
+          color={page === pages || loading ? colors.muteColor : colors.white}
         />
       </TouchableOpacity>
     </View>
@@ -206,6 +240,17 @@ const styles = StyleSheet.create({
   skeletonItemContainer: {
     padding: 15,
     gap: 10,
+  },
+  loadingIndicator: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+  },
+  loadingText: {
+    marginLeft: 10,
+    color: colors.primary,
+    fontSize: 16,
   },
   arrowButton: {
     width: 50,
