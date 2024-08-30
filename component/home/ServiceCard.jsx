@@ -31,8 +31,6 @@ export default function ServiceCard({
 }
 
 const Actions = ({ serviceId, userLanguage, rate }) => {
-  console.log({ serviceId });
-
   const handlePressBooking = () => {
     router.push({
       pathname: "/(screens)/booking",
@@ -54,10 +52,9 @@ const Actions = ({ serviceId, userLanguage, rate }) => {
   };
 
   const handlePressServiceRate = () => {
-    console.log("info");
     router.push({
-      pathname: "/(screens)/serviceRateInfo",
-      params: { serviceId: serviceId },
+      pathname: "/(screens)/serviceRate",
+      params: { serviceId: serviceId, userLanguage: userLanguage },
     });
   };
   return (

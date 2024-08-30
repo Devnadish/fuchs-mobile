@@ -16,6 +16,8 @@ const lightmuteColor = "#F5F5F5";
 const muteColor = "#AEAEB2";
 const textColor = "#0D0808";
 const yellow = "#FFD0A1";
+const green = "#01AA34";
+
 export default {
   activeIcon,
   unActiveIcon,
@@ -35,4 +37,5 @@ export default {
   lightmuteColor,
   yellow,
   darkerbackgroundColor,
+  green,
 };

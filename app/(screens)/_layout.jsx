@@ -14,7 +14,7 @@ const ScreensLayout = () => (
       }}
     />
     <Stack.Screen
-      name="serviceRateInfo"
+      name="serviceRate"
       options={{
         presentation: "formSheet",
         animation: "slide_from_bottom",

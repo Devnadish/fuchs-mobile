@@ -23,3 +23,5 @@ export const GET_ALL_SERVICES =
 
 export const GET_SERVICES_INFO = UrlEndPoint + "/api/service/serviceinfo";
 export const SERVICES_GIFT = UrlEndPoint + "/api/service/servicegift";
+export const SERVICES_RATE = UrlEndPoint + "/api/service/servicerate";
+//  " /api/service/servicerate?serviceId=66cf440408ae52c4aded293a&page=1&limit=10&rate=1&language=ar";
