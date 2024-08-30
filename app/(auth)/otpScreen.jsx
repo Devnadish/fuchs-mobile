@@ -119,10 +119,22 @@ const UserInformation = ({ params, userAvatar }) => {
     <View style={styles.useInfo}>
       <View style={styles.imageContainer}>
         {!userAvatar || userAvatar === null ? (
-          <ExpoImage image={imagePlaceholder} style={styles.image} />
+          <ExpoImage
+            image={imagePlaceholder}
+            style={styles.image}
+            width={110}
+            height={110}
+            radius={75}
+          />
         ) : (
           // <Image style={styles.image} source={imagePlaceholder} />
-          <ExpoImage image={userAvatar} style={styles.image} />
+          <ExpoImage
+            image={userAvatar}
+            style={styles.image}
+            width={110}
+            height={110}
+            radius={75}
+          />
           // <Image style={styles.image} source={{ uri: userAvatar }} />
         )}
       </View>

@@ -22,3 +22,4 @@ export const GET_ALL_SERVICES =
   UrlEndPoint + "/api/service/getallservice?language=ar";
 
 export const GET_SERVICES_INFO = UrlEndPoint + "/api/service/serviceinfo";
+export const SERVICES_GIFT = UrlEndPoint + "/api/service/servicegift";

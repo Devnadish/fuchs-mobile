@@ -29,7 +29,13 @@ const TabsLayout = () => {
         },
 
         headerTitle: () => (
-          <ExpoImage image={ONESTOP} style={{ width: 60, height: 40 }} />
+          <ExpoImage
+            image={ONESTOP}
+            style={{ width: 60, height: 40 }}
+            width={40}
+            height={40}
+            radius={2}
+          />
         ),
         headerRight: () => <ActiveBooking />,
         headerLeft: () => <UserAvatar />,

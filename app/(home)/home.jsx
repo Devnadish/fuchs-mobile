@@ -55,7 +55,7 @@ const HomePage = () => {
           showsHorizontalScrollIndicator={false}
         >
           <View style={styles.container}>
-            {services.length > 0 ? (
+            {services?.length > 0 ? (
               services.map((service) => (
                 <ServiceCard
                   key={service.id}

@@ -42,7 +42,7 @@ const Actions = ({ serviceId, userLanguage, rate }) => {
   const handlePressfreeGift = () => {
     router.push({
       pathname: "/(screens)/freegift",
-      params: { serviceId: serviceId },
+      params: { serviceId: serviceId, userLanguage: userLanguage },
     });
   };
 

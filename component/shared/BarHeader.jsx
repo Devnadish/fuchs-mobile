@@ -13,8 +13,8 @@ const BarHeader = React.memo(({ title, icon }) => {
     <View style={styles.header}>
       <Pressable style={styles.backBtn} onPress={handleBackPress}>
         <Ionicons name="chevron-back" size={24} color="black" />
-        {/* <Text style={[styles.headerText, { fontSize: 16 }]}>Back</Text> */}
       </Pressable>
+
       <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
         <Text style={styles.headerText}>{title}</Text>
         {icon && icon}
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: "semibold",
   },
   backBtn: {
+    width: 58,
     flexDirection: "row",
     alignItems: "center",
     gap: 5,

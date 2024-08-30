@@ -27,7 +27,13 @@ const UserImage = ({ userAvatar, setuserAvatar }) => {
         {!userAvatar ? (
           <FontAwesome name="user-circle" size={120} color={colors.muteColor} />
         ) : (
-          <ExpoImage image={userAvatar} style={styles.image} />
+          <ExpoImage
+            image={userAvatar}
+            style={styles.image}
+            width={115}
+            height={115}
+            radius={75}
+          />
         )}
       </View>
       <Pressable onPress={pickImage} style={styles.changeButon}>
