@@ -48,8 +48,9 @@ export default function ServiceRate() {
       <View style={styles.itemContainer}>
         <View style={styles.userComment}>
           <Text style={styles.userNameAndData}>
-            {item.userName || "Anonymous"} {item.rate}
+            {item.userName || "Anonymous"}
           </Text>
+          <Text style={styles.userNameAndData}>rate:{item.rate}</Text>
           <Text style={styles.userNameAndData}>
             {getTimeElapsed(item.updatedAt)}
           </Text>
@@ -233,6 +234,7 @@ const styles = StyleSheet.create({
   },
   userNameAndData: {
     fontSize: 12,
+    color: colors.muteColor,
   },
   listContainer: {
     padding: 10,
