@@ -19,15 +19,25 @@ import { getTimeElapsed } from "../../lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 let limit = 10;
+const SkeletonCommonProps = {
+  colorMode: "light",
+  transition: {
+    type: "timing",
+    duration: 1500,
+  },
+  backgroundColor: colors.muteColor,
+};
 
 export default function ServiceRate() {
   const [serviceRate, setServiceRate] = useState([]);
   const [rateCategory, setRateCategory] = useState(5);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true); // Loading state
   const params = useLocalSearchParams();
   const { serviceId, userLanguage } = params;
 
   const fetchRate = useCallback(async () => {
+    setLoading(true); // Start loading
     const data = await getServiceRate(
       serviceId,
       page,
@@ -36,7 +46,7 @@ export default function ServiceRate() {
       userLanguage
     );
     setServiceRate(data);
-    console.log(JSON.stringify(data, null, 2));
+    setLoading(false); // End loading
   }, [serviceId, rateCategory, userLanguage, page]);
 
   useEffect(() => {
@@ -50,7 +60,7 @@ export default function ServiceRate() {
           <Text style={styles.userNameAndData}>
             {item.userName || "Anonymous"}
           </Text>
-          <Text style={styles.userNameAndData}>rate:{item.rate}</Text>
+          <Text style={styles.userNameAndData}>rate: {item.rate}</Text>
           <Text style={styles.userNameAndData}>
             {getTimeElapsed(item.updatedAt)}
           </Text>
@@ -59,6 +69,25 @@ export default function ServiceRate() {
       </View>
     ),
     []
+  );
+
+  const renderSkeleton = () => (
+    <View style={styles.SkeletonitemContainer}>
+      <Skeleton
+        height={15}
+        width={"80%"}
+        radius={8}
+        show={loading}
+        {...SkeletonCommonProps}
+      />
+      <Skeleton
+        height={30}
+        width={"100%"}
+        radius={8}
+        show={loading}
+        {...SkeletonCommonProps}
+      />
+    </View>
   );
 
   return (
@@ -78,7 +107,6 @@ export default function ServiceRate() {
             ? serviceRate?.serviceInformation?.descriptionAr
             : serviceRate?.serviceInformation?.descriptionEn
         }
-        image={serviceRate?.serviceInformation?.image}
       />
       <RateFaces
         rateCategory={rateCategory}
@@ -86,48 +114,32 @@ export default function ServiceRate() {
       />
       <View style={styles.container}>
         <FlatList
-          data={serviceRate.serviceRate}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()} // Ensure key is a string
+          data={loading ? Array.from({ length: 5 }) : serviceRate.serviceRate} // Show skeletons if loading
+          renderItem={loading ? renderSkeleton : renderItem}
+          keyExtractor={(item, index) =>
+            loading ? index.toString() : item.id.toString()
+          } // Ensure key is a string
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false} // Hide scroll indicator for better UX
           ItemSeparatorComponent={() => <View style={styles.separator} />} // Add separator between items
         />
       </View>
-      <Pageination
-        page={page}
-        setPage={setPage}
-        pages={serviceRate.totalPage}
-      />
+      <Pagination page={page} setPage={setPage} pages={serviceRate.totalPage} />
     </Container>
   );
 }
 
-const Pageination = ({ page, setPage, pages = 1 }) => {
+const Pagination = ({ page, setPage, pages = 1 }) => {
   const handleNextPage = () => {
-    setPage(page + 1);
+    if (page < pages) setPage(page + 1);
   };
 
   const handlePreviousPage = () => {
-    setPage(page - 1);
+    if (page > 1) setPage(page - 1);
   };
+
   return (
-    <View style={styles.pageinationContainer}>
-      <TouchableOpacity
-        onPress={handleNextPage}
-        activeOpacity={0.7}
-        disabled={page === pages}
-        style={styles.arrowButton}
-      >
-        <MaterialIcons
-          name="arrow-circle-left"
-          size={30}
-          color={page === pages ? colors.muteColor : colors.white}
-        />
-      </TouchableOpacity>
-      <Text style={styles.pageinationText}>
-        {page}/{pages}
-      </Text>
+    <View style={styles.paginationContainer}>
       <TouchableOpacity
         onPress={handlePreviousPage}
         activeOpacity={0.7}
@@ -135,9 +147,24 @@ const Pageination = ({ page, setPage, pages = 1 }) => {
         style={styles.arrowButton}
       >
         <MaterialIcons
-          name="arrow-circle-right"
+          name="arrow-circle-left"
           size={30}
           color={page === 1 ? colors.muteColor : colors.white}
+        />
+      </TouchableOpacity>
+      <Text style={styles.paginationText}>
+        {page}/{pages}
+      </Text>
+      <TouchableOpacity
+        onPress={handleNextPage}
+        activeOpacity={0.7}
+        disabled={page === pages}
+        style={styles.arrowButton}
+      >
+        <MaterialIcons
+          name="arrow-circle-right"
+          size={30}
+          color={page === pages ? colors.muteColor : colors.white}
         />
       </TouchableOpacity>
     </View>
@@ -145,14 +172,6 @@ const Pageination = ({ page, setPage, pages = 1 }) => {
 };
 
 const AboutService = ({ Title, description }) => {
-  const SkeletonCommonProps = {
-    colorMode: "light",
-    transition: {
-      type: "timing",
-      duration: 1500,
-    },
-    backgroundColor: colors.muteColor,
-  };
   return (
     <View style={styles.serviceInfoContainer}>
       <Skeleton
@@ -178,19 +197,23 @@ const AboutService = ({ Title, description }) => {
 };
 
 const styles = StyleSheet.create({
+  SkeletonitemContainer: {
+    padding: 15,
+    gap: 10,
+  },
   arrowButton: {
     width: 50,
     height: 50,
     justifyContent: "center",
     alignItems: "center",
   },
-  pageinationText: {
+  paginationText: {
     color: colors.white,
     fontSize: 16,
     fontWeight: "bold",
     lineHeight: 50,
   },
-  pageinationContainer: {
+  paginationContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
