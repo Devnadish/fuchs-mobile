@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Image, Button } from "react-native";
 import { colors } from "../../constants";
 import BottomSingInComponent from "../../component/auth/BottomSingInComponent";
 import { showToast } from "../../lib/nadish";
@@ -23,6 +23,7 @@ export default function HomePage() {
     <View style={[globalStyle.container, { justifyContent: "flex-between" }]}>
       <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
       <HeaderImage />
+      {/* <Button title="Login" onPress={() => showToast("Login button pressed")} /> */}
       <View style={styles.loginContainer}>
         {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
         <LoginAsGuest />

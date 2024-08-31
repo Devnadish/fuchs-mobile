@@ -12,7 +12,6 @@ const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  console.log("flatList");
 
   const getOfferData = async () => {
     setLoading(true);

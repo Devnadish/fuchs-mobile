@@ -7,7 +7,6 @@ export const getServiceRate = async (
   rate,
   language
 ) => {
-  console.log({ serviceId, page, limit, rate, language });
   try {
     const { data } = await axios.get(`${SERVICES_RATE}`, {
       params: {

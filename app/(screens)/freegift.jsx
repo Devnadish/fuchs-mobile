@@ -18,7 +18,6 @@ export default function FreeGift() {
   const [gift, setGift] = useState([]);
   const params = useLocalSearchParams();
   const { serviceId, userLanguage } = params;
-  console.log(gift);
   const fetchData = async (userLanguage, id) => {
     const data = await getServiceGiftFromDb(userLanguage, id);
     setGift(data);

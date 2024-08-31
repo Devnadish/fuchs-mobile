@@ -8,7 +8,6 @@ import Container from "../../component/shared/Containner";
 export default function Booking() {
   const params = useLocalSearchParams();
   const { serviceId } = params;
-  console.log({ serviceId });
   return (
     <Container>
       <View style={globalStyle.container}>

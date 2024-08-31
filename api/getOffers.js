@@ -1,8 +1,6 @@
 import axios from "axios";
 import { OFFERS_DETAIL } from "./endPoints";
 export const getOffers = async (language, page, limit, branchId) => {
-  console.log("### ", language, page, limit, branchId);
-
   try {
     const { data } = await axios.get(`${OFFERS_DETAIL}`, {
       params: {

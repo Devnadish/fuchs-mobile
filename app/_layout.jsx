@@ -6,6 +6,7 @@ import { UserAuthProvider } from "../provider/userAuth/userAuthProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { carBarStyle, indexBarStyle } from "../constants/headerBarStyle";
 import { pingServer, showToast } from "../lib/nadish";
+import Toast from "react-native-toast-message";
 
 const RootLayout = () => {
   const check = pingServer();
@@ -26,6 +27,7 @@ const RootLayout = () => {
           </Stack>
         </LanguageProvider>
       </GestureHandlerRootView>
+      <Toast position="top" topOffset={50} visibilityTime={2000} />
     </UserAuthProvider>
   );
 };

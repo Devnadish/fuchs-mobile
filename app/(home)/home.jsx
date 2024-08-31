@@ -33,7 +33,6 @@ const HomePage = () => {
     try {
       const data = await getAllServices(userLanguage);
       setServices(data);
-      console.log(data);
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch services:", error);

@@ -72,7 +72,6 @@ export default function OtpScreen() {
 
     //  >>>>>>>>>>>>> 5. create the user
     const createUser = await createNewuser(userData); //create new user
-    console.log({ createUser });
 
     setLoading(false);
     //  >>>>>>>>>>>>> 6. if user created go to login screen
@@ -114,7 +113,6 @@ export default function OtpScreen() {
 }
 
 const UserInformation = ({ params, userAvatar }) => {
-  console.log(userAvatar);
   return (
     <View style={styles.useInfo}>
       <View style={styles.imageContainer}>
