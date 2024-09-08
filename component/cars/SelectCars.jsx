@@ -60,7 +60,6 @@ export default function SelectCars({ setVisible, setConfirmCar, userMobile }) {
 }
 
 const Confirm = ({ selectedCar, setVisible, userMobile, setConfirmCar }) => {
-  console.log(selectedCar.year);
   const handleSaveCar = async () => {
     const userCar = {
       mobile: userMobile,
@@ -71,7 +70,6 @@ const Confirm = ({ selectedCar, setVisible, userMobile, setConfirmCar }) => {
       carYear: selectedCar?.year || "",
     };
 
-    console.log(userCar);
     const updateCar = await updateUserCar(userCar);
     if (updateUserCar) {
       showToast("Car Updated");

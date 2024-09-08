@@ -13,6 +13,7 @@ import { Stack } from "expo-router";
 import ShowModal from "../../component/shared/ShowModal";
 import SelectCars from "../../component/cars/SelectCars";
 import { Skeleton } from "moti/skeleton";
+import CarInstrutor from "../../component/instraction/CarInstrutor";
 
 export default function Car() {
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,6 @@ export default function Car() {
   });
 
   const { userMobile, userLanguage } = useContext(userAuthContext);
-  console.log(JSON.stringify(selectedCar, null, 2));
 
   const fetchUserData = async () => {
     setLoading(true);
@@ -55,17 +55,27 @@ export default function Car() {
       />
 
       <View style={globalStyle.container}>
+        <CarInstrutor />
         <View style={styles.carInfoContainer}>
           <CarInfo label={"Car : "} value={selectedCar?.carName} />
           <CarInfo label={"Model : "} value={selectedCar?.model} />
           <CarInfo label={"Year : "} value={selectedCar?.year} />
-
-          <Btn
-            title="Changes"
-            handlePress={() => setModalVisible(true)}
-            containerStyles={styles.btnContainer}
-            textStyles={{ color: colors.primaryBtn }}
-          />
+          {selectedCar?.carName ? (
+            <Btn
+              title="Select Your Car"
+              handlePress={() => setModalVisible(true)}
+              containerStyles={styles.btnContainer}
+              textStyles={{ color: colors.primaryBtn }}
+            />
+          ) : (
+            <Skeleton
+              width={100}
+              height={40}
+              borderRadius={5}
+              show={!value}
+              {...SkeletonCommonProps}
+            />
+          )}
         </View>
       </View>
 
@@ -128,7 +138,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   btnContainer: {
-    width: "40%",
+    width: "60%",
     backgroundColor: "transparent",
   },
 });

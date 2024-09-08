@@ -58,7 +58,6 @@ export default function ChangeProfile({ setShowModal, setAvatar }) {
     // Update the user context
 
     setLoading(false);
-    console.log(imagePublicId);
   };
 
   const handleCancel = () => {

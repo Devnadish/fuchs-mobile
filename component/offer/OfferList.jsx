@@ -39,7 +39,6 @@ const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
         Limit,
         selectedOffer
       );
-      // console.log({ initialOffer });
       setOffers(initialOffer);
     };
 
@@ -53,7 +52,6 @@ const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
     }
 
     if (pageNum >= pageCount) {
-      // console.log("No more branches to load.", { pageNum, pageCount });
       return;
     } else {
       pageNum = pageNum + 1;

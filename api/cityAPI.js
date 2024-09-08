@@ -6,7 +6,6 @@ export const getAllCity = async (language) => {
     const { data } = await axios.get(GET_ALL_CITY, {
       params: { language },
     });
-    console.log(data);
     return data;
   } catch (error) {
     handleAxiosError(error);
