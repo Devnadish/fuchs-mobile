@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import ServiceCard from "../../component/home/ServiceCard";
-import { globalStyle } from "../../styles/globalStyle";
+import { globalStyle, SkeletonCommonProps } from "../../styles/globalStyle";
 import { colors } from "../../constants";
 import ImageSlider from "../../component/shared/ImageSlider";
 import { getAllServices } from "../../api/getAllServices";
@@ -15,14 +15,6 @@ const images = [
   "https://farm4.staticflickr.com/3075/3168662394_7d7103de7d_z_d.jpg",
 ];
 
-const SkeletonCommonProps = {
-  colorMode: "light",
-  transition: {
-    type: "timing",
-    duration: 1500,
-  },
-  backgroundColor: colors.muteColor,
-};
 const HomePage = () => {
   const [services, setServices] = useState([]);
   const { userLanguage } = useContext(userAuthContext);

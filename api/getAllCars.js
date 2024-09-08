@@ -1,10 +1,11 @@
 import axios from "axios";
 import { GET_ALL_CARS } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
 export const getAllCars = async (carId) => {
   try {
     const data = await axios.get(GET_ALL_CARS);
     return data.data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };

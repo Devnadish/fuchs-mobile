@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BRANCHES_DETAIL } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
 export const branchDetail = async (brid) => {
   try {
     const { data } = await axios.get(`${BRANCHES_DETAIL}`, {
@@ -9,6 +10,6 @@ export const branchDetail = async (brid) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };

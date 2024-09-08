@@ -14,6 +14,7 @@ import { enCitys } from "../../constants/City";
 import { router, useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../../constants";
+import { borderRadius } from "../../styles/globalStyle";
 
 export default function City() {
   return (
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     padding: 10,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     backgroundColor: colors.white,
   },
   pressapleContainer: {
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 8,
     marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     fontSize: 16,
     lineHeight: 20,
     padding: 8,

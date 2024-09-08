@@ -10,6 +10,7 @@ import { HEADER_IMAGE, LOGO_IMAGE } from "../../constants/images";
 export const HeaderImage = () => {
   const { width } = useWindowDimensions();
   return (
+    // <View style={{ position: "absolute", zIndex: -1, top: 0 }}>
     <View>
       <ExpoImage
         image={HEADER_IMAGE}
@@ -28,14 +29,15 @@ export const HeaderImage = () => {
 };
 export const styles = StyleSheet.create({
   logoImage: {
-    width: 120,
-    height: 120,
+    width: 90,
+    height: 90,
     position: "absolute",
     bottom: 0,
     left: "50%",
+    zIndex: 3,
     transform: [{ translateX: -50 }, { translateY: 50 }], // center the image from bottom
   },
   headerImage: {
-    height: 316,
+    height: 200,
   },
 });

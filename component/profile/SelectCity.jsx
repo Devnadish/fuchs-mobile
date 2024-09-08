@@ -1,66 +1,95 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
-import React, { memo, useCallback, useState } from "react";
-import FormContainer from "../shared/FormContainer";
-import { enCitys } from "../../constants/City";
-import ShowModal from "../shared/ShowModal";
-import { Entypo } from "@expo/vector-icons";
-import Feather from "@expo/vector-icons/Feather";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { colors } from "../../constants";
+import { getAllCity } from "../../api/cityAPI";
+import { Skeleton } from "moti/skeleton"; // Import Moti Skeleton
+import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { SkeletonCommonProps } from "../../styles/globalStyle";
 
-const SelectCity = ({ selectedValue, setSelectedValue }) => {
-  const [visible, setVisible] = useState(false);
+const SelectCity = ({ setSelectedValue, selectedValue, setVisible }) => {
+  const [cityData, setCityData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { userLAnguage } = useContext(userAuthContext);
 
-  const memoriedCallBack = useCallback((item) => {
-    setSelectedValue(item.label);
-    setVisible(false);
-  }, []);
+  useEffect(() => {
+    const fetchCities = async () => {
+      setLoading(true); // Set loading to true before fetching
+      try {
+        const cityData = await getAllCity(userLAnguage);
+        setCityData(cityData);
+      } catch (error) {
+        console.error("Failed to fetch cities:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
+      }
+    };
 
-  const RenderItem = memo(({ item, handleOnPressItem }) => {
-    return (
+    fetchCities();
+  }, [userLAnguage]);
+
+  const handleOnPressItem = useCallback(
+    (item) => {
+      const cityName = userLAnguage === "ar" ? item.cityAr : item.cityEn;
+      const cityId = item.id;
+      setSelectedValue({ city: cityName, cityId: cityId });
+      setVisible(false);
+    },
+    [setSelectedValue, setVisible, userLAnguage]
+  );
+
+  const renderItem = useCallback(
+    ({ item }) => (
       <Pressable
         onPress={() => handleOnPressItem(item)}
-        style={styles.pressapleContainer}
+        style={styles.pressableContainer}
       >
-        <View style={styles.pressaple}>
-          <Text style={styles.whyText}>{item.label}</Text>
+        <View style={styles.pressable}>
+          <Text style={styles.whyText}>
+            {userLAnguage === "ar" ? item.cityAr : item.cityEn}
+          </Text>
         </View>
       </Pressable>
-    );
-  });
+    ),
+    [handleOnPressItem]
+  );
+
+  const renderSkeleton = () => (
+    <View style={styles.skeletonItemContainer}>
+      <Skeleton
+        height={50}
+        width={"100%"}
+        radius={4}
+        show={loading}
+        {...SkeletonCommonProps}
+      />
+    </View>
+  );
 
   return (
-    <FormContainer
-      title={"Change City"}
-      icon={<Feather name="edit" size={24} color={colors.muteColor} />}
-    >
-      <Pressable onPress={() => setVisible(true)} style={styles.pressTochange}>
-        <Text>{selectedValue}</Text>
-        <Entypo name="select-arrows" size={24} color={colors.muteColor} />
-      </Pressable>
-      <ShowModal
-        visible={visible}
-        setVisible={setVisible}
-        header={"Selct Your City"}
-      >
-        <View style={{ marginBottom: 30 }}>
-          <FlatList
-            data={enCitys}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <RenderItem item={item} handleOnPressItem={memoriedCallBack} />
-            )}
-            contentContainerStyle={styles.contentContainer}
-            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-          />
-        </View>
-      </ShowModal>
-    </FormContainer>
+    <View style={styles.container}>
+      <FlatList
+        data={loading ? Array.from({ length: 8 }) : cityData} // Show skeletons or city data
+        keyExtractor={(item, index) =>
+          loading ? index.toString() : item.id.toString()
+        }
+        renderItem={loading ? renderSkeleton : renderItem}
+        contentContainerStyle={styles.contentContainer}
+        extraData={loading} // Ensure FlatList re-renders on loading state change
+      />
+    </View>
   );
 };
 
 export default SelectCity;
+
 const styles = StyleSheet.create({
-  pressaple: {
+  container: {
+    marginBottom: 30,
+  },
+  skeletonItemContainer: {
+    marginVertical: 5, // Space between skeletons
+  },
+  pressable: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -71,25 +100,15 @@ const styles = StyleSheet.create({
     borderColor: colors.borderColor,
     backgroundColor: colors.backgroundColor,
   },
-  pressTochange: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: colors.white,
-    borderWidth: 1,
-    borderColor: colors.borderColor,
-  },
-  pressapleContainer: {
+  pressableContainer: {
     width: "100%",
   },
   contentContainer: {
     backgroundColor: colors.backgroundColor,
     padding: 10,
+    gap: 10,
   },
-  itemStyle: {
-    height: 50, // Set the desired height for the items
+  separator: {
+    height: 10,
   },
 });

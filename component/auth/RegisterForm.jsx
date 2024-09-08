@@ -10,7 +10,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
 import { showToast } from "../../lib/nadish";
 import { ScrollView } from "react-native-gesture-handler";
-import { globalStyle } from "../../styles/globalStyle";
+import { borderRadius, globalStyle } from "../../styles/globalStyle";
 
 export default function RegisterForm({
   name,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 8,
     marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     fontSize: 16,
     lineHeight: 20,
     padding: 8,

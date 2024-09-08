@@ -1,67 +1,58 @@
 import React from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Dimensions, Text, View } from "react-native";
 import { colors } from "../../constants";
+import { borderRadius, shadowStyle } from "../../styles/globalStyle";
 
-const FormContainer = ({ title, icon, children, errorBorder }) => {
+const FormContainer = ({ title, icon, children }) => {
   return (
-    <KeyboardAvoidingView
-      // enabled
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.formContainer]}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          gap: 10,
-          marginBottom: 10,
-          width: "100%",
-        }}
-        s
-      >
+    <View style={styles.formContainer}>
+      <View style={styles.headerContainer}>
         {icon && icon}
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: "bold",
-            color: colors.primary,
-          }}
-        >
-          {title && title}
-        </Text>
+        {title && (
+          <Text style={[styles.titleText, icon ? styles.titleWithIcon : null]}>
+            {title}
+          </Text>
+        )}
       </View>
-      {children}
-    </KeyboardAvoidingView>
+
+      <View style={styles.contentContainer}>{children}</View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    alignItems: "flex-start",
+    justifyContent: "center",
+    padding: 10,
+    width: "100%",
+    backgroundColor: colors.white,
+  },
   formContainer: {
     width: Dimensions.get("window").width - 30,
     backgroundColor: colors.white,
-    padding: 30,
-    gap: 8,
+    borderRadius: borderRadius,
+    borderWidth: 1,
+    borderColor: colors.borderColor,
+    overflow: "hidden",
+    // alignItems: "center",
     justifyContent: "center",
+    ...shadowStyle,
+  },
+  headerContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    borderRadius: 10,
-    marginVertical: 10,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    padding: 10,
+    width: "100%",
+  },
+  titleText: {
+    fontSize: 16,
+    color: colors.primary,
+  },
+  titleWithIcon: {
+    marginLeft: 10, // Add margin if icon is present
   },
 });
 

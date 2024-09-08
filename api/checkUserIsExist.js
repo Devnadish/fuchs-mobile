@@ -1,11 +1,15 @@
 import axios from "axios";
 import { CHECK_USER_IS_EXIST } from "../api/endPoints";
-export const checkisExisit = async (mobile) => {
-  const userData = { mobile };
+import { handleAxiosError } from "./errorHandiling";
+
+export const checkUserExists = async (mobile) => {
   try {
-    const data = await axios.post(CHECK_USER_IS_EXIST, userData);
-    return data.data;
+    const { data } = await axios.get(CHECK_USER_IS_EXIST, {
+      params: { mobile }, // Ensure mobile is passed as an object
+    });
+
+    return data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };

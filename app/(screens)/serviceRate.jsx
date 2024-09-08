@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { shadowStyle } from "../../styles/globalStyle";
+import { shadowStyle, SkeletonCommonProps } from "../../styles/globalStyle";
 import BarHeader from "../../component/shared/BarHeader";
 import Container from "../../component/shared/Containner";
 import { useState, useEffect, useCallback } from "react";
@@ -20,15 +20,6 @@ import { getTimeElapsed } from "../../lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const limit = 10;
-
-const SkeletonCommonProps = {
-  colorMode: "light",
-  transition: {
-    type: "timing",
-    duration: 1500,
-  },
-  backgroundColor: colors.muteColor,
-};
 
 export default function ServiceRate() {
   const [serviceRate, setServiceRate] = useState([]);

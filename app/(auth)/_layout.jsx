@@ -1,22 +1,13 @@
 import React from "react";
 import { Stack } from "expo-router";
-import {
-  createNewUser,
-  loginScreen,
-  otpScreen,
-} from "../../constants/headerBarStyle";
+
 import { NewUserProvider } from "../../provider/newUserProvider/newUserProvider";
 
 const AuthLayout = () => (
   <NewUserProvider>
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="home" />
-      <Stack.Screen name="register" options={createNewUser} />
-
-      <Stack.Screen name="otpScreen" options={otpScreen} />
-      <Stack.Screen name="login" options={loginScreen} />
-
-      <Stack.Screen
+      {/* <Stack.Screen
         name="city"
         options={{
           presentation: "transparentModal",
@@ -24,9 +15,9 @@ const AuthLayout = () => (
           animationTypeForReplace: "pop",
           headerShown: false,
         }}
-      />
+      /> */}
 
-      <Stack.Screen
+      {/* <Stack.Screen
         name="cars"
         options={{
           presentation: "transparentModal",
@@ -34,9 +25,9 @@ const AuthLayout = () => (
           animationTypeForReplace: "pop",
           headerShown: false,
         }}
-      />
+      /> */}
 
-      <Stack.Screen
+      {/* <Stack.Screen
         name="carModel"
         options={{
           presentation: "transparentModal",
@@ -44,7 +35,7 @@ const AuthLayout = () => (
           animationTypeForReplace: "pop",
           headerShown: false,
         }}
-      />
+      /> */}
     </Stack>
   </NewUserProvider>
 );

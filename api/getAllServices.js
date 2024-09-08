@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GET_ALL_SERVICES } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
 export const getAllServices = async (language) => {
   try {
     const data = await axios.get(GET_ALL_SERVICES, {
@@ -7,6 +8,6 @@ export const getAllServices = async (language) => {
     });
     return data.data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };

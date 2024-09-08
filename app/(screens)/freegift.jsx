@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { shadowStyle } from "../../styles/globalStyle";
+import { shadowStyle, SkeletonCommonProps } from "../../styles/globalStyle";
 import BarHeader from "../../component/shared/BarHeader";
 import Container from "../../component/shared/Containner";
 import { useState, useEffect } from "react";
@@ -75,14 +75,6 @@ export default function FreeGift() {
 }
 
 const AboutService = ({ Title, description, image }) => {
-  const SkeletonCommonProps = {
-    colorMode: "light",
-    transition: {
-      type: "timing",
-      duration: 1500,
-    },
-    backgroundColor: colors.muteColor,
-  };
   return (
     <View style={styles.serviceInfoContainer}>
       <Skeleton

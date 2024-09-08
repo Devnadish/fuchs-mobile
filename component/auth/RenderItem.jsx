@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import React, { memo } from "react";
 import { colors } from "../../../constants";
+import { borderRadius } from "../../styles/globalStyle";
 
 const RenderItem = ({ item, handleOnPressItem }) => {
   return (
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     padding: 10,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     backgroundColor: colors.backgroundColor,
   },
   whyText: {

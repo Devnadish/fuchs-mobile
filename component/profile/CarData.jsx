@@ -15,6 +15,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showToast } from "../../lib/nadish";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { updateUserCar } from "../../api/updateUserCar";
+import { borderRadius } from "../../styles/globalStyle";
 export default function CarData({ car, carModel, carYear }) {
   const { userMobile } = useContext(userAuthContext);
   const [newCar, setNewCar] = useState({});
@@ -65,6 +66,7 @@ export default function CarData({ car, carModel, carYear }) {
           selectedValue={newCar}
           setSelectedValue={setNewCar}
           setCarmodel={setNewCarModel}
+          userMobile={userMobile}
           data={cars}
         />
         <SelectCarModel
@@ -274,7 +276,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     padding: 10,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     backgroundColor: colors.white,
     borderWidth: 1,
     borderColor: colors.borderColor,

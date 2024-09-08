@@ -2,7 +2,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../constants";
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { globalStyle, shadowStyle } from "../../styles/globalStyle";
+import {
+  borderRadius,
+  globalStyle,
+  shadowStyle,
+} from "../../styles/globalStyle";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { router } from "expo-router";
@@ -127,14 +131,14 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 0.5,
     borderColor: colors.muteColor,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     // ...shadowStyle,
   },
   touchable: {},
   Bookingcontainer: {
     width: 100,
     height: 48,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     backgroundColor: colors.primary,
     opacity: 0.9,
     justifyContent: "center",
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   moreAction: {
     width: 48,
     height: 48,
-    borderRadius: 10,
+    borderRadius: borderRadius,
     backgroundColor: colors.white,
     opacity: 0.9,
     justifyContent: "center",

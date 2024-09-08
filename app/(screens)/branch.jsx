@@ -17,13 +17,10 @@ export default function Bbranch() {
   const [branch, setBranch] = useState();
   const { userLanguage } = useContext(userAuthContext);
 
-  // console.log(JSON.stringify(branch?.image[0], null, 2));
-
   const getBranch = async () => {
     const data = await branchDetail(branchId);
     setBranch(data);
   };
-  // console.log(JSON.stringify(branch, null, 2));
   useEffect(() => {
     getBranch();
   }, []);

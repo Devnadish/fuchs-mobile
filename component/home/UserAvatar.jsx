@@ -1,12 +1,11 @@
+import React, { useContext, useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   Pressable,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
 import { AdvancedImage } from "cloudinary-react-native";
 import { cld } from "../../util/cloudinary";
 import { thumbnail } from "@cloudinary/url-gen/actions/resize";
@@ -18,54 +17,65 @@ import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 import { colors } from "../../constants";
 import ExpoImage from "../shared/ExpoImage";
 
-export default function UserAvatar() {
-  const { userAvatar, userName } = useContext(userAuthContext);
+const UserAvatar = () => {
+  const { userAvatar, userName, userMobile } = useContext(userAuthContext);
+  // console.warn(userAvatar);
   const [loading, setLoading] = useState(true);
   const [myImage, setMyImage] = useState(null);
 
   useEffect(() => {
-    if (userAvatar) {
-      const image = cld.image(userAvatar);
-      image.resize(
-        thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
-      );
+    if (userAvatar && userMobile !== "Gust") {
+      const image = cld
+        .image(userAvatar)
+        .resize(
+          thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
+        );
       setMyImage(image);
     } else {
       setMyImage(null);
     }
-    setLoading(false); // Set loading to false after processing the image
-  }, [userAvatar]);
+    setLoading(false);
+  }, [userAvatar, userMobile]);
+
+  const handlePress = () => {
+    router.push("/(profile)/home");
+  };
+
+  const renderImage = () => {
+    if (loading) {
+      return <ActivityIndicator color={colors.primary} size="small" />;
+    }
+
+    return myImage ? (
+      <AdvancedImage
+        cldImg={myImage}
+        style={styles.image}
+        onLoadEnd={() => setLoading(false)}
+      />
+    ) : (
+      <ExpoImage image={LOGO_IMAGE} style={styles.image} />
+    );
+  };
 
   return (
     <View style={styles.avatarContainer}>
-      <View style={styles.imageContainer}>
-        {loading ? (
-          <ActivityIndicator
-            animating={loading}
-            color={colors.primary}
-            size="small"
-          />
-        ) : (
-          <Pressable onPress={() => router.push("/(profile)/profile")}>
-            {myImage ? (
-              <AdvancedImage
-                cldImg={myImage}
-                style={styles.image}
-                onLoadEnd={() => setLoading(false)}
-              />
-            ) : (
-              <ExpoImage image={LOGO_IMAGE} style={styles.image} />
-            )}
-          </Pressable>
-        )}
-      </View>
-      <View style={styles.userInfo}>
+      {userMobile !== "Gust" && (
+        <View style={styles.imageContainer}>
+          <Pressable onPress={handlePress}>{renderImage()}</Pressable>
+        </View>
+      )}
+      <View
+        style={[
+          styles.userInfo,
+          { flexDirection: userMobile === "Gust" ? "row" : "column" },
+        ]}
+      >
         <Text style={styles.userName}>Hi.. </Text>
         <Text>{userName || "No Name"}</Text>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -81,7 +91,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 0.5,
   },
   image: {
     width: 40,
@@ -96,3 +105,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default UserAvatar;

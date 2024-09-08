@@ -1,11 +1,10 @@
+import React from "react";
 import {
   ActivityIndicator,
   Text,
   TouchableOpacity,
-  Image,
   View,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 import { colors } from "../../constants";
 
@@ -15,64 +14,40 @@ const Btn = ({
   containerStyles,
   textStyles,
   isLoading,
-  loadingText,
+  loadingText = "Loading...",
   icon,
-  color,
   type,
 }) => {
-  if (type === "link") {
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <>
+          <ActivityIndicator color="#fff" size="small" />
+          <Text style={[styles.text, textStyles]}>{loadingText}</Text>
+        </>
+      );
+    }
     return (
-      <View style={[styles.linkViewStyle, containerStyles]}>
-        <TouchableOpacity
-          onPress={handlePress}
-          activeOpacity={0.7}
-          style={[styles.linkBtnStyle]}
-        >
-          <Text style={[styles.linkText, textStyles]}>{title}</Text>
-        </TouchableOpacity>
-      </View>
+      <>
+        {icon && icon}
+        <Text style={[styles.text, textStyles]}>{title}</Text>
+      </>
     );
-  }
+  };
+
   return (
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
       style={[styles.btnStyle, containerStyles]}
       disabled={isLoading}
-      // TODO:isloading true change opacity tp 0.7
     >
-      <View style={styles.innerView}>
-        {icon && (
-          <Image
-            source={icon}
-            resizeMode="contain"
-            tintColor={color}
-            className="w-6 h-6"
-          />
-        )}
-
-        {isLoading ? (
-          <Text style={[styles.text, textStyles]}>
-            {loadingText || "loading..."}
-          </Text>
-        ) : (
-          <Text style={[styles.text, textStyles]}>{title}</Text>
-        )}
-        {isLoading && (
-          <ActivityIndicator animating={isLoading} color="#fff" size="small" />
-        )}
-      </View>
+      <View style={styles.innerView}>{renderContent()}</View>
     </TouchableOpacity>
   );
 };
 
-export default Btn;
-
 const styles = StyleSheet.create({
-  linkBtnStyle: {
-    color: "black",
-    padding: 5,
-  },
   btnStyle: {
     backgroundColor: colors.primaryBtn,
     padding: 5,
@@ -80,8 +55,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     height: 50,
+  },
+  linkBtnStyle: {
+    padding: 5,
   },
   innerView: {
     width: "100%",
@@ -90,19 +68,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 15,
   },
-
   text: {
     color: colors.backgroundColor,
     fontSize: 14,
+    textTransform: "capitalize",
   },
   linkText: {
     color: colors.linkColor,
     fontWeight: "bold",
     fontSize: 16,
   },
-  linkViewStyle: {
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
 });
+
+export default Btn;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { OFFERS_DETAIL } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
 export const getOffers = async (language, page, limit, branchId) => {
   try {
     const { data } = await axios.get(`${OFFERS_DETAIL}`, {
@@ -12,7 +13,7 @@ export const getOffers = async (language, page, limit, branchId) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };
 

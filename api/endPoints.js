@@ -25,3 +25,9 @@ export const GET_SERVICES_INFO = UrlEndPoint + "/api/service/serviceinfo";
 export const SERVICES_GIFT = UrlEndPoint + "/api/service/servicegift";
 export const SERVICES_RATE = UrlEndPoint + "/api/service/servicerate";
 //  " /api/service/servicerate?serviceId=66cf440408ae52c4aded293a&page=1&limit=10&rate=1&language=ar";
+export const UPDATE_PROFILE_IMAGE =
+  UrlEndPoint + "/api/user/update/updateUserProfileImage";
+export const UPDATE_PROFILE =
+  UrlEndPoint + "/api/user/update/updateUserProfile";
+export const GET_ALL_CITY = UrlEndPoint + "/api/city/getallcity";
+export const UPDATE_CITY = UrlEndPoint + "/api/city/updatecity";

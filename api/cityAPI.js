@@ -1,0 +1,23 @@
+import axios from "axios";
+import { GET_ALL_CITY, UPDATE_CITY } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
+export const getAllCity = async (language) => {
+  try {
+    const { data } = await axios.get(GET_ALL_CITY, {
+      params: { language },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+};
+
+export const UpdateCity = async (userData) => {
+  try {
+    const { data } = await axios.patch(UPDATE_CITY, userData);
+    return data;
+  } catch (error) {
+    handleAxiosError(error);
+  }
+};

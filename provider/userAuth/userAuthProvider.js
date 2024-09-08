@@ -23,30 +23,37 @@ export const UserAuthProvider = ({ children }) => {
   const checkLoginStatus = async () => {
     console.log("check login status");
     const userData = await AsyncStorage.getItem("userData");
-    // console.log("userData from loacl storage: ", userData);
+    console.log("userData from loacl storage: ", userData);
     if (userData) {
-      setIsLogin(true);
-      const { name, email, mobile, avatar } = JSON.parse(userData);
+      const { name, email, mobile, avatar, isLogin } = JSON.parse(userData);
       setUserName(name);
       setUserEmail(email);
       setUserMobile(mobile);
       setUserAvatar(avatar);
-    } else {
-      setIsLogin(false);
+      setIsLogin(isLogin);
     }
   };
 
   const loginFunction = async (userData) => {
     await AsyncStorage.setItem("userData", JSON.stringify(userData));
-    // console.log("userData from loacl storage: ", userData);
-    const { name, email, avatar, mobile } = userData;
+    const { name, email, avatar, mobile, isLogin } = userData;
+    console.log("user after login: ", userData);
     setUserName(name);
     setUserEmail(email);
     setUserMobile(mobile);
     setUserAvatar(avatar);
-    setIsLogin(true);
+    setIsLogin(isLogin);
     console.log("Login successful");
     console.log("userAvatar from loacl storage: ", userAvatar);
+  };
+
+  const loadAsGuest = async () => {
+    setUserName("Gust");
+    setUserEmail("Gust");
+    setUserMobile("Gust");
+    setUserAvatar("Gust");
+    setIsLogin(false);
+    console.log("Login As Guest successful");
   };
 
   const updateProfile = async (userData) => {
@@ -59,6 +66,60 @@ export const UserAuthProvider = ({ children }) => {
     setUserAvatar(avatar);
     setIsLogin(true);
     console.log("update successful");
+  };
+  const updateImageProfile = async (newAvatar) => {
+    try {
+      const userData = await AsyncStorage.getItem("userData");
+      if (!userData) {
+        console.warn("No user data found.");
+        return;
+      }
+
+      const userDataJson = JSON.parse(userData);
+      userDataJson.avatar = newAvatar;
+
+      await AsyncStorage.setItem("userData", JSON.stringify(userDataJson));
+
+      // Update state with new user data
+      const { name, email, mobile } = userDataJson;
+      setUserName(name);
+      setUserEmail(email);
+      setUserMobile(mobile);
+      setUserAvatar(newAvatar); // Update avatar state
+      setIsLogin(true);
+
+      console.log("Profile image updated successfully:", userDataJson);
+    } catch (error) {
+      console.error("Error updating profile image:", error);
+    }
+  };
+
+  const updateUserProfile = async (newName, newEmail) => {
+    try {
+      const userData = await AsyncStorage.getItem("userData");
+      if (!userData) {
+        console.warn("No user data found.");
+        return;
+      }
+
+      const userDataJson = JSON.parse(userData);
+      userDataJson.name = newName;
+      userDataJson.email = newEmail;
+
+      await AsyncStorage.setItem("userData", JSON.stringify(userDataJson));
+
+      // Update state with new user data
+      const { name, email, mobile, avatar } = userDataJson;
+      setUserName(name);
+      setUserEmail(email);
+      setUserMobile(mobile);
+      setUserAvatar(avatar); // Update avatar state
+      setIsLogin(true);
+
+      console.log("Profile image updated successfully:", userDataJson);
+    } catch (error) {
+      console.error("Error updating profile image:", error);
+    }
   };
 
   const logout = async () => {
@@ -93,125 +154,13 @@ export const UserAuthProvider = ({ children }) => {
         setUserLanguage,
         userTheme,
         setUserTheme,
+        loadAsGuest,
+        checkLoginStatus,
+        updateImageProfile,
+        updateUserProfile,
       }}
     >
       {children}
     </userAuthContext.Provider>
   );
 };
-
-// export { UserAuthProvider, userAuthContext };
-
-// import React, { createContext, useEffect, useState } from "react";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// const userAuthContext = createContext(null);
-
-// const UserAuthProvider = ({ children }) => {
-//   const [isLogin, setIsLogin] = useState(false);
-//   const [userName, setUserName] = useState("");
-//   const [userMobilee, setUserMobilee] = useState("");
-//   const [userEmail, setUserEmail] = useState("");
-//   const [userAvatar, setUserAvatar] = useState("");
-
-//   const fetchUserData = async () => {
-//     try {
-//       const user = await AsyncStorage.getItem("user");
-//       if (user) {
-//         const userData = JSON.parse(user);
-//         setUserName(userData.name);
-//         setUserEmail(userData.email);
-//         setUserAvatar(userData.avatar);
-//         setUserMobilee(userData.mobile);
-//         setIsLogin(userData.isLogin);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching user data:", error);
-//     }
-//   };
-
-//   const login = () => {
-//     setIsLogin(true);
-//   };
-//   const logout = () => {
-//     setIsLogin(false);
-//   };
-
-//   return (
-//     <userAuthContext.Provider
-//       value={{
-//         isLogin,
-//         setIsLogin,
-//         userName,
-//         setUserName,
-//         userEmail,
-//         setUserEmail,
-//         userAvatar,
-//         setUserAvatar,
-//         userMobilee,
-//         setUserMobilee,
-//         login,
-//         logout,
-//       }}
-//     >
-//       {children}
-//     </userAuthContext.Provider>
-//   );
-// };
-
-// export { UserAuthProvider, userAuthContext };
-
-// // import { createContext, useEffect, useState } from "react";
-// // import AsyncStorage from "@react-native-async-storage/async-storage";
-// // import { getLocales } from "expo-localization";
-// // import i18next, { languageResources } from "../../services/i18next";
-// // import { I18nManager } from "react-native";
-
-// // const userAuthContext = createContext(null);
-
-// // const UserAuthProvider = ({ children }) => {
-// //   const [isLogin, setIsLogin] = useState(false);
-// //   const [userName, setuserName] = useState("");
-// //   const [userMobilee, setUserMobilee] = useState("");
-// //   const [userEmail, setuserEmail] = useState("");
-// //   const [userAvatar, setuserAvatar] = useState("");
-// //   const userInformation = CheckIsLogin();
-
-// //    const CheckIsLogin = async () => {
-// //      try {
-// //        const user = await AsyncStorage.getItem("user");
-// //      } catch (error) {
-// //        console.error("Error fetching user data:", error);
-// //      }
-// //    };
-
-// //   useEffect(() => {
-// //     const userData = JSON.parse(userInformation);
-// //     setuserName(userData.name);
-// //     setuserEmail(userData.email);
-// //     setuserAvatar(userData.avatar);
-// //     setUserMobilee(userData.mobile);
-// //     setIsLogin(userData.isLogin);
-// //   }, [userInformation]);
-
-// //   return (
-// //     <userAuthContext.Provider
-// //       value={{
-// //         isLogin,
-// //         setIsLogin,
-// //         userName,
-// //         setuserName,
-// //         userEmail,
-// //         setuserEmail,
-// //         userAvatar,
-// //         setuserAvatar,
-// //         userMobilee,
-// //         setUserMobilee,
-// //       }}
-// //     >
-// //       {children}
-// //     </userAuthContext.Provider>
-// //   );
-// // };
-
-// // export { UserAuthProvider, userAuthContext };

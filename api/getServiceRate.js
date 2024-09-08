@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVICES_RATE } from "./endPoints";
+import { handleAxiosError } from "./errorHandiling";
 export const getServiceRate = async (
   serviceId,
   page,
@@ -19,6 +20,6 @@ export const getServiceRate = async (
     });
     return data;
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 };

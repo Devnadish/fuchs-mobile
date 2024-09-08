@@ -2,13 +2,19 @@ import { Button, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { Children } from "react";
 import { colors } from "../../constants";
 
-export default function ShowModal({ visible, setVisible, header, children }) {
+export default function ShowModal({
+  visible,
+  setVisible,
+  header,
+  children,
+  height = "80%",
+}) {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <Pressable style={{ flex: 1 }} onPress={() => setVisible(false)}>
         <View style={styles.backDrop} />
       </Pressable>
-      <View style={styles.bodyStyle}>
+      <View style={[styles.bodyStyle, { height: height }]}>
         <View style={styles.headerStyle}>
           <Text>{header}</Text>
 
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
-    height: "80%",
+
     width: "100%",
     position: "absolute",
     bottom: 0,
@@ -66,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   childrenStyle: {
+    flex: 1,
     width: "100%",
     backgroundColor: colors.backgroundColor,
   },

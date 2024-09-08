@@ -11,7 +11,7 @@ export default function Setting() {
   const { logout } = useContext(userAuthContext);
   const handleLogout = () => {
     logout();
-    router.push("/(auth)/login");
+    router.push("/(auth)/home");
   };
   return (
     <View style={globalStyle.container}>
@@ -21,8 +21,6 @@ export default function Setting() {
     </View>
   );
 }
-
-// Usage
 
 const styles = StyleSheet.create({
   logoutBtn: {

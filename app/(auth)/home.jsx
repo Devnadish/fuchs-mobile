@@ -1,60 +1,29 @@
-import { StyleSheet, View, Dimensions, Image, Button } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { colors } from "../../constants";
-import BottomSingInComponent from "../../component/auth/BottomSingInComponent";
 import { showToast } from "../../lib/nadish";
-import { StatusBar } from "expo-status-bar";
-import { useContext } from "react";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
-import { router } from "expo-router";
 import Btn from "../../component/shared/Btn";
 import Xlink from "../../component/shared/Xlink";
 import WhyIregister from "../../component/auth/WhyIregister";
-import { globalStyle } from "../../styles/globalStyle";
 import { HeaderImage } from "../../component/auth/HeaderImage";
-
-// TODO: sperate component
-// TODO: move styles
-// TODO: Refactore it For best practise and performance
+import Auth from "../../component/auth/Auth";
 
 export default function HomePage() {
-  const { isLogin, userName } = useContext(userAuthContext);
-
   return (
-    <View style={[globalStyle.container, { justifyContent: "flex-between" }]}>
-      <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} />
-      <HeaderImage />
-      {/* <Button title="Login" onPress={() => showToast("Login button pressed")} /> */}
-      <View style={styles.loginContainer}>
-        {isLogin ? <LoginAs userName={userName} /> : <SignUp />}
-        <LoginAsGuest />
+    <>
+      <View style={styles.container}>
+        {/* <StatusBar backgroundColor={colors.primary} barStyle={"dark-content"} /> */}
+        {/* <HeaderImage /> */}
+        <Auth />
+        {/* <View style={styles.loginContainer}>
+          <SignUp />
+          <LoginAsGuest />
+        </View>
+        <BottomSingInComponent /> */}
       </View>
-      <BottomSingInComponent />
-    </View>
+    </>
   );
 }
 
-function LoginAs({ userName }) {
-  const handleLogin = async () => {
-    router.push("/(home)/home");
-  };
-  return (
-    <View>
-      <Btn
-        title={`Login as ${userName}`}
-        containerStyles={{
-          backgroundColor: colors.primary,
-          borderColor: colors.muteColor,
-        }}
-        textStyles={{
-          color: colors.backgroundColor,
-        }}
-        handlePress={() => {
-          handleLogin();
-        }}
-      />
-    </View>
-  );
-}
 const SignUp = () => {
   return (
     <View
@@ -93,6 +62,14 @@ function LoginAsGuest() {
 }
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    gap: 40,
+  },
   loginContainer: {
     flex: 1,
     alignItems: "center",

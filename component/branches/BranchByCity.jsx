@@ -42,7 +42,6 @@ const BranchByCity = ({ userLanguage, selectedCity }) => {
     }
 
     if (pageNum >= pageCount) {
-      // console.log("No more branches to load.", { pageNum, pageCount });
       return;
     } else {
       pageNum = pageNum + 1;

@@ -5,7 +5,6 @@ import { globalStyle } from "../../../styles/globalStyle";
 import { colors } from "../../../constants";
 
 export default function BranchDetails({ branch, userlanguage }) {
-  // console.log(JSON.stringify(branch, null, 2));
   return (
     <ScrollView
       contentContainerStyle={globalStyle.scroll}
