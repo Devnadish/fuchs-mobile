@@ -1,14 +1,11 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import RadioButton from "../../component/shared/RadioButton";
-import FormContainer from "../../component/shared/FormContainer";
-import { colors } from "../../constants";
 import { globalStyle } from "../../styles/globalStyle";
 import { router } from "expo-router";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 
 export default function Setting() {
-  const { logout } = useContext(userAuthContext);
+  const { logout } = useUserAuth();
   const handleLogout = () => {
     logout();
     router.push("/(auth)/home");

@@ -3,15 +3,15 @@ import { StyleSheet, View } from "react-native";
 
 import { colors } from "../../../constants";
 import ExpoImage from "../../shared/ExpoImage";
-import { useContext, useState } from "react";
-import { userAuthContext } from "../../../provider/userAuth/userAuthProvider";
+import { useState } from "react";
+import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
 import { cloudUrl } from "../../../constants/images";
 import Btn from "../../shared/Btn";
 import ShowModal from "../../shared/ShowModal";
 import ChangeProfile from "./ChangeProfile";
 
 const UserImage = () => {
-  const { userAvatar } = useContext(userAuthContext);
+  const { userAvatar } = useUserAuth();
 
   const [avatar, setAvatar] = useState(cloudUrl + userAvatar);
   const [showModal, setShowModal] = useState(false);

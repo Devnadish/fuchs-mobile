@@ -41,7 +41,7 @@ export const profileButtons = [
   {
     id: 4,
     name: "setting",
-    href: "/(profile)/profile",
+    href: "/(profile)/setting",
     icon: <Ionicons name="settings" size={20} color={colors.muteColor} />,
     title: "Setting",
     decription: "select theme and language and more",
@@ -52,7 +52,7 @@ export const activityButtons = [
   {
     id: 3,
     name: "booking",
-    href: "/(profile)/profile",
+    href: "/(profile)/booking",
     icon: (
       <FontAwesome name="calendar-check-o" size={24} color={colors.muteColor} />
     ),

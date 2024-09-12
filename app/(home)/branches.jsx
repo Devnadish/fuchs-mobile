@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+
 import Loader from "../../component/shared/Loader";
 import BranchesList from "../../component/branches/BranchesList";
 import BranchByCity from "../../component/branches/BranchByCity";
 import { groupBranchesByCity } from "../../api/groupBranchesByCity";
 import { StyleSheet, View } from "react-native";
 import { colors } from "../../constants";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 // TODO: Filter by City ==> Get client City and show it as default
 // TODO: add buttun to show all branches and back to madinaty
 
 const Branches = () => {
-  const { userLanguage } = useContext(userAuthContext);
+  const { userLanguage } = useUserAuth();
+  // const { userLanguage } = useContext(userAuthContext);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedBranche, setSelectedBranche] = useState(null);
 

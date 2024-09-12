@@ -1,11 +1,5 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React, {
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import FormContainer from "../shared/FormContainer";
 import { Entypo } from "@expo/vector-icons";
 import ShowModal from "../shared/ShowModal";
@@ -13,11 +7,11 @@ import { colors } from "../../constants";
 import { cars, carsModel } from "../../constants/cars";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showToast } from "../../lib/nadish";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { updateUserCar } from "../../api/updateUserCar";
 import { borderRadius } from "../../styles/globalStyle";
 export default function CarData({ car, carModel, carYear }) {
-  const { userMobile } = useContext(userAuthContext);
+  const { userMobile } = useUserAuth();
   const [newCar, setNewCar] = useState({});
   const [newCarModel, setNewCarModel] = useState(carModel);
   const [newCarYear, setNewCarYear] = useState(carYear);

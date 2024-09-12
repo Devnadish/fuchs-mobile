@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import React, { useState } from "react";
+
 import { StyleSheet, View } from "react-native";
 import { colors } from "../../constants";
 import OfferList from "../../component/offer/OfferList";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 
 const Offers = () => {
-  const { userLanguage } = useContext(userAuthContext);
+  const { userLanguage } = useUserAuth();
   const [selectedOffer, setSelectedOffer] = useState(null);
 
   return (

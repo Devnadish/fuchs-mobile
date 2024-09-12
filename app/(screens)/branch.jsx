@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import Containner from "../../component/shared/Containner";
 
@@ -7,7 +7,7 @@ import BarHeader from "../../component/shared/BarHeader";
 import BranchImages from "../../component/branches/detail/BranchImages";
 import BranchActions from "../../component/branches/detail/BranchActions";
 import BranchDetails from "../../component/branches/detail/BranchDetails";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { View } from "react-native";
 import { colors } from "../../constants";
 
@@ -15,7 +15,7 @@ export default function Bbranch() {
   const params = useLocalSearchParams();
   const { branchId, branchName } = params;
   const [branch, setBranch] = useState();
-  const { userLanguage } = useContext(userAuthContext);
+  const { userLanguage } = useUserAuth();
 
   const getBranch = async () => {
     const data = await branchDetail(branchId);

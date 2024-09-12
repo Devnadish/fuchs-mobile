@@ -1,15 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { colors } from "../../constants";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import TextLink from "../shared/TextLink";
 import { router } from "expo-router";
 
 export default function ActiveBooking() {
   const [active, setActive] = useState(true);
-  const { userMobile } = useContext(userAuthContext);
-
+  const { userMobile } = useUserAuth();
   if (userMobile === "Gust") {
     return (
       <View

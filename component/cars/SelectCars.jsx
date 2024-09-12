@@ -11,7 +11,7 @@ import { baseContainerStyle } from "../../styles/globalStyle";
 import CarsModeFlatList from "./CarsModeFlatList";
 import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
 
-export default function SelectCars({ setVisible, setConfirmCar, userMobile }) {
+export default function SelectCars({ setVisible, setConfirmCar }) {
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState({});
   const [carsModel, setCarsModel] = useState([]);
@@ -52,31 +52,15 @@ export default function SelectCars({ setVisible, setConfirmCar, userMobile }) {
       <Confirm
         selectedCar={selectedCar}
         setVisible={setVisible}
-        userMobile={userMobile}
         setConfirmCar={setConfirmCar}
       />
     </View>
   );
 }
 
-const Confirm = ({ selectedCar, setVisible, userMobile, setConfirmCar }) => {
+const Confirm = ({ selectedCar, setVisible, setConfirmCar }) => {
   const handleSaveCar = async () => {
-    const userCar = {
-      mobile: userMobile,
-      carId: selectedCar?.carId || "",
-      car: selectedCar?.carName || "",
-      carModelId: selectedCar?.modelId || "",
-      carModel: selectedCar?.model || "",
-      carYear: selectedCar?.year || "",
-    };
-
-    const updateCar = await updateUserCar(userCar);
-    if (updateUserCar) {
-      showToast("Car Updated");
-    }
-
     setConfirmCar(selectedCar);
-
     setVisible(false);
   };
 

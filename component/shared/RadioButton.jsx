@@ -1,6 +1,8 @@
-import { TouchableOpacity, View, Text } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { useTheme } from "../../provider/themeProvider/useThemProvider";
 
 const RadioButton = ({ options, selectedValue, onValueChange }) => {
+  const { colors } = useTheme();
   return (
     <View
       style={{
@@ -23,7 +25,8 @@ const RadioButton = ({ options, selectedValue, onValueChange }) => {
               width: 24,
               borderRadius: 12,
               borderWidth: 2,
-              borderColor: selectedValue === option.value ? "blue" : "gray",
+              borderColor:
+                selectedValue === option.value ? colors.primary : colors.accent,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -34,12 +37,14 @@ const RadioButton = ({ options, selectedValue, onValueChange }) => {
                   height: 12,
                   width: 12,
                   borderRadius: 6,
-                  backgroundColor: "blue",
+                  backgroundColor: colors.primary,
                 }}
               />
             )}
           </View>
-          <Text style={{ marginLeft: 8 }}>{option.label}</Text>
+          <Text style={{ marginLeft: 8, color: colors.foreground }}>
+            {option.label}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>

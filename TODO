@@ -1,13 +1,15 @@
-TODO: when user register car if not select car carModel and car year Disaple
-FIXME: Remove gorham lib and update whyiRegester component
-FIXME: refactore the login from the component
+TODO:refactore userAuth
+
+1-add and remove favorte branch
+2-add and remove pinned offer
+3- test theme
+4 test language
+
+5 - apk file to test
+
 FIXME: refactore index file in root dir to be as register or search for solution
-TODO: Create Global style
 TODO:Refactoe pressapale butune to be reusabla
 TODO: Refactore them
-TODO: ADD CAR DETAIL IN CONTEXT
 TODO: Fix city front and back
-TODO: login and register need refactor
 TODO: width,height,raduuse make global
-TODO:refactore userAuth
 TODO: implement skelton in all

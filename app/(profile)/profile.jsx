@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import React, { useEffect, useState } from "react";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { getUserByMobile } from "../../api/getUserByMobile";
 import { colors } from "../../constants";
 import { borderRadius } from "../../styles/globalStyle";
@@ -13,30 +13,31 @@ import { showToast } from "../../lib/nadish";
 import ProfileInstraction from "../../component/instraction/ProfileInstraction";
 
 export default function Profile() {
+  const { userName: contextuserName, userEmail } = useUserAuth();
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
-  const { userMobile, updateUserProfile } = useContext(userAuthContext);
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
+  const { userMobile, updateProfile } = useUserAuth();
+  const [userName, setUserName] = useState(contextuserName);
+  const [email, setEmail] = useState(userEmail);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      setLoading(true);
-      try {
-        const data = await getUserByMobile({ mobile: userMobile });
-        if (data) {
-          setUserName(data.name);
-          setEmail(data.email);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const data = await getUserByMobile({ mobile: userMobile });
+  //       if (data) {
+  //         setUserName(data.name);
+  //         setEmail(data.email);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchUserData();
-  }, [userMobile]);
+  //   fetchUserData();
+  // }, [userMobile]);
 
   const handleUpdate = async () => {
     setUpdateLoading(true);
@@ -47,7 +48,8 @@ export default function Profile() {
         email: email,
       };
       const updateData = await UPDATE_USER_PROFILE_DATA(userInformation);
-      await updateUserProfile(userName, email); // Update user context
+      // await updateUserProfile(userName, email); // Update user context
+      await updateProfile({ userName: userName, userEmail: email });
       showToast("Profile updated successfully");
       setUpdateLoading(false);
 

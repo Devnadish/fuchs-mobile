@@ -1,11 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { router } from "expo-router";
 import { colors } from "../../constants";
 export default function Logout() {
-  const { logout } = useContext(userAuthContext);
+  const { logout } = useUserAuth();
   const handleLogout = () => {
     logout();
     router.push("/(auth)/login");

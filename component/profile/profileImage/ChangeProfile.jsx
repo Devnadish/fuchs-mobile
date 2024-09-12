@@ -5,7 +5,7 @@ import { colors } from "../../../constants";
 import ExpoImage from "../../shared/ExpoImage";
 import Btn from "../../shared/Btn";
 import { cloudUrl } from "../../../constants/images";
-import { userAuthContext } from "../../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
 import { uploadImageToCloudnary } from "../../../util/uploadImageToCloudnary";
 import { UPDATE_PRIFILE_IMAGE } from "../../../api/updateUserProfile";
 
@@ -14,7 +14,8 @@ export default function ChangeProfile({ setShowModal, setAvatar }) {
     userAvatar: avatar,
     userMobile,
     updateImageProfile,
-  } = useContext(userAuthContext);
+    updateProfile,
+  } = useUserAuth();
   const [userAvatar, setuserAvatar] = useState(cloudUrl + avatar);
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +54,7 @@ export default function ChangeProfile({ setShowModal, setAvatar }) {
     };
 
     const updateUser = await UPDATE_PRIFILE_IMAGE(userInformation);
-    await updateImageProfile(userInformation.avatar);
+    await updateProfile({ userAvatar: userInformation.avatar });
     setAvatar(cloudUrl + userInformation.avatar);
     // Update the user context
 

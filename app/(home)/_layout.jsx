@@ -1,5 +1,4 @@
-import { Image, Platform, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import { Tabs } from "expo-router";
 import { colors } from "../../constants";
 import { Entypo } from "@expo/vector-icons";
@@ -10,8 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Homepage } from "../../constants/headerBarStyle";
 import ActiveBooking from "../../component/home/ActiveBookin";
 import UserAvatar from "../../component/home/UserAvatar";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
-import { LOGO_IMAGE, ONESTOP } from "../../constants/images";
+import { ONESTOP } from "../../constants/images";
 import ExpoImage from "../../component/shared/ExpoImage";
 
 const TabsLayout = () => {

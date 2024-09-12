@@ -13,12 +13,12 @@ import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { LOGO_IMAGE } from "../../constants/images";
 import { router } from "expo-router";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { colors } from "../../constants";
 import ExpoImage from "../shared/ExpoImage";
 
 const UserAvatar = () => {
-  const { userAvatar, userName, userMobile } = useContext(userAuthContext);
+  const { userAvatar, userName, userMobile } = useUserAuth();
   // console.warn(userAvatar);
   const [loading, setLoading] = useState(true);
   const [myImage, setMyImage] = useState(null);

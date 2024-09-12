@@ -6,7 +6,10 @@ import Input from "../../shared/Input";
 import colors from "../../../constants/colors";
 import TextLink from "../../shared/TextLink";
 import { loginIcon, mobileIcon, passwordIcon } from "./loginLogic";
-import { userAuthContext } from "../../../provider/userAuth/userAuthProvider";
+import {
+  userAuthContext,
+  useUserAuth,
+} from "../../../provider/userAuth/userAuthProvider";
 import { userLogin } from "../../../api/login";
 import { router } from "expo-router";
 
@@ -14,7 +17,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
-  const { loginFunction } = useContext(userAuthContext);
+  const { loginFunction } = useUserAuth();
 
   const handleLogin = async () => {
     const data = { mobile, password };
@@ -24,6 +27,7 @@ const LoginForm = () => {
 
     try {
       const response = await userLogin(data);
+      console.log(JSON.stringify(response, null, 2));
 
       // Handle response status codes 400-401-402-500
       if (response.statusCode >= 400) {
@@ -32,10 +36,24 @@ const LoginForm = () => {
       }
 
       const userInformation = {
-        name: response.name,
-        email: response.email,
-        mobile: response.mobile,
-        avatar: response.profile.avatar,
+        userId: response.id,
+        userName: response.name,
+        userEmail: response.email,
+        userMobile: response.mobile,
+        userAvatar: response.profile.avatar,
+        userRole: response.role,
+
+        userCity: response.profile.city,
+        userCityId: response.profile.cityId,
+        userLanguage: response.profile.language || "en",
+        userTheme: response.profile.theme || "light",
+
+        userCar: response.car.car,
+        userCarId: response.car.carId,
+        userModelId: response.car.modelId,
+        userCarModel: response.car.carModel,
+        userCarYear: response.car.carYear,
+
         isLogin: true,
       };
 

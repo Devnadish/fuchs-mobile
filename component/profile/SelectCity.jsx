@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { colors } from "../../constants";
 import { getAllCity } from "../../api/cityAPI";
 import { Skeleton } from "moti/skeleton"; // Import Moti Skeleton
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { SkeletonCommonProps } from "../../styles/globalStyle";
 
-const SelectCity = ({ setSelectedValue, selectedValue, setVisible }) => {
+const SelectCity = ({ setCity, setCityId, setVisible }) => {
   const [cityData, setCityData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { userLAnguage } = useContext(userAuthContext);
+  const { userLAnguage } = useUserAuth();
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -31,10 +31,11 @@ const SelectCity = ({ setSelectedValue, selectedValue, setVisible }) => {
     (item) => {
       const cityName = userLAnguage === "ar" ? item.cityAr : item.cityEn;
       const cityId = item.id;
-      setSelectedValue({ city: cityName, cityId: cityId });
+      setCity(cityName);
+      setCityId(cityId);
       setVisible(false);
     },
-    [setSelectedValue, setVisible, userLAnguage]
+    [setCity, setCityId, setVisible, userLAnguage]
   );
 
   const renderItem = useCallback(

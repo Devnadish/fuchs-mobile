@@ -2,11 +2,18 @@ import React from "react";
 import { StyleSheet, Dimensions, Text, View } from "react-native";
 import { colors } from "../../constants";
 import { borderRadius, shadowStyle } from "../../styles/globalStyle";
+import { useTheme } from "../../provider/themeProvider/useThemProvider";
 
 const FormContainer = ({ title, icon, children }) => {
+  const { colors } = useTheme();
   return (
-    <View style={styles.formContainer}>
-      <View style={styles.headerContainer}>
+    <View
+      style={[
+        styles.formContainer,
+        { borderColor: colors.border, backgroundColor: colors.card },
+      ]}
+    >
+      <View style={[styles.headerContainer, { backgroundColor: colors.card }]}>
         {icon && icon}
         {title && (
           <Text style={[styles.titleText, icon ? styles.titleWithIcon : null]}>
@@ -15,7 +22,9 @@ const FormContainer = ({ title, icon, children }) => {
         )}
       </View>
 
-      <View style={styles.contentContainer}>{children}</View>
+      <View style={[styles.contentContainer, { backgroundColor: colors.card }]}>
+        {children}
+      </View>
     </View>
   );
 };

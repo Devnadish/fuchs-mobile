@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getUserByMobile } from "../../api/getUserByMobile";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { colors } from "../../constants";
 import {
   borderRadius,
@@ -9,16 +9,35 @@ import {
   SkeletonCommonProps,
 } from "../../styles/globalStyle";
 import Btn from "../../component/shared/Btn";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import ShowModal from "../../component/shared/ShowModal";
 import SelectCars from "../../component/cars/SelectCars";
 import { Skeleton } from "moti/skeleton";
 import CarInstrutor from "../../component/instraction/CarInstrutor";
+import { updateUserCar } from "../../api/updateUserCar";
+import SaveAndCancel from "../../component/shared/SaveAndCancel";
+import { showToast } from "../../lib/nadish";
 
 export default function Car() {
-  const [loading, setLoading] = useState(false);
+  const {
+    updateProfile,
+    userCar,
+    userCarId,
+    userModelId,
+    userCarModel,
+    userCarYear,
+    userMobile,
+    userLanguage,
+  } = useUserAuth();
+  const [saveIndcator, setSaveIndcator] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedCar, setSelectedCar] = useState({});
+  const [selectedCar, setSelectedCar] = useState({
+    carId: userCarId,
+    modelId: userModelId,
+    car: userCar,
+    model: userCarModel,
+    year: userCarYear,
+  });
 
   const [selectedNewCar, setSelectedNewCar] = useState({
     car: null,
@@ -26,57 +45,52 @@ export default function Car() {
     year: null,
   });
 
-  const { userMobile, userLanguage } = useContext(userAuthContext);
+  const handleSaveCar = async () => {
+    setSaveIndcator(true);
+    const userCar = {
+      mobile: userMobile,
+      carId: selectedCar?.carId || "",
+      car: selectedCar?.car || "",
+      carModelId: selectedCar?.modelId || "",
+      carModel: selectedCar?.model || "",
+      carYear: selectedCar?.year || "",
+    };
 
-  const fetchUserData = async () => {
-    setLoading(true);
-    try {
-      const { car } = await getUserByMobile({ mobile: userMobile });
-      setSelectedCar({
-        carName: car?.car || "select car",
-        model: car?.carModel || "select model",
-        year: car?.carYear || "select year",
+    const updateCar = await updateUserCar(userCar);
+    if (updateUserCar) {
+      await updateProfile({
+        userCar: selectedCar?.car,
+        userCarId: selectedCar?.carId,
+        userModelId: selectedCar?.modelId,
+        userCarModel: selectedCar?.model,
+        userCarYear: selectedCar?.year,
       });
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    } finally {
-      setLoading(false);
+      showToast("Car Updated");
     }
-  };
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+    setSaveIndcator(false);
+  };
 
   return (
     <>
       <Stack.Screen
         options={{ title: `Select Car ${userMobile}`, headerShown: true }}
       />
-
-      <View style={globalStyle.container}>
+      <View style={styles.container}>
         <CarInstrutor />
         <View style={styles.carInfoContainer}>
-          <CarInfo label={"Car : "} value={selectedCar?.carName} />
+          <CarInfo label={"Car : "} value={selectedCar?.car} />
           <CarInfo label={"Model : "} value={selectedCar?.model} />
           <CarInfo label={"Year : "} value={selectedCar?.year} />
-          {selectedCar?.carName ? (
-            <Btn
-              title="Select Your Car"
-              handlePress={() => setModalVisible(true)}
-              containerStyles={styles.btnContainer}
-              textStyles={{ color: colors.primaryBtn }}
-            />
-          ) : (
-            <Skeleton
-              width={100}
-              height={40}
-              borderRadius={5}
-              show={!value}
-              {...SkeletonCommonProps}
-            />
-          )}
+
+          <Btn
+            title="Select Your Car"
+            handlePress={() => setModalVisible(true)}
+            containerStyles={styles.btnContainer}
+            textStyles={{ color: colors.primaryBtn }}
+          />
         </View>
+        <SaveAndCancel handleSubmit={handleSaveCar} indcator={saveIndcator} />
       </View>
 
       {modalVisible && (
@@ -102,39 +116,30 @@ export default function Car() {
 const CarInfo = ({ label, value }) => (
   <View style={styles.carInfo}>
     <Text>{label}</Text>
-    {value ? (
-      <Text>{value}</Text>
-    ) : (
-      <Skeleton
-        width={100}
-        height={40}
-        borderRadius={5}
-        show={!value}
-        {...SkeletonCommonProps}
-      />
-    )}
+    <Text>{value}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    padding: 20,
+  },
   carInfoContainer: {
-    width: "80%",
-    gap: 10,
+    width: "100%",
+    gap: 5,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: borderRadius,
     padding: 20,
-    borderWidth: 1,
-    borderColor: colors.borderColor,
   },
   carInfo: {
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: colors.white,
     gap: 10,
     width: "100%",
-    borderWidth: 1,
-    borderColor: colors.muteColor,
-    borderRadius: 5,
     padding: 10,
   },
   btnContainer: {

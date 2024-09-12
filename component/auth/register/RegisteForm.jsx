@@ -6,10 +6,7 @@ import Input from "../../shared/Input";
 
 import TextLink from "../../shared/TextLink";
 import * as logic from "./registerLogic";
-import {
-  createNewuser,
-  ValidateBeforeCreate,
-} from "../../../api/createNewuser";
+import { ValidateBeforeCreate } from "../../../api/createNewuser";
 import Otp from "./Otp";
 
 const RegisteForm = () => {

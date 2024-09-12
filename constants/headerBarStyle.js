@@ -1,4 +1,4 @@
-import WhyIregister from "../component/auth/WhyIregister";
+import WhyIregister from "../component/auth/register/WhyIregister";
 import ActiveBooking from "../component/home/ActiveBookin";
 import UserAvatar from "../component/home/UserAvatar";
 import colors from "./colors";

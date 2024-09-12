@@ -11,6 +11,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { globalStyle } from "../../styles/globalStyle";
 import UserImage from "../../component/profile/profileImage/UserImage";
 import { router } from "expo-router";
+import UserInfo from "../../component/profile/profileImage/UserInfo";
 
 export default function home() {
   return (
@@ -20,6 +21,7 @@ export default function home() {
       showsHorizontalScrollIndicator={false}
     >
       <UserImage />
+      <UserInfo />
       <View style={styles.container}>
         <MenuItem menu={activityButtons} title={"Activity "} />
         <MenuItem menu={profileButtons} title={"Profile"} />

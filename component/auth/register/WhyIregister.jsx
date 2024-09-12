@@ -1,10 +1,10 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useRef, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { whyilogin } from "../../constants/textData/whyilogin";
-import { colors } from "../../constants";
-import ShowModal from "../shared/ShowModal";
-import { globalStyle } from "../../styles/globalStyle";
+import { whyilogin } from "../../../constants/textData/whyilogin";
+import { colors } from "../../../constants";
+import ShowModal from "../../shared/ShowModal";
+import { globalStyle } from "../../../styles/globalStyle";
 export default function WhyIregister() {
   //  const headerHeight = useHeaderHeight();
   const [visible, setVisible] = useState(false);

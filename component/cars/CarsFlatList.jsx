@@ -21,7 +21,7 @@ export default function CarsFlatList({
     (item) => {
       setSelectedCar({
         carId: item.id.toString(),
-        carName: userLanguage === "ar" ? item?.carAr : item?.carEn,
+        car: userLanguage === "ar" ? item?.carAr : item?.carEn,
         modelId: null,
         model: "select model",
         year: "select year",
