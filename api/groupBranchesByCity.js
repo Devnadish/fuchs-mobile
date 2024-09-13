@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GROUP_BRANCHES_BY_CITY } from "./endPoints";
-import { handleAxiosError } from "./errorHandiling";
+import { handleAxiosError } from "./errorHandling";
 export const groupBranchesByCity = async (language) => {
   try {
     const { data } = await axios.get(GROUP_BRANCHES_BY_CITY, {

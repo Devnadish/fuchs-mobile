@@ -63,10 +63,7 @@ export const UserAuthProvider = ({ children }) => {
 
   const loadAsGuest = async () => {
     const guestData = {
-      userName: "Guest",
-      userEmail: "Guest",
-      userMobile: "Guest",
-      userAvatar: "Guest",
+      userId: "Guest",
       isLogin: false,
     };
     await updateUserData(guestData);

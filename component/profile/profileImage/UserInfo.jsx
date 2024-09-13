@@ -9,6 +9,7 @@ import { colors } from "../../../constants";
 export default function UserInfo() {
   const [showModal, setShowModal] = useState(false);
   const {
+    userId,
     userName,
     userEmail,
     userMobile,
@@ -34,6 +35,7 @@ export default function UserInfo() {
       />
       <ShowModal setVisible={setShowModal} visible={showModal}>
         <View style={styles.continer}>
+          <Txt title={"userId"} text={userId} />
           <Txt title={"avatar"} text={userAvatar} />
           <Txt title={"Name"} text={userName} />
           <Txt title={"Email"} text={userEmail} />
@@ -43,7 +45,10 @@ export default function UserInfo() {
           <Txt title={"Car"} text={userCar} />
           <Txt title={"Car Model"} text={userCarModel} />
           <Txt title={"Car Year"} text={userCarYear} />
-          <Txt title={"Language"} text={userLanguage} />
+          <Txt
+            title={"Language"}
+            text={userLanguage === "ar" ? "العربية" : "English"}
+          />
           <Txt title={"Theme"} text={userTheme} />
         </View>
       </ShowModal>

@@ -11,33 +11,14 @@ import { router, Stack } from "expo-router";
 import { UPDATE_USER_PROFILE_DATA } from "../../api/updateUserProfile";
 import { showToast } from "../../lib/nadish";
 import ProfileInstraction from "../../component/instraction/ProfileInstraction";
+import SaveAndCancel from "../../component/shared/SaveAndCancel";
 
 export default function Profile() {
   const { userName: contextuserName, userEmail } = useUserAuth();
-  const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const { userMobile, updateProfile } = useUserAuth();
   const [userName, setUserName] = useState(contextuserName);
   const [email, setEmail] = useState(userEmail);
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const data = await getUserByMobile({ mobile: userMobile });
-  //       if (data) {
-  //         setUserName(data.name);
-  //         setEmail(data.email);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, [userMobile]);
 
   const handleUpdate = async () => {
     setUpdateLoading(true);
@@ -48,12 +29,12 @@ export default function Profile() {
         email: email,
       };
       const updateData = await UPDATE_USER_PROFILE_DATA(userInformation);
-      // await updateUserProfile(userName, email); // Update user context
-      await updateProfile({ userName: userName, userEmail: email });
-      showToast("Profile updated successfully");
+      if (updateData) {
+        await updateProfile({ userName: userName, userEmail: email });
+        showToast("Profile updated successfully");
+        setTimeout(() => router.back(), 2000);
+      }
       setUpdateLoading(false);
-
-      setTimeout(() => router.back(), 2000);
     } catch (error) {
       console.error("Error updating profile:", error);
     } finally {
@@ -67,13 +48,6 @@ export default function Profile() {
         options={{ title: `Profile ${userMobile}`, headerShown: true }}
       />
       <View style={styles.container}>
-        {loading && (
-          <ActivityIndicator
-            animating={loading}
-            color={colors.primary}
-            size="large"
-          />
-        )}
         <ProfileInstraction />
         <View style={styles.formContainer}>
           <Input
@@ -96,17 +70,7 @@ export default function Profile() {
           />
         </View>
         <View>
-          <Btn
-            title="Update Profile"
-            handlePress={handleUpdate}
-            isLoading={updateLoading}
-            loadingText="Updating Profile"
-            containerStyles={{
-              backgroundColor: colors.danger,
-              width: "80%",
-              marginTop: 20,
-            }}
-          />
+          <SaveAndCancel handleSubmit={handleUpdate} indcator={updateLoading} />
         </View>
       </View>
     </>

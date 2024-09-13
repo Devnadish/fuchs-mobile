@@ -1,50 +1,77 @@
-import { Button, Modal, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { Children } from "react";
+import React, { memo, useEffect, useRef } from "react";
+import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import Animated, {
+  Easing,
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
 import { colors } from "../../constants";
 
-export default function ShowModal({
-  visible,
-  setVisible,
-  header,
-  children,
-  height = "80%",
-}) {
-  return (
-    <Modal visible={visible} animationType="slide" transparent={true}>
-      <Pressable style={{ flex: 1 }} onPress={() => setVisible(false)}>
-        <View style={styles.backDrop} />
-      </Pressable>
-      <View style={[styles.bodyStyle, { height: height }]}>
-        <View style={styles.headerStyle}>
-          <Text>{header}</Text>
+const ShowModal = memo(
+  ({ visible, setVisible, header, children, height = "80%" }) => {
+    const translateY = useSharedValue(height === "80%" ? 1000 : 0); // Start off-screen
 
-          <Pressable
-            onPress={() => setVisible(false)}
-            style={styles.closeButton}
-          >
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>
-              X
-            </Text>
-          </Pressable>
-        </View>
-        <View style={styles.childrenStyle}>{children}</View>
-      </View>
-    </Modal>
-  );
-}
+    useEffect(() => {
+      if (visible) {
+        translateY.value = withTiming(0, {
+          duration: 300,
+          easing: Easing.out(Easing.ease),
+        });
+      } else {
+        translateY.value = withTiming(1000, {
+          duration: 300,
+          easing: Easing.in(Easing.ease),
+        });
+      }
+    }, [visible]);
 
+    const animatedStyle = useAnimatedStyle(() => {
+      return {
+        transform: [{ translateY: translateY.value }],
+        height: height,
+      };
+    });
+
+    return (
+      <Modal
+        visible={visible}
+        animationType="none" // We will handle animations with Reanimated
+        transparent={true}
+        onRequestClose={() => setVisible(false)} // For Android back button support
+      >
+        <Pressable style={styles.overlay} onPress={() => setVisible(false)}>
+          <View style={styles.backDrop} />
+        </Pressable>
+        <Animated.View style={[styles.bodyStyle, animatedStyle]}>
+          <View style={styles.headerStyle}>
+            <Text style={styles.headerText}>{header}</Text>
+            <Pressable
+              onPress={() => setVisible(false)}
+              style={styles.closeButton}
+              accessibilityLabel="Close modal"
+            >
+              <Text style={styles.closeButtonText}>X</Text>
+            </Pressable>
+          </View>
+          <View style={styles.childrenStyle}>{children}</View>
+        </Animated.View>
+      </Modal>
+    );
+  }
+);
+
+// Styles
 const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+  },
   backDrop: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
-    width: "100%",
-    position: "relative",
   },
   headerStyle: {
     flexDirection: "row",
-    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     height: 50,
@@ -52,12 +79,15 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.muteColor,
     paddingHorizontal: 20,
   },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 18,
+  },
   bodyStyle: {
     backgroundColor: "white",
     padding: 20,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
-
     width: "100%",
     position: "absolute",
     bottom: 0,
@@ -65,11 +95,16 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     backgroundColor: colors.danger,
-    width: 24,
-    height: 24,
-    borderRadius: 20,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+  },
+  closeButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   childrenStyle: {
     flex: 1,
@@ -77,3 +112,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
   },
 });
+
+export default ShowModal;

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState, useCallback } from "react";
 import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { colors } from "../../constants";
 import { UpdateCity } from "../../api/cityAPI";
 import ShowModal from "../../component/shared/ShowModal";
@@ -21,9 +21,16 @@ export default function City() {
   const handleSubmit = useCallback(async () => {
     setUpdLoading(true);
     try {
-      await UpdateCity({ mobile: userMobile, city, cityId: city.cityId });
-      await updateProfile({ userCity: city, userCityId: cityId });
-      showToast("City updated successfully");
+      const updateCity = await UpdateCity({
+        mobile: userMobile,
+        city,
+        cityId: city.cityId,
+      });
+      if (updateCity) {
+        await updateProfile({ userCity: city, userCityId: cityId });
+        showToast("City updated successfully");
+        setTimeout(() => router.back(), 2000);
+      }
     } catch (error) {
       console.error("Error updating city:", error);
     } finally {

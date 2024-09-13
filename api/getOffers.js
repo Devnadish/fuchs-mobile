@@ -1,6 +1,6 @@
 import axios from "axios";
 import { OFFERS_DETAIL } from "./endPoints";
-import { handleAxiosError } from "./errorHandiling";
+import { handleAxiosError } from "./errorHandling";
 export const getOffers = async (language, page, limit, branchId) => {
   try {
     const { data } = await axios.get(`${OFFERS_DETAIL}`, {

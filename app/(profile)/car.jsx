@@ -57,7 +57,7 @@ export default function Car() {
     };
 
     const updateCar = await updateUserCar(userCar);
-    if (updateUserCar) {
+    if (updateCar) {
       await updateProfile({
         userCar: selectedCar?.car,
         userCarId: selectedCar?.carId,
@@ -66,6 +66,7 @@ export default function Car() {
         userCarYear: selectedCar?.year,
       });
       showToast("Car Updated");
+      setTimeout(() => router.back(), 2000);
     }
 
     setSaveIndcator(false);

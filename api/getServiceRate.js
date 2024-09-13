@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SERVICES_RATE } from "./endPoints";
-import { handleAxiosError } from "./errorHandiling";
+import { handleAxiosError } from "./errorHandling";
 export const getServiceRate = async (
   serviceId,
   page,

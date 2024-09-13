@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CHECK_USER_IS_EXIST } from "../api/endPoints";
-import { handleAxiosError } from "./errorHandiling";
+import { handleAxiosError } from "./errorHandling";
 
 export const checkUserExists = async (mobile) => {
   try {

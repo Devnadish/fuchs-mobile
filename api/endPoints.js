@@ -31,3 +31,6 @@ export const UPDATE_PROFILE =
   UrlEndPoint + "/api/user/update/updateUserProfile";
 export const GET_ALL_CITY = UrlEndPoint + "/api/city/getallcity";
 export const UPDATE_CITY = UrlEndPoint + "/api/city/updatecity";
+
+export const UPDATE_USER_SETTINGS =
+  UrlEndPoint + "/api/user/update/updateUserStting";

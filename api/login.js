@@ -1,6 +1,6 @@
 import axios from "axios";
 import { USER_LOGIN } from "../api/endPoints";
-import { handleAxiosError } from "./errorHandiling";
+import { handleAxiosError } from "./errorHandling";
 
 export const userLogin = async (userData) => {
   // Validate input fields

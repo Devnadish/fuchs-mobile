@@ -8,6 +8,8 @@ import { getAllServices } from "../../api/getAllServices";
 import { Skeleton } from "moti/skeleton";
 import { useTheme } from "../../provider/themeProvider/useThemProvider";
 import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import useAxios from "../../api/useAxios";
+import { GET_ALL_SERVICES } from "../../api/endPoints";
 
 const images = [
   "https://i.imgur.com/CzXTtJV.jpg",
@@ -16,11 +18,11 @@ const images = [
 ];
 
 const HomePage = () => {
-  const isDarkMode = useColorScheme();
-  const { colors } = useTheme();
   const { userLanguage } = useUserAuth();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const { responseData, loading, error } = useAxios(GET_ALL_SERVICES, "GET");
+  // console.log(responseData);
 
   const fetchServices = useCallback(async () => {
     try {
