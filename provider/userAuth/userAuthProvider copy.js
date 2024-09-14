@@ -12,60 +12,55 @@ import { I18nManager } from "react-native";
 export const userAuthContext = createContext(null);
 
 export const UserAuthProvider = ({ children }) => {
-  const initialUserData = {
+  const [userData, setUserData] = useState({
     userId: "",
     userName: "",
     userEmail: "",
     userMobile: "",
     userAvatar: "",
     userRole: "",
+
     userCity: "",
     userCityId: "",
     userLanguage: "en",
     userTheme: "light",
+
     userCar: "",
     userCarId: "",
     userModelId: "",
     userCarModel: "",
     userCarYear: "",
-    isLogin: false,
-  };
 
-  const [userData, setUserData] = useState(initialUserData);
+    isLogin: false,
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const storedData = await AsyncStorage.getItem("userData");
+
       if (storedData) {
-        const parsedData = JSON.parse(storedData);
-        setUserData({ ...parsedData, isLogin: true });
-        console.log(
-          "User Data In Context:",
-          JSON.stringify(parsedData, null, 2)
-        );
+        setUserData({ ...JSON.parse(storedData), isLogin: true });
+        console.log("userData In Context:", JSON.stringify(userData, null, 2));
       }
       setLoading(false);
     };
+
     checkLoginStatus();
   }, []);
 
   useEffect(() => {
-    const { userLanguage } = userData;
-    if (!userLanguage) return;
-    console.log("Language:", userLanguage);
-    i18next.changeLanguage(userLanguage);
-    I18nManager.forceRTL(userLanguage === "ar");
-    // Reload the app when the language changes
+    i18next.changeLanguage(userData.userLanguage);
+    I18nManager.forceRTL(userData.userLanguage === "ar");
   }, [userData.userLanguage]);
 
   const updateUserData = async (newData) => {
-    const updatedData = { ...userData, ...newData, isLogin: true };
-    await AsyncStorage.setItem("userData", JSON.stringify(updatedData));
-    setUserData(updatedData);
+    await AsyncStorage.setItem("userData", JSON.stringify(newData));
+    setUserData((prevData) => ({ ...prevData, ...newData, isLogin: true }));
+    const storedData = await AsyncStorage.getItem("userData");
     console.log(
-      "Updated User Data In Context:",
-      JSON.stringify(updatedData, null, 2)
+      "updated userData In Context:",
+      JSON.stringify(storedData, null, 2)
     );
   };
 
@@ -74,19 +69,42 @@ export const UserAuthProvider = ({ children }) => {
   };
 
   const loadAsGuest = async () => {
-    const guestData = { userId: "Guest", isLogin: false };
+    const guestData = {
+      userId: "Guest",
+      isLogin: false,
+    };
     await updateUserData(guestData);
     console.log("Login As Guest successful");
   };
 
   const updateProfile = async (newProfileData) => {
-    await updateUserData(newProfileData);
+    await updateUserData({ ...userData, ...newProfileData });
     console.log("Profile updated successfully");
   };
 
   const logout = async () => {
     await AsyncStorage.clear();
-    setUserData(initialUserData);
+    setUserData({
+      userId: "",
+      userName: "",
+      userEmail: "",
+      userMobile: "",
+      userAvatar: "",
+      userRole: "",
+
+      userCity: "",
+      userCityId: "",
+      userLanguage: "en",
+      userTheme: "light",
+
+      userCar: "",
+      userCarId: "",
+      userModelId: "",
+      userCarModel: "",
+      userCarYear: "",
+
+      isLogin: false,
+    });
     console.log("Logout successful");
   };
 

@@ -1,17 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 // import { colors } from "../../constants";
-import { globalStyle } from "../../styles/globalStyle";
-import BarHeader from "../../component/shared/BarHeader";
-import Container from "../../component/shared/Containner";
+import { globalStyle } from "../../../styles/globalStyle";
+import BarHeader from "../../../component/shared/BarHeader";
+import Container from "../../../component/shared/Containner";
 
 export default function Booking() {
   const params = useLocalSearchParams();
   const { serviceId } = params;
   return (
     <Container>
+      <Stack.Screen options={{ title: `Active Booking`, headerShown: true }} />
       <View style={globalStyle.container}>
-        <BarHeader title={"Booking"} />
         <Text style={{ fontSize: 17, fontWeight: "bold" }}>{serviceId} </Text>
       </View>
     </Container>

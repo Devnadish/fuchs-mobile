@@ -9,6 +9,7 @@ import { showToast } from "../../lib/nadish";
 import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { UPDATE_USER_SETTING } from "../../api/updateUserProfile";
 import { router } from "expo-router";
+import RNRestart from "react-native-restart";
 
 const options = {
   language: [
@@ -60,6 +61,12 @@ export default function Setting() {
         await updateProfile({ userLanguage: language, userTheme: theme });
         showToast("Settting updated successfully");
         setTimeout(() => router.back(), 2000);
+        RNRestart.restart();
+        // if (RNRestart) {
+        //   RNRestart.restart();
+        // } else {
+        //   console.error("RNRestart is not available");
+        // }
       }
       setUpdateLoading(false);
     } catch (error) {

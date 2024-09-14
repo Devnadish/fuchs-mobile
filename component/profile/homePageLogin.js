@@ -1,4 +1,5 @@
 import {
+  Entypo,
   FontAwesome,
   FontAwesome5,
   Fontisto,
@@ -18,6 +19,14 @@ export const profileButtons = [
     icon: <FontAwesome5 name="user-alt" size={20} color={colors.muteColor} />,
     title: "Profile",
     decription: "will help us to send you our offers and Gifts",
+  },
+  {
+    id: 5,
+    name: "person",
+    href: "/(profile)/passwordPage",
+    icon: <Entypo name="lock" size={24} color={colors.muteColor} />,
+    title: "Password",
+    decription: "Keep Your Data Secure with Strong Password",
   },
   {
     id: 2,
@@ -52,7 +61,7 @@ export const activityButtons = [
   {
     id: 3,
     name: "booking",
-    href: "/(profile)/booking",
+    href: "/(screens)/activeBooking",
     icon: (
       <FontAwesome name="calendar-check-o" size={24} color={colors.muteColor} />
     ),
@@ -62,7 +71,7 @@ export const activityButtons = [
   {
     id: 1,
     name: "Favorite Branches",
-    href: "/(profile)/profile",
+    href: "/(screens)/favBranches",
     icon: <Fontisto name="heart" size={20} color={colors.muteColor} />,
     title: "Favorite Branches",
     decription: "Favorite Branches ",
@@ -70,7 +79,7 @@ export const activityButtons = [
   {
     id: 2,
     name: "pind offer",
-    href: "/(profile)/profile",
+    href: "/(screens)/pinOffers",
     icon: <Fontisto name="pinboard" size={20} color={colors.muteColor} />,
     title: "Pind offer",
     decription: "pind offer you like",

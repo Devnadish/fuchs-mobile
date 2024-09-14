@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function FavBrnanches() {
+export default function passwordPage() {
   return (
     <View>
-      <Text>FavBrnanches</Text>
+      <Text>passwordPage</Text>
     </View>
   );
 }

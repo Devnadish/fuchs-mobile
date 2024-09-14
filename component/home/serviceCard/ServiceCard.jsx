@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "../../../constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { router } from "expo-router";
-import { borderRadius, globalStyle } from "../../styles/globalStyle";
+import { borderRadius, globalStyle } from "../../../styles/globalStyle";
 
 const ServiceCard = React.memo(
   ({ id, title, description, userLanguage, rate }) => {
@@ -26,7 +26,11 @@ const Actions = ({ serviceId, userLanguage, rate }) => {
   return (
     <View style={styles.actionContainer}>
       <ActionButton
-        onPress={() => handleNavigation("/(screens)/booking", { serviceId })}
+        onPress={() =>
+          handleNavigation("/(screens)/serviceAction/bookAppointment", {
+            serviceId,
+          })
+        }
         icon={
           <FontAwesome name="calendar-plus-o" size={24} color={colors.white} />
         }
@@ -34,7 +38,7 @@ const Actions = ({ serviceId, userLanguage, rate }) => {
       />
       <ActionButton
         onPress={() =>
-          handleNavigation("/(screens)/serviceInfo", {
+          handleNavigation("/(screens)/serviceAction/serviceInfo", {
             serviceId,
             userLanguage,
           })
@@ -43,13 +47,16 @@ const Actions = ({ serviceId, userLanguage, rate }) => {
       />
       <ActionButton
         onPress={() =>
-          handleNavigation("/(screens)/freegift", { serviceId, userLanguage })
+          handleNavigation("/(screens)/serviceAction/freegift", {
+            serviceId,
+            userLanguage,
+          })
         }
         icon={<FontAwesome name="gift" size={24} color={colors.primaryBtn} />}
       />
       <ActionButton
         onPress={() =>
-          handleNavigation("/(screens)/serviceRate", {
+          handleNavigation("/(screens)/serviceAction/serviceRate", {
             serviceId,
             userLanguage,
           })

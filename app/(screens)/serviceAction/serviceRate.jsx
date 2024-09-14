@@ -6,19 +6,20 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { shadowStyle, SkeletonCommonProps } from "../../styles/globalStyle";
-import BarHeader from "../../component/shared/BarHeader";
-import Container from "../../component/shared/Containner";
-import { useState, useEffect, useCallback } from "react";
-import { colors } from "../../constants";
+import { Stack, useLocalSearchParams } from "expo-router";
+import { useState, useEffect, useCallback, memo, useMemo } from "react";
+import { colors } from "../../../constants";
 import { Skeleton } from "moti/skeleton";
-import { Entypo } from "@expo/vector-icons";
-import RateFaces from "../../component/home/RateFaces";
-import { getServiceRate } from "../../api/getServiceRate";
-import { getTimeElapsed } from "../../lib/nadish";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import RateFaces from "../../../component/home/RateFaces";
+import { getServiceRate } from "../../../api/getServiceRate";
+import { getTimeElapsed } from "../../../lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import ServiceDetail from "../../../component/home/serviceCard/ServiceDetail";
+import Container from "../../../component/shared/Containner";
+import { shadowStyle, SkeletonCommonProps } from "../../../styles/globalStyle";
 
+const MemoizedServiceDetail = memo(ServiceDetail);
 const limit = 10;
 
 export default function ServiceRate() {
@@ -26,7 +27,7 @@ export default function ServiceRate() {
   const [rateCategory, setRateCategory] = useState(5);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [loadingPage, setLoadingPage] = useState(false); // New loading state for pagination
+  const [loadingPage, setLoadingPage] = useState(false);
   const params = useLocalSearchParams();
   const { serviceId, userLanguage } = params;
 
@@ -52,16 +53,32 @@ export default function ServiceRate() {
     fetchRate();
   }, [fetchRate]);
 
+  const serviceTitle = useMemo(
+    () =>
+      userLanguage === "ar"
+        ? serviceRate?.serviceInformation?.titleAr
+        : serviceRate?.serviceInformation?.titleEn,
+    [serviceRate, userLanguage]
+  );
+
+  const serviceDescription = useMemo(
+    () =>
+      userLanguage === "ar"
+        ? serviceRate?.serviceInformation?.descriptionAr
+        : serviceRate?.serviceInformation?.descriptionEn,
+    [serviceRate, userLanguage]
+  );
+
   const handleNextPage = () => {
     if (page < serviceRate.totalPage) {
-      setLoadingPage(true); // Start loading for the next page
+      setLoadingPage(true);
       setPage((prevPage) => prevPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (page > 1) {
-      setLoadingPage(true); // Start loading for the previous page
+      setLoadingPage(true);
       setPage((prevPage) => prevPage - 1);
     }
   };
@@ -69,7 +86,7 @@ export default function ServiceRate() {
   useEffect(() => {
     if (loadingPage) {
       fetchRate();
-      setLoadingPage(false); // Reset loading state after fetching
+      setLoadingPage(false);
     }
   }, [loadingPage, fetchRate]);
 
@@ -112,21 +129,13 @@ export default function ServiceRate() {
 
   return (
     <Container>
-      <BarHeader
-        title={"What Users Say.."}
-        icon={<Entypo name="star" size={24} color={colors.primaryBtn} />}
+      <Stack.Screen
+        options={{ title: "What Users Say..", headerShown: true }}
       />
-      <AboutService
-        Title={
-          userLanguage === "ar"
-            ? serviceRate?.serviceInformation?.titleAr
-            : serviceRate?.serviceInformation?.titleEn
-        }
-        description={
-          userLanguage === "ar"
-            ? serviceRate?.serviceInformation?.descriptionAr
-            : serviceRate?.serviceInformation?.descriptionEn
-        }
+      <MemoizedServiceDetail
+        Title={serviceTitle}
+        description={serviceDescription}
+        icon={<FontAwesome name="star" size={48} color={colors.yellow} />}
       />
       <RateFaces
         rateCategory={rateCategory}
@@ -152,7 +161,6 @@ export default function ServiceRate() {
       )}
       <Pagination
         page={page}
-        setPage={setPage}
         pages={serviceRate.totalPage}
         loading={loadingPage}
         handleNextPage={handleNextPage}
@@ -202,31 +210,6 @@ const Pagination = ({
   );
 };
 
-const AboutService = ({ Title, description }) => {
-  return (
-    <View style={styles.serviceInfoContainer}>
-      <Skeleton
-        height={30}
-        width={"100%"}
-        radius={10}
-        {...SkeletonCommonProps}
-        show={!Title}
-      >
-        <Text style={styles.infoTitle}>{Title}</Text>
-      </Skeleton>
-      <Skeleton
-        height={30}
-        width={"100%"}
-        radius={10}
-        {...SkeletonCommonProps}
-        show={!description}
-      >
-        <Text style={styles.infoDescription}>{description}</Text>
-      </Skeleton>
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   skeletonItemContainer: {
     padding: 15,
@@ -270,41 +253,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  serviceInfoContainer: {
-    padding: 20,
-    backgroundColor: colors.white,
-    marginTop: 50,
-    ...shadowStyle,
-  },
-  infoTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: colors.textColor,
-  },
-  infoDescription: {
-    fontSize: 14,
-    marginBottom: 10,
-    color: colors.muteColor,
-  },
   container: { flex: 1, marginTop: 5 },
   itemContainer: {
     padding: 15,
     borderWidth: 1,
     borderColor: colors.muteColor,
     borderRadius: 5,
+    backgroundColor: colors.white,
   },
   itemText: {
-    fontSize: 16,
-  },
-  userNameAndData: {
-    fontSize: 12,
-    color: colors.muteColor,
-  },
-  listContainer: {
-    padding: 10,
+    fontSize: 14,
+    color: colors.textColor,
   },
   separator: {
-    height: 10, // Space between items
+    height: 10,
   },
 });

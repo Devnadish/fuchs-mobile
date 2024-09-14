@@ -70,31 +70,6 @@ const TabsLayout = () => {
       />
 
       <Tabs.Screen
-        name="Booking"
-        options={{
-          tabBarButton: () => null,
-          tabBarVisible: false,
-          title: t("tab.booking"),
-          headerTitle: null,
-          tabBarLabel: () => {
-            return null;
-          },
-          // headerShown: false,
-          // tabBarIcon: ({ color, focused }) => (
-          //   <>
-          //     <FontAwesome6
-          //       name="calendar-plus"
-          //       size={focused ? 28 : 24}
-          //       color={focused ? colors.danger : colors.primary}
-          //     />
-          //     <Text style={{ color: focused ? colors.danger : colors.primary }}>
-          //       Book
-          //     </Text>
-          //   </>
-          // ),
-        }}
-      />
-      <Tabs.Screen
         name="offers"
         options={{
           title: t("tab.offers"),
