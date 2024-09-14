@@ -4,7 +4,7 @@ import UserAvatar from "../component/home/UserAvatar";
 import colors from "./colors";
 
 export const indexBarStyle = {
-  title: "Sign Up",
+  title: "Welcome",
   headerShown: true,
   headerTitleAlign: "center",
   headerTintColor: colors.linkColor,

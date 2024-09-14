@@ -18,6 +18,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import ServiceDetail from "../../../component/home/serviceCard/ServiceDetail";
 import Container from "../../../component/shared/Containner";
 import { shadowStyle, SkeletonCommonProps } from "../../../styles/globalStyle";
+import ScreenBarTitle from "../../../component/shared/ScreenBarTitle";
 
 const MemoizedServiceDetail = memo(ServiceDetail);
 const limit = 10;
@@ -130,8 +131,17 @@ export default function ServiceRate() {
   return (
     <Container>
       <Stack.Screen
-        options={{ title: "What Users Say..", headerShown: true }}
+        options={{
+          headerShown: true,
+          headerBackTitleVisible: true,
+          headerTitle: () => <ScreenBarTitle title={"What Clients Say.."} />,
+          headerShadowVisible: true,
+          headerStyle: { backgroundColor: colors.backgroundColor },
+          headerTintColor: colors.primaryBtn,
+          headerTitleAlign: "center",
+        }}
       />
+
       <MemoizedServiceDetail
         Title={serviceTitle}
         description={serviceDescription}

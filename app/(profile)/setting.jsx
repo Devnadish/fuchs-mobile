@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import RadioButton from "../../component/shared/RadioButton";
 import { colors } from "../../constants";
 import { useTheme } from "../../provider/themeProvider/useThemProvider";
@@ -8,8 +8,10 @@ import SaveAndCancel from "../../component/shared/SaveAndCancel";
 import { showToast } from "../../lib/nadish";
 import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 import { UPDATE_USER_SETTING } from "../../api/updateUserProfile";
-import { router } from "expo-router";
-import RNRestart from "react-native-restart";
+import { router, Stack } from "expo-router";
+import ScreenBarTitle from "../../component/shared/ScreenBarTitle";
+import Container from "../../component/shared/Containner";
+import * as Updates from "expo-updates";
 
 const options = {
   language: [
@@ -59,16 +61,9 @@ export default function Setting() {
       const updateData = await UPDATE_USER_SETTING(userInformation);
       if (updateData) {
         await updateProfile({ userLanguage: language, userTheme: theme });
-        showToast("Settting updated successfully");
-        setTimeout(() => router.back(), 2000);
-        RNRestart.restart();
-        // if (RNRestart) {
-        //   RNRestart.restart();
-        // } else {
-        //   console.error("RNRestart is not available");
-        // }
+        showToast("Setting updated successfully");
+        promptRestart();
       }
-      setUpdateLoading(false);
     } catch (error) {
       console.error("Error updating profile:", error);
     } finally {
@@ -76,22 +71,62 @@ export default function Setting() {
     }
   };
 
+  const promptRestart = () => {
+    Alert.alert(
+      "Settings Updated",
+      "Your settings have been updated. Would you like to restart the app now to apply the changes?",
+      [
+        {
+          text: "Later",
+          onPress: () => router.back(),
+          style: "cancel",
+        },
+        {
+          text: "Restart Now",
+          onPress: async () => {
+            // Call Expo's update logic here
+            // For example, you might want to call a method to refresh or reload the app
+            // This is a placeholder since Expo doesn't have a direct restart method
+            // You might want to use a library like expo-updates to manage updates
+            await Updates.reloadAsync();
+            showToast("App will restart to apply changes."); // Placeholder for actual restart logic
+            router.back(); // Navigate back after the alert
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      <SettingOption
-        title="Language"
-        options={options.language}
-        selectedValue={language}
-        onSelect={setLanguage}
-      />
-      <SettingOption
-        title="Theme"
-        options={options.theme}
-        selectedValue={theme}
-        onSelect={setTheme}
-      />
-      <SaveAndCancel handleSubmit={handleSubmit} indicator={updateLoading} />
-    </View>
+    <Container>
+      <View style={styles.container}>
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerBackTitleVisible: true,
+            headerTitle: () => <ScreenBarTitle title={"Setting"} />,
+            headerShadowVisible: true,
+            headerStyle: { backgroundColor: colors.backgroundColor },
+            headerTintColor: colors.primaryBtn,
+            headerTitleAlign: "center",
+          }}
+        />
+        <SettingOption
+          title="Language"
+          options={options.language}
+          selectedValue={language}
+          onSelect={setLanguage}
+        />
+        <SettingOption
+          title="Theme"
+          options={options.theme}
+          selectedValue={theme}
+          onSelect={setTheme}
+        />
+        <SaveAndCancel handleSubmit={handleSubmit} indicator={updateLoading} />
+      </View>
+    </Container>
   );
 }
 
