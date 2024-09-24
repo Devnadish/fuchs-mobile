@@ -4,28 +4,42 @@ import { colors } from "../../constants";
 import { getBranchByCity } from "../../api/getBranchByCity";
 import Loader from "../shared/Loader";
 import RenderBranchItem from "./RenderBranchItem";
+import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
 
-const Limit = 5;
-let pageNum = 1;
+const Limit = 6;
 
-const BranchByCity = ({ userLanguage, selectedCity }) => {
+const BranchByCity = ({
+  selectedCity,
+  setRerender,
+  pageNum,
+  setPageNum,
+  queyType,
+  activeBtn,
+  rerender,
+  setActiveBtn,
+}) => {
+  const { userLanguage, userId } = useUserAuth();
   const [loading, setLoading] = useState(false);
   const [branches, setBranches] = useState([]);
   const [pageCount, setPageCount] = useState(0);
 
   const getBranches = async (page) => {
     setLoading(true);
-    const { allBranches, totalPage } = await getBranchByCity(
-      userLanguage,
-      page,
-      Limit,
-      selectedCity
-    );
-    setLoading(false);
-    setPageCount(totalPage);
-    return allBranches;
+    try {
+      const { allBranches, totalPage } = await getBranchByCity(
+        userLanguage,
+        page,
+        Limit,
+        selectedCity?.id,
+        userId
+      );
+      setPageCount(totalPage);
+      return allBranches;
+    } finally {
+      setLoading(false);
+    }
   };
-  // load initial branches
+
   useEffect(() => {
     const fetchInitialBranches = async () => {
       const initialBranches = await getBranches(pageNum);
@@ -33,75 +47,83 @@ const BranchByCity = ({ userLanguage, selectedCity }) => {
     };
 
     fetchInitialBranches();
-  }, []);
+  }, [selectedCity, queyType, pageNum, rerender]);
 
-  // call api to load more branches to improve performance and  infinite scroll
   const handleLoadMore = async () => {
-    if (loading) {
-      return;
-    }
+    if (loading || pageNum >= pageCount) return;
 
-    if (pageNum >= pageCount) {
-      return;
-    } else {
-      pageNum = pageNum + 1;
-    }
-    setLoading(true);
-    const loadMoreBranches = await getBranches(pageNum);
-    setLoading(false);
-
+    setPageNum((prev) => prev + 1);
+    const loadMoreBranches = await getBranches(pageNum + 1);
     setBranches((prevBranches) => [...prevBranches, ...loadMoreBranches]);
   };
 
-  const renderItem = useCallback(({ item, index }) => {
-    return (
-      <RenderBranchItem item={item} index={index} userLanguage={userLanguage} />
-    );
-  });
-  if (branches.length === 0) return null;
+  const renderItem = useCallback(
+    ({ item }) => (
+      <RenderBranchItem
+        item={item}
+        userLanguage={userLanguage}
+        setRerender={setRerender}
+        queyType={queyType}
+        activeBtn={activeBtn}
+        setActiveBtn={setActiveBtn}
+      />
+    ),
+    [userLanguage, setRerender, queyType]
+  );
 
-  const FooterIfNoMoreBranches = () => {
-    return (
-      <>
-        {pageCount === pageNum ? (
-          <Text style={{ color: colors.danger, width: "100%" }}>
-            No more branches to load.
-          </Text>
-        ) : (
-          <Loader loading={loading} />
-        )}
-      </>
-    );
-  };
+  if (branches.length === 0 && !loading) return null;
+
+  const FooterIfNoMoreBranches = () => (
+    <>
+      {pageCount === pageNum ? (
+        <Text style={{ color: colors.danger, width: "100%" }}>
+          No more branches to load.
+        </Text>
+      ) : (
+        <Loader loading={loading} />
+      )}
+    </>
+  );
 
   return (
-    <FlatList
-      data={branches}
-      keyExtractor={(item, index) => item.id.toString() + index.toString()}
-      renderItem={renderItem}
-      contentContainerStyle={{ gap: 10, alignItems: "center" }}
-      showsVerticalScrollIndicator={false}
-      onEndReached={handleLoadMore}
-      onEndReachedThreshold={3}
-      windowSize={1}
-      initialNumToRender={1}
-      maxToRenderPerBatch={1}
-      ListFooterComponent={() => (
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            // backgroundColor: colors.danger,
-            marginBottom: 20,
-            height: 50,
-            width: "100%",
-          }}
-        >
-          <FooterIfNoMoreBranches />
-        </View>
-      )}
-    />
+    <>
+      <FlatList
+        data={branches}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+        contentContainerStyle={styles.listContainer}
+        showsVerticalScrollIndicator={false}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        numColumns={2} // Display two items per row
+        ListFooterComponent={() => (
+          <View style={styles.footerContainer}>
+            <FooterIfNoMoreBranches />
+          </View>
+        )}
+      />
+    </>
   );
 };
 
 export default BranchByCity;
+
+const styles = StyleSheet.create({
+  queyText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: colors.primary,
+    paddingBottom: 10,
+  },
+  listContainer: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+  },
+  footerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    height: 50,
+    width: "100%",
+  },
+});

@@ -70,7 +70,6 @@ const UserAvatar = () => {
           { flexDirection: userMobile === "Gust" ? "row" : "column" },
         ]}
       >
-        <Text style={styles.userName}>Hi.. </Text>
         <Text>{userName || "No Name"}</Text>
       </View>
     </View>

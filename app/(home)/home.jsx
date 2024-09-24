@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import ServiceCard from "../../component/home/ServiceCard/ServiceCard";
 import { globalStyle, SkeletonCommonProps } from "../../styles/globalStyle";
 import { colors } from "../../constants";
 import ImageSlider from "../../component/shared/ImageSlider";
 import { getAllServices } from "../../api/getAllServices";
 import { Skeleton } from "moti/skeleton";
 import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import ServiceCards from "../../component/home/serviceCard/ServiceCards";
 
 const images = [
   "https://i.imgur.com/CzXTtJV.jpg",
@@ -18,8 +18,6 @@ const HomePage = () => {
   const { userLanguage } = useUserAuth();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const { responseData, loading, error } = useAxios(GET_ALL_SERVICES, "GET");
-  // console.log(responseData);
 
   const fetchServices = useCallback(async () => {
     try {
@@ -48,9 +46,9 @@ const HomePage = () => {
           <View style={styles.container}>
             {loading ? (
               <NoServices loading={loading} />
-            ) : services.length > 0 ? (
+            ) : services?.length > 0 ? (
               services.map((service) => (
-                <ServiceCard
+                <ServiceCards
                   key={service.id}
                   title={
                     userLanguage === "ar" ? service.titleAr : service.titleEn

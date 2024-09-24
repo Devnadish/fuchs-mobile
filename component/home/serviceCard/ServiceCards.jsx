@@ -7,7 +7,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { router } from "expo-router";
 import { borderRadius, globalStyle } from "../../../styles/globalStyle";
 
-const ServiceCard = React.memo(
+const ServiceCards = React.memo(
   ({ id, title, description, userLanguage, rate }) => {
     return (
       <View style={styles.cardContainer}>
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ServiceCard;
+export default ServiceCards;

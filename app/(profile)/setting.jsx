@@ -84,10 +84,6 @@ export default function Setting() {
         {
           text: "Restart Now",
           onPress: async () => {
-            // Call Expo's update logic here
-            // For example, you might want to call a method to refresh or reload the app
-            // This is a placeholder since Expo doesn't have a direct restart method
-            // You might want to use a library like expo-updates to manage updates
             await Updates.reloadAsync();
             showToast("App will restart to apply changes."); // Placeholder for actual restart logic
             router.back(); // Navigate back after the alert

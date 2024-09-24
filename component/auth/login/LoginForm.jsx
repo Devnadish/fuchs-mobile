@@ -27,7 +27,6 @@ const LoginForm = () => {
 
     try {
       const response = await userLogin(data);
-      console.log(JSON.stringify(response, null, 2));
 
       // Handle response status codes 400-401-402-500
       if (response.statusCode >= 400) {

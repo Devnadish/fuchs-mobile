@@ -8,6 +8,8 @@ TODO:refactore userAuth
 5 - apk file to test
 
 FIXME: refactore index file in root dir to be as register or search for solution
+FIXME: recatore the favore When Add Favorate shuld not fliecker
+FIXME: recatore the favore When remove last Favorate show skelton now it show no favorate
 TODO:Refactoe pressapale butune to be reusabla
 TODO: Refactore them
 TODO: Fix city front and back

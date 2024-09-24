@@ -25,6 +25,9 @@ export const globalStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  badge: {
+    backgroundColor: colors.primary,
+  },
 });
 
 export const shadowStyle = {

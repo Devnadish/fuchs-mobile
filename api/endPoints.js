@@ -1,36 +1,28 @@
-export const UrlEndPoint = process.env.EXPO_PUBLIC_ENDPOINT_URL;
+export const endPoint = process.env.EXPO_PUBLIC_ENDPOINT_URL;
+console.log({ endPoint });
 
-export const CHECK_USER_IS_EXIST = UrlEndPoint + "/api/user/checkUserIsexisit";
-
-export const CREATE_NEW_USER = UrlEndPoint + "/api/user/registerNewUser";
-// For login and get user details
-export const USER_LOGIN = UrlEndPoint + "/api/user/login";
-export const GET_USER = UrlEndPoint + "/api/user/update";
-export const GET_USER_BY_MOBILE = UrlEndPoint + "/api/user/get_by_mobile";
-export const UPDATE_USER_PROFILE =
-  UrlEndPoint + "/api/user/update/updateprofile";
-export const UPDATE_USER_CAR = UrlEndPoint + "/api/user/update/updatecar";
-export const GET_ALL_CARS = UrlEndPoint + "/api/cars/getallcars";
-export const GET_CARS_BY_ID = UrlEndPoint + "/api/cars/getCarById";
-// export const GET_CARS_BY_ID = UrlEndPoint +  "/api/cars/getCarById?carId=66bb31a72b7dbdff6a173032";
-export const GROUP_BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/groupcity";
-
-export const BRANCHES_BY_CITY = UrlEndPoint + "/api/branches/getbranchbycity";
-export const BRANCHES_DETAIL = UrlEndPoint + "/api/branches/branchdetail"; // params : brid
-export const OFFERS_DETAIL = UrlEndPoint + "/api/offer/alloffer"; // params : brid
-export const GET_ALL_SERVICES =
-  UrlEndPoint + "/api/service/getallservice?language=ar";
-
-export const GET_SERVICES_INFO = UrlEndPoint + "/api/service/serviceinfo";
-export const SERVICES_GIFT = UrlEndPoint + "/api/service/servicegift";
-export const SERVICES_RATE = UrlEndPoint + "/api/service/servicerate";
-//  " /api/service/servicerate?serviceId=66cf440408ae52c4aded293a&page=1&limit=10&rate=1&language=ar";
+export const CHECK_USER_IS_EXIST = endPoint + "/user/checkUserIsexisit";
+export const CREATE_NEW_USER = endPoint + "/user/registerNewUser";
+export const USER_LOGIN = endPoint + "/user/login";
+export const GET_USER = endPoint + "/user/update";
+export const GET_USER_BY_MOBILE = endPoint + "/user/get_by_mobile";
+export const UPDATE_USER_PROFILE = endPoint + "/user/update/updateprofile";
+export const UPDATE_USER_CAR = endPoint + "/user/update/updatecar";
+export const GET_ALL_CARS = endPoint + "/cars/getallcars";
+export const GET_CARS_BY_ID = endPoint + "/cars/getCarById";
+export const GROUP_BRANCHES_BY_CITY = endPoint + "/branches/groupcity";
+export const BRANCHES_BY_CITY = endPoint + "/branches/getbranchbycity";
+export const BRANCHES_DETAIL = endPoint + "/branches/branchdetail"; // params : brid
+export const OFFERS_DETAIL = endPoint + "/offer/alloffer"; // params : brid
+export const GET_ALL_SERVICES = endPoint + "/service/getallservice?language=ar";
+export const GET_SERVICES_INFO = endPoint + "/service/serviceinfo";
+export const SERVICES_GIFT = endPoint + "/service/servicegift";
+export const SERVICES_RATE = endPoint + "/service/servicerate"; //params : serviceId ,page ,limit ,rate
 export const UPDATE_PROFILE_IMAGE =
-  UrlEndPoint + "/api/user/update/updateUserProfileImage";
-export const UPDATE_PROFILE =
-  UrlEndPoint + "/api/user/update/updateUserProfile";
-export const GET_ALL_CITY = UrlEndPoint + "/api/city/getallcity";
-export const UPDATE_CITY = UrlEndPoint + "/api/city/updatecity";
-
-export const UPDATE_USER_SETTINGS =
-  UrlEndPoint + "/api/user/update/updateUserStting";
+  endPoint + "/user/update/updateUserProfileImage";
+export const UPDATE_PROFILE = endPoint + "/user/update/updateUserProfile";
+export const GET_ALL_CITY = endPoint + "/city/getallcity";
+export const UPDATE_CITY = endPoint + "/city/updatecity";
+export const UPDATE_USER_SETTINGS = endPoint + "/user/update/updateUserStting";
+export const FAVORITE_BRANCHES = endPoint + "/branches/favorate";
+export const BRANCHES_COUNTER = endPoint + "/branches/getCounters"; //params : userId ,cityId
