@@ -11,8 +11,8 @@ const BranchHeader = ({ item }) => {
   const { userLanguage } = useUserAuth();
   return (
     <View style={styles.continer}>
-      <Drive item={item} />
       <CityName item={item} userLanguage={userLanguage} />
+      <Drive item={item} />
       <Rateing item={item} />
     </View>
   );
@@ -21,7 +21,7 @@ const BranchHeader = ({ item }) => {
 const Rateing = ({ item }) => {
   return (
     <View style={styles.ratingIcon}>
-      <AntDesign name="star" size={20} color={colors.yellow} />
+      <AntDesign name="star" size={30} color={colors.white} />
       <Text style={styles.rateText}>{item?.usersRate}</Text>
     </View>
   );
@@ -52,7 +52,8 @@ const Drive = ({ item }) => {
           });
         }}
       >
-        <MaterialIcons name="drive-eta" size={24} color={colors.white} />
+        <MaterialIcons name="drive-eta" size={30} color={colors.white} />
+        <Text style={styles.rateText}>Drive</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,39 +61,32 @@ const Drive = ({ item }) => {
 
 const styles = StyleSheet.create({
   continer: {
-    justifyContent: "space-between",
-    backgroundColor: colors.white,
-    padding: 15,
+    position: "absolute",
+    top: 0,
+    left: 5,
+    zIndex: 10,
     width: "100%",
-    flexDirection: "row",
+    height: "100%",
+    gap: 20,
   },
   driveContainer: {
-    width: 40,
-    height: 40,
-    backgroundColor: colors.green,
-    borderRadius: 5,
+    width: 48,
+    height: 48,
     alignItems: "center",
-    justifyContent: "center",
   },
 
   badge: {
-    backgroundColor: "transparent",
-    color: colors.textColor,
-    paddingHorizontal: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
+    color: colors.white,
     fontWeight: "300",
-    borderColor: colors.borderColor,
-    borderWidth: 1,
-    height: 30,
+    borderColor: colors.primary,
+    alignSelf: "flex-end",
+    marginRight: 10,
   },
 
-  ratingIcon: {
-    alignItems: "center",
-  },
+  ratingIcon: { alignItems: "center", width: 48, height: 48 },
   rateText: {
-    color: colors.textColor,
+    color: colors.white,
+    fontWeight: "bold",
     fontSize: 12,
   },
 });
