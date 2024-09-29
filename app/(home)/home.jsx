@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { globalStyle, SkeletonCommonProps } from "../../styles/globalStyle";
-import { colors } from "../../constants";
-import ImageSlider from "../../component/shared/ImageSlider";
-import { getAllServices } from "../../api/getAllServices";
+import { globalStyle, SkeletonCommonProps } from "@styles/globalStyle";
+import { colors } from "@constants";
+import ImageSlider from "@component/shared/ImageSlider";
+import { getAllServices } from "@api/getAllServices";
 import { Skeleton } from "moti/skeleton";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import ServiceCards from "../../component/home/serviceCard/ServiceCards";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import ServiceCards from "@component/home/serviceCard/ServiceCards";
+// import ServiceCards from "@component/home/serviceCard/ServiceCards";
 
 const images = [
   "https://i.imgur.com/CzXTtJV.jpg",

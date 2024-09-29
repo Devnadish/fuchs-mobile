@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import Btn from "./Btn";
 import { router } from "expo-router";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 

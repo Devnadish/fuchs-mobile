@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Txt from "../../shared/Txt";
-import { globalStyle } from "../../../styles/globalStyle";
-import { colors } from "../../../constants";
+import Txt from "@component/shared/Txt";
+import { globalStyle } from "@styles/globalStyle";
+import { colors } from "@constants";
 
 export default function BranchDetails({ branch, userlanguage }) {
   return (

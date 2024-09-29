@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { View, Modal, Text } from "react-native";
-import Btn from "../../shared/Btn";
-import { showToast } from "../../../lib/nadish";
-import Input from "../../shared/Input";
+import Btn from "@component/shared/Btn";
+import { showToast } from "@lib/nadish";
+import Input from "@component/shared/Input";
 
-import TextLink from "../../shared/TextLink";
+import TextLink from "@component/shared/TextLink";
 import * as logic from "./registerLogic";
-import { ValidateBeforeCreate } from "../../../api/createNewuser";
+import { ValidateBeforeCreate } from "@api/createNewuser";
 import Otp from "./Otp";
 
 const RegisteForm = () => {

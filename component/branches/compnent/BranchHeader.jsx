@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 
 import { router } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 
 const BranchHeader = ({ item }) => {
   const { userLanguage } = useUserAuth();

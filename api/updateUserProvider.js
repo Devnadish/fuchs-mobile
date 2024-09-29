@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_USER_PROFILE } from "../api/endPoints";
+import { UPDATE_USER_PROFILE } from "@api/endPoints";
 import { handleAxiosError } from "./errorHandling";
 export const updateUserProfile = async (userData) => {
   try {

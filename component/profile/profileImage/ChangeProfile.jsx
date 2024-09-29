@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { colors } from "../../../constants";
-import ExpoImage from "../../shared/ExpoImage";
-import Btn from "../../shared/Btn";
-import { cloudUrl } from "../../../constants/images";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { uploadImageToCloudnary } from "../../../util/uploadImageToCloudnary";
-import { UPDATE_PRIFILE_IMAGE } from "../../../api/updateUserProfile";
+import { colors } from "@constants";
+import ExpoImage from "@component/shared/ExpoImage";
+import Btn from "@component/shared/Btn";
+import { cloudUrl } from "@constants/images";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { uploadImage } from "@util/uploadImageToCloudnary";
+import { UPDATE_PRIFILE_IMAGE } from "@api/updateUserProfile";
 
 export default function ChangeProfile({ setShowModal, setAvatar }) {
   const {
@@ -39,11 +39,13 @@ export default function ChangeProfile({ setShowModal, setAvatar }) {
     setLoading(true);
     let imagePublicId;
     try {
-      imagePublicId = await uploadImageToCloudnary(
-        userAvatar,
-        "oneStopUserAvatar", // cloudainary preset name
-        "userAvatar"
-      );
+      console.log(userAvatar);
+      const imageData = {
+        uri: userAvatar,
+        type: `image/${userAvatar.split(".")[1]}`,
+        name: `image.${userAvatar.split(".")[1]}`,
+      };
+      imagePublicId = await uploadImage(imageData, "oneStopUserAvatar");
     } catch (error) {
       console.error("Error uploading image:", error);
     }

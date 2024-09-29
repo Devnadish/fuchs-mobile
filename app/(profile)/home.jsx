@@ -5,13 +5,13 @@ import {
   otherButtons,
   profileButtons,
   styles,
-} from "../../component/profile/homePageLogin";
-import { colors } from "../../constants";
+} from "@component/profile/homePageLogin";
+import { colors } from "@constants";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { globalStyle } from "../../styles/globalStyle";
-import UserImage from "../../component/profile/profileImage/UserImage";
+import { globalStyle } from "@styles/globalStyle";
+import UserImage from "@component/profile/profileImage/UserImage";
 import { router } from "expo-router";
-import UserInfo from "../../component/profile/profileImage/UserInfo";
+import UserInfo from "@component/profile/profileImage/UserInfo";
 
 export default function home() {
   return (

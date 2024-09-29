@@ -13,7 +13,10 @@
       "backgroundColor": "#ffffff"
     },
     "extra": {
-      "supportsRTL": true
+      "supportsRTL": true,
+      "eas": {
+        "projectId": "f667d731-a820-4852-8103-5e057c415147"
+      }
     },
     "ios": {
       "supportsTablet": true,
@@ -42,6 +45,20 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends.",
           "cameraPermission": "The app accesses your Camera>"
+        }
+      ],
+      "expo-build-properties",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.4"
+          }
         }
       ]
     ]

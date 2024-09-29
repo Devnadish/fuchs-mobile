@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { memo } from "react";
 import { Skeleton } from "moti/skeleton";
-import { colors } from "../../../constants";
-import { SkeletonCommonProps } from "../../../styles/globalStyle";
+import { colors } from "@constants";
+import { SkeletonCommonProps } from "@styles/globalStyle";
 
 const SkeletonText = ({ show, children }) => (
   <Skeleton

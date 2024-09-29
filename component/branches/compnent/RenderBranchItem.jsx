@@ -3,7 +3,7 @@ import React from "react";
 import BranchHeader from "./BranchHeader";
 import BranchImage from "./BranchImage";
 import BranchFooter from "./BranchFooter";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 
 export default function RenderBranchItem({ item, heartType, itemCount }) {
   return (

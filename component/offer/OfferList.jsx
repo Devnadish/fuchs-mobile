@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { colors } from "../../constants";
-import Loader from "../shared/Loader";
+import { colors } from "@constants";
+import Loader from "@component/shared/Loader";
 import RenderOfferItem from "./RenderOfferItem";
-import { getOffers } from "../../api/getOffers";
+import { getOffers } from "@api/getOffers";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { SkeletonBodyRow } from "@component/shared/SkeltonBody";
 
 const Limit = 5;
-let pageNum = 1;
 
-const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
+const OfferList = ({ setSelectedOffer, selectedOffer }) => {
+  const { userLanguage } = useUserAuth();
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [pageNum, setPageNum] = useState(1); // Use state for pageNum
 
-  const getOfferData = async () => {
+  const fetchOffers = async () => {
     setLoading(true);
     const { allOffers, totalPage } = await getOffers(
       userLanguage,
@@ -21,104 +24,76 @@ const OfferList = ({ userLanguage, setSelectedOffer, selectedOffer }) => {
       Limit,
       selectedOffer
     );
-    setLoading(false);
+    setOffers((prevOffers) => [...prevOffers, ...allOffers]);
     setPageCount(totalPage);
-    return allOffers;
-  };
-  // load initial Offer
-  useEffect(() => {
-    const fetchInitialOffer = async (
-      userLanguage,
-      pageNum,
-      Limit,
-      selectedOffer
-    ) => {
-      const initialOffer = await getOfferData(
-        userLanguage,
-        pageNum,
-        Limit,
-        selectedOffer
-      );
-      setOffers(initialOffer);
-    };
-
-    fetchInitialOffer();
-  }, []);
-
-  // call api to load more branches to improve performance and  infinite scroll
-  const handleLoadMore = async () => {
-    if (loading) {
-      return;
-    }
-
-    if (pageNum >= pageCount) {
-      return;
-    } else {
-      pageNum = pageNum + 1;
-    }
-    setLoading(true);
-
-    const loadMoreOffers = await getOfferData(
-      userLanguage,
-      pageNum,
-      Limit,
-      selectedOffer
-    );
     setLoading(false);
-
-    setOffers((prevOffers) => [...prevOffers, ...loadMoreOffers]);
   };
 
-  const renderItem = useCallback(({ item, index }) => {
-    return (
-      <RenderOfferItem item={item} index={index} userLanguage={userLanguage} />
-    );
-  });
+  useEffect(() => {
+    fetchOffers();
+  }, [userLanguage, selectedOffer, pageNum]); // Fetch offers when dependencies change
 
-  if (offers?.length === 0) return null;
-
-  const FooterIfNoMoreOffers = () => {
-    return (
-      <>
-        {pageCount === pageNum ? (
-          <Text style={{ color: colors.danger, width: "100%" }}>
-            No more Offers to load.
-          </Text>
-        ) : (
-          <Loader loading={loading} />
-        )}
-      </>
-    );
+  const handleLoadMore = () => {
+    if (!loading && pageNum < pageCount) {
+      setPageNum((prevPageNum) => prevPageNum + 1); // Increment pageNum
+    }
   };
+
+  const renderItem = useCallback(
+    ({ item }) => <RenderOfferItem item={item} userLanguage={userLanguage} />,
+    [userLanguage]
+  );
+
+  const FooterComponent = () => (
+    <View style={styles.footerContainer}>
+      {pageCount === pageNum ? (
+        <Text style={styles.footerText}>No more Offers to load.</Text>
+      ) : (
+        <Loader loading={loading} />
+      )}
+    </View>
+  );
 
   return (
-    // <Text>{JSON.stringify(offers)}</Text>
-    <FlatList
-      data={offers}
-      keyExtractor={(item, index) => item.id.toString() + index.toString()}
-      renderItem={renderItem}
-      contentContainerStyle={{ gap: 10, alignItems: "center" }}
-      showsVerticalScrollIndicator={false}
-      onEndReached={handleLoadMore}
-      onEndReachedThreshold={3}
-      windowSize={1}
-      initialNumToRender={1}
-      maxToRenderPerBatch={1}
-      ListFooterComponent={() => (
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 20,
-            height: 50,
-            width: "100%",
-          }}
-        >
-          <FooterIfNoMoreOffers />
-        </View>
+    <View style={{ width: "100%" }}>
+      {loading ? (
+        <SkeletonBodyRow
+          howMany={6}
+          loading={true}
+          height={200}
+          width={"48%"}
+        />
+      ) : (
+        <FlatList
+          data={offers}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
+          showsVerticalScrollIndicator={false}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={FooterComponent}
+        />
       )}
-    />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  listContainer: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+  },
+  footerContainer: {
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  footerText: {
+    color: colors.danger,
+    textAlign: "center",
+    width: "100%",
+  },
+});
 
 export default OfferList;

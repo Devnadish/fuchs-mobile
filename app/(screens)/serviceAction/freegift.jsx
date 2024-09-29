@@ -1,15 +1,15 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useState, useEffect, useCallback } from "react";
-import { colors } from "../../../constants";
-import Container from "../../../component/shared/Containner";
+import { colors } from "@constants";
+import Container from "@component/shared/Containner";
 import { FontAwesome } from "@expo/vector-icons";
-import { getServiceGiftFromDb } from "../../../api/getServiceGift";
-import ExpoImage from "../../../component/shared/ExpoImage";
-import ScreenBarTitle from "../../../component/shared/ScreenBarTitle";
-import ServiceDetail from "../../../component/home/serviceCard/ServiceDetail";
+import { getServiceGiftFromDb } from "@api/getServiceGift";
+import ExpoImage from "@component/shared/ExpoImage";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
+import ServiceDetail from "@component/home/serviceCard/ServiceDetail";
 import { Skeleton } from "moti/skeleton";
-import { SkeletonCommonProps } from "../../../styles/globalStyle";
+import { SkeletonCommonProps } from "@styles/globalStyle";
 
 const MemoizedServiceDetail = React.memo(ServiceDetail);
 

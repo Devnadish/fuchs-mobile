@@ -1,22 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { getUserByMobile } from "../../api/getUserByMobile";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { colors } from "../../constants";
+import { getUserByMobile } from "@api/getUserByMobile";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
 import {
   borderRadius,
   globalStyle,
   SkeletonCommonProps,
-} from "../../styles/globalStyle";
-import Btn from "../../component/shared/Btn";
+} from "@styles/globalStyle";
+import Btn from "@component/shared/Btn";
 import { router, Stack } from "expo-router";
-import ShowModal from "../../component/shared/ShowModal";
-import SelectCars from "../../component/cars/SelectCars";
+import ShowModal from "@component/shared/ShowModal";
+import SelectCars from "@component/cars/SelectCars";
 import { Skeleton } from "moti/skeleton";
-import CarInstrutor from "../../component/instraction/CarInstrutor";
-import { updateUserCar } from "../../api/updateUserCar";
-import SaveAndCancel from "../../component/shared/SaveAndCancel";
-import { showToast } from "../../lib/nadish";
+import CarInstrutor from "@component/instraction/CarInstrutor";
+import { updateUserCar } from "@api/updateUserCar";
+import SaveAndCancel from "@component/shared/SaveAndCancel";
+import { showToast } from "@lib/nadish";
 
 export default function Car() {
   const {

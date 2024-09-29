@@ -1,11 +1,11 @@
 import { Pressable, StyleSheet, Text, View, Linking } from "react-native";
 import React, { useCallback } from "react";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useCurrentLocation, {
   openGoogleMapsForNavigation,
-} from "../../../hooks/useLocation";
-import { showToast } from "../../../lib/nadish";
+} from "@hooks/useLocation";
+import { showToast } from "@lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 const BranchActions = React.memo(

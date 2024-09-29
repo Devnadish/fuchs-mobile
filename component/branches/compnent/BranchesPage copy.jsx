@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
-import { colors } from "../../../constants";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { getBranchByCity } from "../../../api/getBranchByCity";
-import Container from "../../shared/Containner";
-import SkeletonBody from "../../shared/SkeltonBody";
+import { colors } from "@constants";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { getBranchByCity } from "@api/getBranchByCity";
+import Container from "@component/shared/Containner";
+import SkeletonBody from "@component/shared/SkeltonBody";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapOnBranches from "./MapOnBranches";
 import NoBranchs from "./NoBranchs";
@@ -149,11 +149,11 @@ const styles = StyleSheet.create({
 
 // import React, { useEffect, useState } from "react";
 // import { ScrollView, StyleSheet, Text, View } from "react-native";
-// import { colors } from "../../../constants";
-// import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-// import { getBranchByCity } from "../../../api/getBranchByCity";
-// import Container from "../../shared/Containner";
-// import SkeletonBody from "../../shared/SkeltonBody";
+// import { colors } from "@constants";
+// import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+// import { getBranchByCity } from "@api/getBranchByCity";
+// import Container from "@component/shared/Containner";
+// import SkeletonBody from "@component/shared/SkeltonBody";
 // import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import MapOnBranches from "./MapOnBranches";
 // import NoBranchs from "./NoBranchs";

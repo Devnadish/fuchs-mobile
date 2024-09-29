@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { MotiView } from "moti";
 
 export default function CarsModeFlatList({

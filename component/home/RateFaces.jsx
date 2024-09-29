@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { colors } from "../../constants";
-import { shadowStyle } from "../../styles/globalStyle";
+import { colors } from "@constants";
+import { shadowStyle } from "@styles/globalStyle";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 

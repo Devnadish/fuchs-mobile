@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { router } from "expo-router";
-import { borderRadius, globalStyle } from "../../../styles/globalStyle";
+import { borderRadius, globalStyle } from "@styles/globalStyle";
 
 const ServiceCards = React.memo(
   ({ id, title, description, userLanguage, rate }) => {

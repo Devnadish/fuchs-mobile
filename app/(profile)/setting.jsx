@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Alert } from "react-native";
-import RadioButton from "../../component/shared/RadioButton";
-import { colors } from "../../constants";
-import { useTheme } from "../../provider/themeProvider/useThemProvider";
+import RadioButton from "@component/shared/RadioButton";
+import { colors } from "@constants";
+import { useTheme } from "@provider/themeProvider/useThemProvider";
 import { MaterialIcons } from "@expo/vector-icons";
-import SaveAndCancel from "../../component/shared/SaveAndCancel";
-import { showToast } from "../../lib/nadish";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { UPDATE_USER_SETTING } from "../../api/updateUserProfile";
+import SaveAndCancel from "@component/shared/SaveAndCancel";
+import { showToast } from "@lib/nadish";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { UPDATE_USER_SETTING } from "@api/updateUserProfile";
 import { router, Stack } from "expo-router";
-import ScreenBarTitle from "../../component/shared/ScreenBarTitle";
-import Container from "../../component/shared/Containner";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
+import Container from "@component/shared/Containner";
 import * as Updates from "expo-updates";
 
 const options = {

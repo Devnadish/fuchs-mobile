@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import colors from "../../constants/colors";
+import colors from "@constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Container = ({

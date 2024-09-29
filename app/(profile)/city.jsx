@@ -1,15 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState, useCallback } from "react";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import { router, Stack } from "expo-router";
-import { colors } from "../../constants";
-import { UpdateCity } from "../../api/cityAPI";
-import ShowModal from "../../component/shared/ShowModal";
-import SelectCity from "../../component/profile/SelectCity";
-import UpdateCityInstraction from "../../component/instraction/UpdateCityInstraction";
+import { colors } from "@constants";
+import { UpdateCity } from "@api/cityAPI";
+import ShowModal from "@component/shared/ShowModal";
+import SelectCity from "@component/profile/SelectCity";
+import UpdateCityInstraction from "@component/instraction/UpdateCityInstraction";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { showToast } from "../../lib/nadish";
-import SaveAndCancel from "../../component/shared/SaveAndCancel";
+import { showToast } from "@lib/nadish";
+import SaveAndCancel from "@component/shared/SaveAndCancel";
 
 export default function City() {
   const { userMobile, updateProfile, userCity, userCityId } = useUserAuth();

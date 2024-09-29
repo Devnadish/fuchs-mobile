@@ -4,8 +4,8 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import ExpoImage from "../shared/ExpoImage";
-import { HEADER_IMAGE, LOGO_IMAGE } from "../../constants/images";
+import ExpoImage from "@component/shared/ExpoImage";
+import { HEADER_IMAGE, LOGO_IMAGE } from "@constants/images";
 
 export const HeaderImage = () => {
   const { width } = useWindowDimensions();

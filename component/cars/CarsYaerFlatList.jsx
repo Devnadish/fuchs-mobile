@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { colors } from "../../constants";
-import { baseContainerStyle } from "../../styles/globalStyle";
+import { colors } from "@constants";
+import { baseContainerStyle } from "@styles/globalStyle";
 
 export default function CarsYearFlatList({
   currentYear,

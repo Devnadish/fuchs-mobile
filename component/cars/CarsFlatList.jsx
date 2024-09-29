@@ -1,13 +1,10 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { colors } from "../../constants";
-import ExpoImage from "../shared/ExpoImage";
+import { colors } from "@constants";
+import ExpoImage from "@component/shared/ExpoImage";
 import { Skeleton } from "moti/skeleton";
-import {
-  baseContainerStyle,
-  SkeletonCommonProps,
-} from "../../styles/globalStyle";
+import { baseContainerStyle, SkeletonCommonProps } from "@styles/globalStyle";
 
 export default function CarsFlatList({
   selectedCar,

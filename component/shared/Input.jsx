@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DismissKeyboard = ({ children }) => (
@@ -129,7 +129,7 @@ export default Input;
 //   TouchableWithoutFeedback,
 //   Keyboard,
 // } from "react-native";
-// import { colors } from "../../constants";
+// import { colors } from "@constants";
 // import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // const DismissKeyboard = ({ children }) => (

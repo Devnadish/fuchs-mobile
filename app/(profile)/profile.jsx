@@ -1,17 +1,17 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { getUserByMobile } from "../../api/getUserByMobile";
-import { colors } from "../../constants";
-import { borderRadius } from "../../styles/globalStyle";
-import Input from "../../component/shared/Input";
-import Btn from "../../component/shared/Btn";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { getUserByMobile } from "@api/getUserByMobile";
+import { colors } from "@constants";
+import { borderRadius } from "@styles/globalStyle";
+import Input from "@component/shared/Input";
+import Btn from "@component/shared/Btn";
 import { Feather } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
-import { UPDATE_USER_PROFILE_DATA } from "../../api/updateUserProfile";
-import { showToast } from "../../lib/nadish";
-import ProfileInstraction from "../../component/instraction/ProfileInstraction";
-import SaveAndCancel from "../../component/shared/SaveAndCancel";
+import { UPDATE_USER_PROFILE_DATA } from "@api/updateUserProfile";
+import { showToast } from "@lib/nadish";
+import ProfileInstraction from "@component/instraction/ProfileInstraction";
+import SaveAndCancel from "@component/shared/SaveAndCancel";
 
 export default function Profile() {
   const { userName: contextuserName, userEmail } = useUserAuth();

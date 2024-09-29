@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import ExpoImage from "../../shared/ExpoImage";
+import ExpoImage from "@component/shared/ExpoImage";
 
 const BranchImage = ({ image }) => {
   return (

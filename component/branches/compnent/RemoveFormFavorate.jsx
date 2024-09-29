@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { colors } from "../../../constants";
-import { RemoveFavorites } from "../../../api/addTofavorite";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
+import { RemoveFavorites } from "@api/addTofavorite";
 
 const RemoveFormFavorate = ({ branchId, setRerender }) => {
   const { userId, setRenderData } = useUserAuth();

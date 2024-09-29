@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Image } from "expo-image";
 import { Skeleton } from "moti/skeleton";
-import { colors } from "../../constants";
-import { SkeletonCommonProps } from "../../styles/globalStyle";
+import { colors } from "@constants";
+import { SkeletonCommonProps } from "@styles/globalStyle";
 
 const blurhash = "LKN]Rv%2Tw=w]~RBVZRi};RPxuwH";
 

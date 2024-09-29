@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -6,31 +6,38 @@ import {
   Text,
   View,
 } from "react-native";
-import { AdvancedImage } from "cloudinary-react-native";
-import { cld } from "../../util/cloudinary";
-import { thumbnail } from "@cloudinary/url-gen/actions/resize";
-import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
-import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
-import { LOGO_IMAGE } from "../../constants/images";
+
+import { LOGO_IMAGE } from "@constants/images";
 import { router } from "expo-router";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { colors } from "../../constants";
-import ExpoImage from "../shared/ExpoImage";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
+import ExpoImage from "@component/shared/ExpoImage";
+import {
+  generateCloudinaryUrl,
+  transformations,
+} from "@util/uploadImageToCloudnary";
 
 const UserAvatar = () => {
   const { userAvatar, userName, userMobile } = useUserAuth();
   // console.warn(userAvatar);
+
+  const transformedImageUrl = generateCloudinaryUrl(
+    userAvatar,
+    transformations
+  );
   const [loading, setLoading] = useState(true);
-  const [myImage, setMyImage] = useState(null);
+  const [myImage, setMyImage] = useState(transformedImageUrl);
+  console.log(myImage);
 
   useEffect(() => {
     if (userAvatar && userMobile !== "Gust") {
-      const image = cld
-        .image(userAvatar)
-        .resize(
-          thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
-        );
-      setMyImage(image);
+      // const image = cld
+      //   .image(userAvatar)
+      //   .resize(
+      //     thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
+      //   );
+      setMyImage(transformedImageUrl);
+      setLoading(false);
     } else {
       setMyImage(null);
     }
@@ -47,11 +54,7 @@ const UserAvatar = () => {
     }
 
     return myImage ? (
-      <AdvancedImage
-        cldImg={myImage}
-        style={styles.image}
-        onLoadEnd={() => setLoading(false)}
-      />
+      <ExpoImage image={myImage} style={styles.image} />
     ) : (
       <ExpoImage image={LOGO_IMAGE} style={styles.image} />
     );

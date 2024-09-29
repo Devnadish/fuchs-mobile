@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import * as logic from "./registerLogic";
-import Btn from "../../shared/Btn";
-import { colors } from "../../../constants";
+import Btn from "@component/shared/Btn";
+import { colors } from "@constants";
 import { OtpInput } from "react-native-otp-entry";
-import { showToast } from "../../../lib/nadish";
-import { createNewuser } from "../../../api/createNewuser";
-import { IMAGE_PLACE_HOLDER } from "../../../constants/images";
+import { showToast } from "@lib/nadish";
+import { createNewuser } from "@api/createNewuser";
+import { IMAGE_PLACE_HOLDER } from "@constants/images";
 
 export default function Otp({
   mobile,

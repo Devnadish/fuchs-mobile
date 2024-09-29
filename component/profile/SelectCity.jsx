@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
-import { colors } from "../../constants";
-import { getAllCity } from "../../api/cityAPI";
+import { colors } from "@constants";
+import { getAllCity } from "@api/cityAPI";
 import { Skeleton } from "moti/skeleton"; // Import Moti Skeleton
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { SkeletonCommonProps } from "../../styles/globalStyle";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { SkeletonCommonProps } from "@styles/globalStyle";
 
 const SelectCity = ({ setCity, setCityId, setVisible }) => {
   const [cityData, setCityData] = useState([]);

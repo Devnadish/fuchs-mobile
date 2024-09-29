@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 
 const ShowModal = memo(
   ({ visible, setVisible, header, children, height = "80%" }) => {

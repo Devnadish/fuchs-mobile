@@ -1,6 +1,6 @@
 import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
-import { useUserAuth } from "../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import * as Network from "expo-network";
 
 export default function Index() {
@@ -36,7 +36,7 @@ export default function Index() {
 
 // import { Redirect } from "expo-router";
 // import { useEffect, useState } from "react";
-// import { useUserAuth } from "../provider/userAuth/userAuthProvider";
+// import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 // import * as Network from "expo-network";
 
 // export default function Index() {

@@ -1,13 +1,13 @@
 // import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 
-import { colors } from "../../../constants";
-import ExpoImage from "../../shared/ExpoImage";
+import { colors } from "@constants";
+import ExpoImage from "@component/shared/ExpoImage";
 import { useState } from "react";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { cloudUrl } from "../../../constants/images";
-import Btn from "../../shared/Btn";
-import ShowModal from "../../shared/ShowModal";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { cloudUrl } from "@constants/images";
+import Btn from "@component/shared/Btn";
+import ShowModal from "@component/shared/ShowModal";
 import ChangeProfile from "./ChangeProfile";
 
 const UserImage = () => {

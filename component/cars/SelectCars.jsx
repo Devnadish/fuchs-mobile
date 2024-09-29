@@ -1,15 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
-import { getAllCars } from "../../api/getAllCars";
-import { colors } from "../../constants";
+import { getAllCars } from "@api/getAllCars";
+import { colors } from "@constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { updateUserCar } from "../../api/updateUserCar";
-import { showToast } from "../../lib/nadish";
+import { updateUserCar } from "@api/updateUserCar";
+import { showToast } from "@lib/nadish";
 import CarsFlatList from "./CarsFlatList";
 import CarsYaerFlatList from "./CarsYaerFlatList";
-import { baseContainerStyle } from "../../styles/globalStyle";
+import { baseContainerStyle } from "@styles/globalStyle";
 import CarsModeFlatList from "./CarsModeFlatList";
-import { userAuthContext } from "../../provider/userAuth/userAuthProvider";
+import { userAuthContext } from "@provider/userAuth/userAuthProvider";
 
 export default function SelectCars({ setVisible, setConfirmCar }) {
   const [cars, setCars] = useState([]);

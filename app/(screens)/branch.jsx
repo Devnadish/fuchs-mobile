@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
-import Containner from "../../component/shared/Containner";
+import Containner from "@component/shared/Containner";
 
-import { branchDetail } from "../../api/branchDetail";
-import BarHeader from "../../component/shared/BarHeader";
-import BranchImages from "../../component/branches/detail/BranchImages";
-import BranchActions from "../../component/branches/detail/BranchActions";
-import BranchDetails from "../../component/branches/detail/BranchDetails";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import { branchDetail } from "@api/branchDetail";
+import BarHeader from "@component/shared/BarHeader";
+import BranchImages from "@component/branches/detail/BranchImages";
+import BranchActions from "@component/branches/detail/BranchActions";
+import BranchDetails from "@component/branches/detail/BranchDetails";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import { View } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 
 export default function Bbranch() {
   const params = useLocalSearchParams();

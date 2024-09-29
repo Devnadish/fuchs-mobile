@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { Link } from "expo-router";
 
 const TextLink = ({ title, textStyles, href }) => {

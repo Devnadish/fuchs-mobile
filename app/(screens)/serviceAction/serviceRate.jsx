@@ -8,17 +8,17 @@ import {
 } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { useState, useEffect, useCallback, memo, useMemo } from "react";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import { Skeleton } from "moti/skeleton";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
-import RateFaces from "../../../component/home/RateFaces";
-import { getServiceRate } from "../../../api/getServiceRate";
-import { getTimeElapsed } from "../../../lib/nadish";
+import RateFaces from "@component/home/RateFaces";
+import { getServiceRate } from "@api/getServiceRate";
+import { getTimeElapsed } from "@lib/nadish";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import ServiceDetail from "../../../component/home/serviceCard/ServiceDetail";
-import Container from "../../../component/shared/Containner";
-import { shadowStyle, SkeletonCommonProps } from "../../../styles/globalStyle";
-import ScreenBarTitle from "../../../component/shared/ScreenBarTitle";
+import ServiceDetail from "@component/home/serviceCard/ServiceDetail";
+import Container from "@component/shared/Containner";
+import { shadowStyle, SkeletonCommonProps } from "@styles/globalStyle";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
 
 const MemoizedServiceDetail = memo(ServiceDetail);
 const limit = 10;

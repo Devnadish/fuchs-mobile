@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
-import { colors } from "../../constants";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { getBranchByCity } from "../../api/getBranchByCity";
-import Container from "../../component/shared/Containner";
+import { colors } from "@constants";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { getBranchByCity } from "@api/getBranchByCity";
+import Container from "@component/shared/Containner";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
-import ScreenBarTitle from "../../component/shared/ScreenBarTitle";
-import SkeletonBody from "../../component/shared/SkeltonBody";
-import MapOnBranches from "../../component/branches/compnent/MapOnBranches";
-import NoBranchs from "../../component/branches/compnent/NoBranchs";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
+import SkeletonBody from "@component/shared/SkeltonBody";
+import MapOnBranches from "@component/branches/compnent/MapOnBranches";
+import NoBranchs from "@component/branches/compnent/NoBranchs";
 
 const Limit = 6;
 

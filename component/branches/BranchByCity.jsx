@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { colors } from "../../constants";
-import { getBranchByCity } from "../../api/getBranchByCity";
-import Loader from "../shared/Loader";
+import { colors } from "@constants";
+import { getBranchByCity } from "@api/getBranchByCity";
+import Loader from "@component/shared/Loader";
 import RenderBranchItem from "./RenderBranchItem";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 
 const Limit = 6;
 

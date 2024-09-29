@@ -1,10 +1,10 @@
 import { StyleSheet, View, Dimensions } from "react-native";
-import { colors } from "../../constants";
-import { showToast } from "../../lib/nadish";
-import Btn from "../../component/shared/Btn";
-import Xlink from "../../component/shared/Xlink";
-import { HeaderImage } from "../../component/auth/HeaderImage";
-import Auth from "../../component/auth/Auth";
+import { colors } from "@constants";
+import { showToast } from "@lib/nadish";
+import Btn from "@component/shared/Btn";
+import Xlink from "@component/shared/Xlink";
+import { HeaderImage } from "@component/auth/HeaderImage";
+import Auth from "@component/auth/Auth";
 
 export default function HomePage() {
   return (

@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useCallback } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
-import colors from "../../constants/colors";
+import colors from "@constants/colors";
 
 const BarHeader = React.memo(({ title, icon }) => {
   const handleBackPress = useCallback(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { useTheme } from "../../provider/themeProvider/useThemProvider";
+import { useTheme } from "@provider/themeProvider/useThemProvider";
 
 const RadioButton = ({ options, selectedValue, onValueChange }) => {
   const { colors } = useTheme();

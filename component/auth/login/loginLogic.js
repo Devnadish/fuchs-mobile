@@ -1,5 +1,5 @@
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import { StyleSheet } from "react-native";
 export const mobileIcon = (
   <FontAwesome5 name="mobile-alt" size={20} color={colors.muteColor} />

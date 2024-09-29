@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { colors } from "../../../constants";
-import { addToFavorites } from "../../../api/addTofavorite";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
+import { addToFavorites } from "@api/addTofavorite";
 
 const AddToFavorate = ({ branchId, isFavoriteCheck }) => {
   const [isFavorite, setIsFavorite] = useState(isFavoriteCheck);
@@ -14,7 +14,7 @@ const AddToFavorate = ({ branchId, isFavoriteCheck }) => {
     await addToFavorites(userData);
     setIsFavorite(true);
     setRenderData((pre) => Date.now()); // Trigger re-render to update favorite count
-    // console.log("when add:", { renderData });
+    console.log("when add:", { renderData });
   };
 
   return (

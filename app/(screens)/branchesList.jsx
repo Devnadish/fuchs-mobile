@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
-import { groupBranchesByCity } from "../../api/groupBranchesByCity";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import { colors } from "../../constants";
+import { groupBranchesByCity } from "@api/groupBranchesByCity";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
 import { ScrollView } from "moti";
-import RenderBranchesList from "../../component/branches/compnent/RenderBranchesList";
+import RenderBranchesList from "@component/branches/compnent/RenderBranchesList";
 import { Stack } from "expo-router";
-import ScreenBarTitle from "../../component/shared/ScreenBarTitle";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
-import SkeletonBody from "../../component/shared/SkeltonBody";
-import NoBranchs from "../../component/branches/compnent/NoBranchs";
+import SkeletonBody from "@component/shared/SkeltonBody";
+import NoBranchs from "@component/branches/compnent/NoBranchs";
 
 export default function BranchesList() {
   const { userLanguage } = useUserAuth();

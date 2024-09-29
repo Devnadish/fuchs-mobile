@@ -1,16 +1,16 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Zocial } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import { Homepage } from "../../constants/headerBarStyle";
-import ActiveBooking from "../../component/home/ActiveBookin";
-import UserAvatar from "../../component/home/UserAvatar";
-import { ONESTOP } from "../../constants/images";
-import ExpoImage from "../../component/shared/ExpoImage";
+import { Homepage } from "@constants/headerBarStyle";
+import ActiveBooking from "@component/home/ActiveBookin";
+import UserAvatar from "@component/home/UserAvatar";
+import { ONESTOP } from "@constants/images";
+import ExpoImage from "@component/shared/ExpoImage";
 
 const TabsLayout = () => {
   const { t } = useTranslation();

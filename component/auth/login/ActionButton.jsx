@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { showToast } from "../../../lib/nadish";
-import { userLogin } from "../../../api/login";
+import { showToast } from "@lib/nadish";
+import { userLogin } from "@api/login";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import Btn from "../../shared/Btn";
+import Btn from "@component/shared/Btn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
 

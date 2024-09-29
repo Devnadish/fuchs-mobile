@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { colors } from "../../../constants";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import AddToFavorate from "./AddToFavorate";
 import RemoveFormFavorate from "./RemoveFormFavorate";
 

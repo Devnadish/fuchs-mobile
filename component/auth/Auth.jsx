@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import LoginForm from "./login/LoginForm";
 import RegisteForm from "./register/RegisteForm";
 

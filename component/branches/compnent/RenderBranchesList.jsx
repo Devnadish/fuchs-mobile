@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import LetterAsAvatar from "../../shared/LetterAsAvatar";
+import LetterAsAvatar from "@component/shared/LetterAsAvatar";
 import { router } from "expo-router";
-import { colors } from "../../../constants";
-import MoreArrow from "../../shared/MoreArrow";
+import { colors } from "@constants";
+import MoreArrow from "@component/shared/MoreArrow";
 
 export default function RenderBranchesList({ cities, userLanguage }) {
   const handlePressItem = useCallback(

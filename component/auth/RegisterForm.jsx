@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../component/shared/Input";
-import FormContainer from "../../component/shared/FormContainer";
+import Input from "@component/shared/Input";
+import FormContainer from "@component/shared/FormContainer";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
-import { showToast } from "../../lib/nadish";
+import { showToast } from "@lib/nadish";
 import { ScrollView } from "react-native-gesture-handler";
-import { borderRadius, globalStyle } from "../../styles/globalStyle";
+import { borderRadius, globalStyle } from "@styles/globalStyle";
 
 export default function RegisterForm({
   name,

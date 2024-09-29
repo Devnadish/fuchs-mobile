@@ -1,13 +1,13 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { Stack } from "expo-router";
-import { LanguageProvider } from "../provider/languageProvider/languageProvider";
+import { LanguageProvider } from "@provider/languageProvider/languageProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { carBarStyle, indexBarStyle } from "../constants/headerBarStyle";
-import { pingServer, showToast } from "../lib/nadish";
+import { carBarStyle, indexBarStyle } from "@constants/headerBarStyle";
+import { pingServer, showToast } from "@lib/nadish";
 import Toast from "react-native-toast-message";
-import { ThemeProvider } from "../provider/themeProvider/useThemProvider";
-import { UserAuthProvider } from "../provider/userAuth/userAuthProvider";
+import { ThemeProvider } from "@provider/themeProvider/useThemProvider";
+import { UserAuthProvider } from "@provider/userAuth/userAuthProvider";
 
 const RootLayout = () => {
   const check = pingServer();

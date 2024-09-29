@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Dimensions, Text, View } from "react-native";
-import { colors } from "../../constants";
-import { borderRadius, shadowStyle } from "../../styles/globalStyle";
-import { useTheme } from "../../provider/themeProvider/useThemProvider";
+import { colors } from "@constants";
+import { borderRadius, shadowStyle } from "@styles/globalStyle";
+import { useTheme } from "@provider/themeProvider/useThemProvider";
 
 const FormContainer = ({ title, icon, children }) => {
   const { colors } = useTheme();

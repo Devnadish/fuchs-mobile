@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CREATE_NEW_USER } from "../api/endPoints";
-import { showToast } from "../lib/nadish";
+import { CREATE_NEW_USER } from "@api/endPoints";
+import { showToast } from "@lib/nadish";
 import { checkUserExists } from "./checkUserIsExist";
 import { handleAxiosError } from "./errorHandling";
 

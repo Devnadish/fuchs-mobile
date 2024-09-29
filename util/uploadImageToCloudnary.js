@@ -1,37 +1,46 @@
-import { upload } from "cloudinary-react-native";
-import { cld } from "./cloudinary";
+export const transformations = [
+  "c_thumb", // Crop to thumbnail
+  "w_48", // Width of 48 pixels
+  "h_48", // Height of 48 pixels
+  "g_face", // Gravity to focus on the face
+];
+export const generateCloudinaryUrl = (publicId, transformations) => {
+  const baseUrl = process.env.EXPO_PUBLIC_CLOUDINARY_ENDPOINT;
+  console.log({ baseUrl });
 
-export const uploadImageToCloudnary = async (
-  image,
-  upload_preset,
-  tag = "publicImage"
-) => {
-  // 1. ckech if user upload image
-  if (!image) {
-    return;
-  }
-  // FIXME: width and height are not working properly in cloudinary react native
-  const options = {
-    upload_preset: upload_preset,
-    tag: tag,
-    unsigned: true,
-    width: 300, // Define the width here
-    height: 400, // Define the height here
-  };
+  const transformationString = transformations.join(",");
 
-  return new Promise(async (resolve, reject) => {
-    await upload(cld, {
-      file: image,
-      options: options,
+  return `${baseUrl}${transformationString}/${publicId}`;
+};
 
-      callback: (error, response) => {
-        if (error || !response) {
-          //  showToast("something went wrong with image contact admin");
-          reject(error);
-        } else {
-          resolve(response);
-        }
-      },
+export const uploadImage = async (image, preset) => {
+  const cloudName = "dhyh7aufp";
+
+  const data = new FormData();
+  data.append("file", image);
+  data.append("upload_preset", preset);
+  data.append("cloud_name", cloudName);
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    {
+      method: "post",
+      body: data,
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
+
+  // data.append("tags","Onestop");
+  // data.append("folder","Onestop");
+  // data.append("api_key",process.env.CLOUDINARY_API_KEY);
+  // data.append("timestamp", (Date.now() / 1000) | 0);
+  // data.append("api_secret",process.env.CLOUDINARY_API_SECRET);
+
+  return response;
 };

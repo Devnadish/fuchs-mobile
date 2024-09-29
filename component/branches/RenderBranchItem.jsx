@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import BranchImage from "./compnent/BranchImage";
 import BranchHeader from "./compnent/BranchHeader";
 import BranchFooter from "./compnent/BranchFooter";

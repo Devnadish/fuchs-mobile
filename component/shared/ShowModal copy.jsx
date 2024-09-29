@@ -1,6 +1,6 @@
 // import { Button, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 // import React, { Children } from "react";
-// import { colors } from "../../constants";
+// import { colors } from "@constants";
 
 // export default function ShowModal({
 //   visible,

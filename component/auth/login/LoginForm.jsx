@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import Btn from "../../shared/Btn";
-import { showToast } from "../../../lib/nadish";
-import Input from "../../shared/Input";
-import colors from "../../../constants/colors";
-import TextLink from "../../shared/TextLink";
+import Btn from "@component/shared/Btn";
+import { showToast } from "@lib/nadish";
+import Input from "@component/shared/Input";
+import colors from "@constants/colors";
+import TextLink from "@component/shared/TextLink";
 import { loginIcon, mobileIcon, passwordIcon } from "./loginLogic";
 import {
   userAuthContext,
   useUserAuth,
-} from "../../../provider/userAuth/userAuthProvider";
-import { userLogin } from "../../../api/login";
+} from "@provider/userAuth/userAuthProvider";
+import { userLogin } from "@api/login";
 import { router } from "expo-router";
 
 const LoginForm = () => {

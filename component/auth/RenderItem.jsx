@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import React, { memo } from "react";
-import { colors } from "../../../constants";
-import { borderRadius } from "../../styles/globalStyle";
+import { colors } from "@constants";
+import { borderRadius } from "@styles/globalStyle";
 
 const RenderItem = ({ item, handleOnPressItem }) => {
   return (

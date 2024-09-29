@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { globalStyle } from "../../styles/globalStyle";
+import { globalStyle } from "@styles/globalStyle";
 import { router } from "expo-router";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 
 export default function Setting() {
   const { logout } = useUserAuth();

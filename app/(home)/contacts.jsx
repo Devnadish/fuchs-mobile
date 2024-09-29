@@ -11,8 +11,8 @@ import Entypo from "@expo/vector-icons/Entypo";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { borderRadius, globalStyle } from "../../styles/globalStyle";
-import colors from "../../constants/colors";
+import { borderRadius, globalStyle } from "@styles/globalStyle";
+import colors from "@constants/colors";
 
 const Contacts = () => {
   // TODO: Fech data from API

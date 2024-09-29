@@ -7,9 +7,9 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { colors } from "../../constants";
+import { colors } from "@constants";
 import { StyleSheet } from "react-native";
-import { borderRadius } from "../../styles/globalStyle";
+import { borderRadius } from "@styles/globalStyle";
 
 export const profileButtons = [
   {

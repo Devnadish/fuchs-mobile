@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 
 import { StyleSheet, View } from "react-native";
-import { colors } from "../../constants";
-import OfferList from "../../component/offer/OfferList";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import { colors } from "@constants";
+import OfferList from "@component/offer/OfferList";
 
 const Offers = () => {
-  const { userLanguage } = useUserAuth();
   const [selectedOffer, setSelectedOffer] = useState(null);
 
   return (
     <View style={styles.container}>
       <View style={styles.branchesContainer}>
         <OfferList
-          userLanguage={userLanguage}
           setSelectedOffer={setSelectedOffer}
           selectedOffer={selectedOffer}
         />

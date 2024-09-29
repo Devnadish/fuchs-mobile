@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "../../../constants";
+import { colors } from "@constants";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import { getBranchesCounter } from "../../../api/getBranchesCounter";
-import MoreArrow from "../../shared/MoreArrow";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { getBranchesCounter } from "@api/getBranchesCounter";
+import MoreArrow from "@component/shared/MoreArrow";
 import { router } from "expo-router";
 
 export default function ExtarList() {

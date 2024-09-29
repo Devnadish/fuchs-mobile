@@ -1,44 +1,54 @@
-import React, { memo, useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { colors } from "../../constants";
-import ExpoImage from "../shared/ExpoImage";
+import React, { memo, useState, useCallback } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { colors } from "@constants";
+import ExpoImage from "@component/shared/ExpoImage";
 import Fontisto from "@expo/vector-icons/Fontisto";
 
 const RenderOfferItem = ({ item, userLanguage }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteToggle = useCallback(() => {
+    setIsFavorite((prev) => !prev);
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <ExpoImage image={item?.image} style={styles.carImage} />
+    <View style={styles.offerContainer}>
+      <View style={styles.imageWrapper}>
+        <ExpoImage image={item?.image} style={styles.offerImage} />
       </View>
 
-      <View style={styles.info}>
-        <Text style={styles.rateText}>
-          {userLanguage === "ar" ? item?.detailAr : item?.detailEn}
-        </Text>
+      <View style={styles.detailsContainer}>
+        <View style={styles.detailsBackground}>
+          <ScrollView
+            nestedScrollEnabled={true}
+            contentContainerStyle={styles.detailsScroll}
+          >
+            <Text style={styles.detailsText}>
+              {userLanguage === "ar" ? item?.detailAr : item?.detailEn}
+            </Text>
+          </ScrollView>
+        </View>
       </View>
 
-      <AddToFavorite />
+      <AddToFavorite isFavorite={isFavorite} onToggle={handleFavoriteToggle} />
     </View>
   );
 };
 
-export default memo(RenderOfferItem, (prevProps, nextProps) => {
-  return prevProps.item?.id === nextProps.item?.id;
-});
-
-const AddToFavorite = () => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const handlePress = () => {
-    setIsFavorite(!isFavorite);
-  };
-
-  return (
+const AddToFavorite = memo(
+  ({ isFavorite, onToggle }) => (
     <TouchableOpacity
-      onPress={handlePress}
+      onPress={onToggle}
       activeOpacity={0.7}
-      style={styles.touchable}
+      style={styles.favoriteButton}
     >
-      <View style={styles.Favcontainer}>
+      <View style={styles.favoriteContainer}>
         <Fontisto
           name="pinboard"
           size={24}
@@ -46,18 +56,26 @@ const AddToFavorite = () => {
         />
       </View>
     </TouchableOpacity>
+  ),
+  (prevProps, nextProps) => prevProps.isFavorite === nextProps.isFavorite
+);
+
+export default memo(RenderOfferItem, (prevProps, nextProps) => {
+  return (
+    prevProps.item?.id === nextProps.item?.id &&
+    prevProps.userLanguage === nextProps.userLanguage
   );
-};
+});
 
 const styles = StyleSheet.create({
-  touchable: {
+  favoriteButton: {
     position: "absolute",
     top: 15,
     right: 15,
     width: 48,
     height: 48,
   },
-  Favcontainer: {
+  favoriteContainer: {
     width: 48,
     height: 48,
     borderRadius: 24,
@@ -66,63 +84,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  gradient: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    width: "95%",
+  offerContainer: {
+    width: "48%", // Each item takes up 48% of the width to fit two per row
     backgroundColor: colors.backgroundColor,
     borderWidth: 0.5,
     borderRadius: 5,
     borderColor: colors.primary,
     overflow: "hidden",
     alignItems: "center",
+    margin: "1%", // Add margin for spacing between items
   },
-  imageContainer: {
+  imageWrapper: {
     width: "100%",
     aspectRatio: 1,
     position: "relative",
   },
-  carImage: {
+  offerImage: {
     width: "100%",
     height: "100%",
   },
-  info: {
-    height: 60,
+  detailsContainer: {
     position: "absolute",
     bottom: 0,
     left: 0,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    right: 0,
+  },
+  detailsBackground: {
     backgroundColor: colors.textColor,
+    opacity: 0.7, // Apply opacity to the background
     padding: 5,
-    width: "100%",
-    opacity: 0.7,
   },
-  ratingIcon: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
+  detailsScroll: {
+    maxHeight: 100, // Set a maximum height for the info section
   },
-  rateText: {
-    color: colors.white,
+  detailsText: {
+    color: colors.white, // Keep text color fully opaque
     fontSize: 16,
-  },
-  seeDetailsContainer: {
-    backgroundColor: colors.primary,
-    padding: 5,
-    borderRadius: 5,
-    position: "absolute",
-    top: 5,
-    left: 5,
-    elevation: 5,
-  },
-
-  seeDetailsText: {
-    textAlign: "center",
-    color: colors.white,
-    fontSize: 16,
+    opacity: 1, // Ensure text is fully opaque
   },
 });

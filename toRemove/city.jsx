@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { memo, useCallback, useState } from "react";
-// import { colors } from "../../constants";
-import { enCitys } from "../constants/City";
+// import { colors } from "@constants";
+import { enCitys } from "@constants/City";
 import { router, useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
-import { colors } from "../constants";
-import { borderRadius } from "../styles/globalStyle";
+import { colors } from "@constants";
+import { borderRadius } from "@styles/globalStyle";
 
 export default function City() {
   return (

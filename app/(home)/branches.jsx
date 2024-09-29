@@ -1,8 +1,8 @@
 import React from "react";
-import ExtarList from "../../component/branches/compnent/ExtarList";
-import Container from "../../component/shared/Containner";
-import BranchesPage from "../../component/branches/compnent/BranchesPage";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
+import ExtarList from "@component/branches/compnent/ExtarList";
+import Container from "@component/shared/Containner";
+import BranchesPage from "@component/branches/compnent/BranchesPage";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 
 const Branches = () => {
   const { userCityId, userCity } = useUserAuth();

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import Btn from "../../shared/Btn";
-import ShowModal from "../../shared/ShowModal";
-import { useUserAuth } from "../../../provider/userAuth/userAuthProvider";
-import Txt from "../../shared/Txt";
-import { colors } from "../../../constants";
+import Btn from "@component/shared/Btn";
+import ShowModal from "@component/shared/ShowModal";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import Txt from "@component/shared/Txt";
+import { colors } from "@constants";
 
 export default function UserInfo() {
   const [showModal, setShowModal] = useState(false);

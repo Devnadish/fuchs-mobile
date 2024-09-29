@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { colors } from "../../constants";
-import { useUserAuth } from "../../provider/userAuth/userAuthProvider";
-import TextLink from "../shared/TextLink";
+import { colors } from "@constants";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+
 import { router } from "expo-router";
 
 export default function ActiveBooking() {
