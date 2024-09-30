@@ -19,7 +19,6 @@ import {
 
 const UserAvatar = () => {
   const { userAvatar, userName, userMobile } = useUserAuth();
-  // console.warn(userAvatar);
 
   const transformedImageUrl = generateCloudinaryUrl(
     userAvatar,
@@ -27,15 +26,9 @@ const UserAvatar = () => {
   );
   const [loading, setLoading] = useState(true);
   const [myImage, setMyImage] = useState(transformedImageUrl);
-  console.log(myImage);
 
   useEffect(() => {
     if (userAvatar && userMobile !== "Gust") {
-      // const image = cld
-      //   .image(userAvatar)
-      //   .resize(
-      //     thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))
-      //   );
       setMyImage(transformedImageUrl);
       setLoading(false);
     } else {
@@ -100,8 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   userInfo: {
-    alignItems: "flex-start",
-    alignSelf: "flex-end",
+    alignItems: "center",
   },
   userName: {
     fontWeight: "bold",

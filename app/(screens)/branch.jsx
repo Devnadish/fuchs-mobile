@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import Containner from "@component/shared/Containner";
 
 import { branchDetail } from "@api/branchDetail";
-import BarHeader from "@component/shared/BarHeader";
 import BranchImages from "@component/branches/detail/BranchImages";
 import BranchActions from "@component/branches/detail/BranchActions";
 import BranchDetails from "@component/branches/detail/BranchDetails";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import { View } from "react-native";
 import { colors } from "@constants";
+import ScreenBarTitle from "@component/shared/ScreenBarTitle";
 
 export default function Bbranch() {
   const params = useLocalSearchParams();
@@ -26,7 +26,8 @@ export default function Bbranch() {
   }, []);
   return (
     <Containner>
-      <BarHeader title={branchName} />
+      {/* <BarHeader title={branchName} /> */}
+      <PageHeader title={branchName} />
       <View
         style={{
           flexDirection: "row",
@@ -63,3 +64,17 @@ export default function Bbranch() {
     </Containner>
   );
 }
+
+const PageHeader = ({ title }) => (
+  <Stack.Screen
+    options={{
+      headerShown: true,
+      headerBackTitleVisible: true,
+      headerTitle: () => <ScreenBarTitle title={title} />,
+      headerShadowVisible: true,
+      headerStyle: { backgroundColor: colors.backgroundColor },
+      headerTintColor: colors.primaryBtn,
+      headerTitleAlign: "center",
+    }}
+  />
+);

@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function NoBranchs({ icon, title }) {
   return (
     <View style={styles.nofav}>
-      {icon}
+      <MaterialCommunityIcons
+        name="home-city"
+        size={124}
+        color={colors.primary}
+      />
       <Text>{title}</Text>
     </View>
   );

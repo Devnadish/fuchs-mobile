@@ -30,16 +30,13 @@ const RemoveFormFavorate = ({ branchId, setRerender }) => {
 export default RemoveFormFavorate;
 
 const styles = StyleSheet.create({
-  touchable: {},
   favContainer: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    backgroundColor: colors.backgroundColor,
-    borderWidth: 1,
-    borderColor: colors.borderColor,
-    opacity: 0.9,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+    height: 50,
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    elevation: 1,
   },
 });

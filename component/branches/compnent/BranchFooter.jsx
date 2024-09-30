@@ -1,46 +1,92 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { colors } from "@constants";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
-import AddToFavorate from "./AddToFavorate";
-import RemoveFormFavorate from "./RemoveFormFavorate";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
-export default function BranchFooter({ item, setRerender, heartType }) {
+export default function BranchFooter({ item }) {
   const { userLanguage } = useUserAuth();
+
+  const handlePress = () => {
+    router.push({
+      pathname: `(screens)/branch`,
+      params: {
+        branchId: item?.id,
+        branchName: userLanguage === "ar" ? item?.nameAr : item?.nameEn,
+      },
+    });
+  };
+
   return (
-    <View style={styles.continer}>
-      <View style={styles.brName}>
+    <View style={styles.container}>
+      <View style={styles.branchHeader}>
+        <View style={styles.ratingIcon}>
+          <AntDesign name="star" size={24} color={colors.yellow} />
+          <Text style={styles.rateText}>{item.rate}</Text>
+        </View>
         <Text style={styles.rateText}>
-          {userLanguage === "ar" ? item?.nameAr : item?.nameEn}
+          {userLanguage === "ar" ? item.cityAr : item.cityEn}
         </Text>
       </View>
 
-      <View style={styles.favorate}>
-        {heartType === "add" ? (
-          <AddToFavorate
-            branchId={item?.id}
-            isFavoriteCheck={item.isFavorited}
-          />
-        ) : (
-          <RemoveFormFavorate branchId={item?.id} />
-        )}
-      </View>
+      <Text style={styles.branchName}>
+        {userLanguage === "ar" ? item?.nameAr : item?.nameEn}
+      </Text>
+      <TouchableOpacity style={styles.btnContainer} onPress={handlePress}>
+        <MaterialIcons name="drive-eta" size={30} color={colors.white} />
+        <Text style={styles.btnText}>Drive</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  continer: {
-    justifyContent: "space-between",
+  container: {
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.white,
-    padding: 15,
     width: "100%",
-    flexDirection: "row",
-    gap: 5,
+    padding: 10,
+    backgroundColor: colors.white,
   },
-  brName: { flex: 1 },
-  favorate: {},
+  branchName: {
+    color: colors.muteColor,
+    fontSize: 14,
+    paddingVertical: 5,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 50,
+    backgroundColor: colors.green,
+    borderRadius: 5,
+    elevation: 2,
+    marginTop: 5,
+    paddingHorizontal: 10,
+  },
+  btnText: {
+    color: colors.white,
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  branchHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 10,
 
-  branchName: { color: colors.textColor },
+    backgroundColor: colors.white,
+  },
+  ratingIcon: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  rateText: {
+    color: colors.muteColor,
+    fontWeight: "bold",
+    fontSize: 12,
+  },
 });

@@ -10,6 +10,7 @@ const AddToFavorate = ({ branchId, isFavoriteCheck }) => {
   const { userId, setRenderData, renderData } = useUserAuth();
 
   const handlePress = async () => {
+    console.log(isFavoriteCheck);
     const userData = { userId, branchId };
     await addToFavorites(userData);
     setIsFavorite(true);
@@ -19,10 +20,10 @@ const AddToFavorate = ({ branchId, isFavoriteCheck }) => {
 
   return (
     <TouchableOpacity
-      onPress={handlePress}
+      onPress={() => handlePress()}
       activeOpacity={0.7}
-      style={[styles.touchable]}
-      disabled={isFavorite}
+      style={styles.favContainer}
+      // disabled={isFavorite}
     >
       <View
         style={[
@@ -44,14 +45,12 @@ export default AddToFavorate;
 
 const styles = StyleSheet.create({
   favContainer: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    opacity: 0.9,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.backgroundColor,
-    borderWidth: 1,
-    borderColor: colors.borderColor,
+    justifyContent: "center",
+    width: 50,
+    height: 50,
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    elevation: 1,
   },
 });

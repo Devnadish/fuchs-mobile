@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     // alignItems: "center",
     // justifyContent: "center",
+    backgroundColor: colors.green,
   },
   content: {
     flex: 1,

@@ -32,6 +32,7 @@ export default function ActiveBooking() {
 
   return (
     <View style={styles.booking}>
+      <Text>V-01</Text>
       {active ? (
         <FontAwesome name="calendar-check-o" size={24} color={colors.danger} />
       ) : (
@@ -47,12 +48,14 @@ export default function ActiveBooking() {
 
 const styles = StyleSheet.create({
   booking: {
-    width: 40,
+    width: 140,
     height: 40,
     borderRadius: 50,
     backgroundColor: colors.muteColor,
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
+    flexDirection: "row",
+    gap: 3,
   },
 });
