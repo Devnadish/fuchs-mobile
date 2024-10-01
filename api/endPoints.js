@@ -1,5 +1,4 @@
 export const endPoint = process.env.EXPO_PUBLIC_ENDPOINT_URL;
-console.log({ endPoint });
 
 export const CHECK_USER_IS_EXIST = endPoint + "/user/checkUserIsexisit";
 export const CREATE_NEW_USER = endPoint + "/user/registerNewUser";

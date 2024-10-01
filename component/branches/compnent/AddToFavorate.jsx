@@ -10,12 +10,10 @@ const AddToFavorate = ({ branchId, isFavoriteCheck }) => {
   const { userId, setRenderData, renderData } = useUserAuth();
 
   const handlePress = async () => {
-    console.log(isFavoriteCheck);
     const userData = { userId, branchId };
     await addToFavorites(userData);
     setIsFavorite(true);
     setRenderData((pre) => Date.now()); // Trigger re-render to update favorite count
-    console.log("when add:", { renderData });
   };
 
   return (

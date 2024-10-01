@@ -1,50 +1,54 @@
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import * as Updates from "expo-updates";
 import { getLocales } from "expo-localization";
-import i18next, { languageResources } from "../../services/i18next";
-import { I18nManager } from "react-native";
-
-// FIXME: alert msg to tell use language effect to statrt on next render or lanching
+import i18next from "../../services/i18next";
+import { I18nManager, Alert } from "react-native";
 
 const LanguageContext = createContext(null);
 
 const LanguageProvider = ({ children }) => {
   const deviceLanguage = getLocales()[0].languageCode;
-  const [language, setLanguage] = useState("khalid");
+  const [language, setLanguage] = useState(deviceLanguage);
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchStoredLanguage = async () => {
       try {
-        const value = await AsyncStorage.getItem("lang");
-        if (value !== null) {
-          setLanguage(value);
-        } else {
-          setLanguage(deviceLanguage);
+        const storedLanguage = await AsyncStorage.getItem("lang");
+        if (storedLanguage) {
+          setLanguage(storedLanguage);
         }
       } catch (error) {
-        console.error("Error retrieving data:", error);
+        Alert.alert(
+          "Error",
+          "Failed to retrieve language preference: " + error.message
+        );
       }
     };
 
-    getData();
+    fetchStoredLanguage();
   }, []);
 
-  // change language to arabic or english when user toggle the language
   useEffect(() => {
-    language && changeLang(language);
+    if (language) {
+      changeLang(language);
+    }
   }, [language]);
 
   const changeLang = async (languageParam) => {
-    i18next.changeLanguage(languageParam);
-    language === "ar"
-      ? I18nManager.forceRTL(true)
-      : I18nManager.forceRTL(false);
-    // Updates.reloadAsync();
     try {
-      // await AsyncStorage.setItem("lang", language);
-    } catch (e) {
-      console.log(e);
+      await i18next.changeLanguage(languageParam);
+      const isArabic = languageParam === "ar";
+      I18nManager.forceRTL(isArabic);
+
+      // Optionally reload the app to apply changes
+      // Updates.reloadAsync(); // Uncomment if using Expo Updates
+
+      await AsyncStorage.setItem("lang", languageParam);
+    } catch (error) {
+      Alert.alert(
+        "Error",
+        "An error occurred while changing the language: " + error.message
+      );
     }
   };
 

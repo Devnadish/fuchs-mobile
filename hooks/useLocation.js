@@ -1,49 +1,71 @@
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
-import { Linking, Platform } from "react-native";
+import { Alert, Linking } from "react-native";
 
 const useCurrentLocation = () => {
   const [location, setLocation] = useState(null);
+  const [error, setError] = useState(null); // State to handle errors
 
   useEffect(() => {
+    let isMounted = true; // Track if the component is mounted
+
     const getLocation = async () => {
       try {
         const supported = await Location.hasServicesEnabledAsync();
         if (!supported) {
-          console.log("This device does not support location services");
+          if (isMounted) {
+            Alert.alert(
+              "Location Services Disabled",
+              "This device does not support location services."
+            );
+          }
           return;
         }
 
-        let { status } = await Location.requestForegroundPermissionsAsync();
+        const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
-          console.log("Permission to access location was denied");
+          if (isMounted) {
+            Alert.alert(
+              "Permission Denied",
+              "Permission to access location was denied."
+            );
+          }
           return;
         }
 
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location.coords);
-      } catch (error) {
-        if (error.code === "E_LOCATION_SERVICES_DISABLED") {
-          Linking.openSettings();
-        } else {
-          console.log(error);
+        const locationData = await Location.getCurrentPositionAsync({});
+        if (isMounted) {
+          setLocation(locationData.coords);
         }
+      } catch (error) {
+        handleLocationError(error);
       }
     };
 
     getLocation();
 
     return () => {
-      // Clean up if needed
+      isMounted = false; // Cleanup function to prevent state updates on unmounted component
     };
   }, []);
 
+  const handleLocationError = (error) => {
+    if (error.code === "E_LOCATION_SERVICES_DISABLED") {
+      Alert.alert(
+        "Location Services Disabled",
+        "Please enable location services in your settings.",
+        [
+          { text: "Settings", onPress: () => Linking.openSettings() },
+          { text: "Cancel", style: "cancel" },
+        ]
+      );
+    } else {
+      Alert.alert("Error", "An unexpected error occurred: " + error.message);
+    }
+  };
+
   return location;
 };
-
-// Usage example:
-// const currentLocation = useCurrentLocation();
-// console.log("Current Location:", currentLocation);
 
 export default useCurrentLocation;
 

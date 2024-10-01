@@ -1,74 +1,39 @@
-import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import React, { useMemo } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import { LOGO_IMAGE } from "@constants/images";
 import { router } from "expo-router";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import { colors } from "@constants";
 import ExpoImage from "@component/shared/ExpoImage";
-import {
-  generateCloudinaryUrl,
-  transformations,
-} from "@util/uploadImageToCloudnary";
 
 const UserAvatar = () => {
   const { userAvatar, userName, userMobile } = useUserAuth();
-
-  const transformedImageUrl = generateCloudinaryUrl(
-    userAvatar,
-    transformations
-  );
-  const [loading, setLoading] = useState(true);
-  const [myImage, setMyImage] = useState(transformedImageUrl);
-
-  useEffect(() => {
-    if (userAvatar && userMobile !== "Gust") {
-      setMyImage(transformedImageUrl);
-      setLoading(false);
-    } else {
-      setMyImage(null);
-    }
-    setLoading(false);
-  }, [userAvatar, userMobile]);
 
   const handlePress = () => {
     router.push("/(profile)/home");
   };
 
-  const renderImage = () => {
-    if (loading) {
-      return <ActivityIndicator color={colors.primary} size="small" />;
+  const avatarContent = useMemo(() => {
+    if (userAvatar) {
+      return <ExpoImage image={userAvatar} style={styles.image} />;
     }
 
-    return myImage ? (
-      <ExpoImage image={myImage} style={styles.image} />
-    ) : (
-      <ExpoImage image={LOGO_IMAGE} style={styles.image} />
-    );
-  };
-
-  return (
-    <View style={styles.avatarContainer}>
-      {userMobile !== "Gust" && (
-        <View style={styles.imageContainer}>
-          <Pressable onPress={handlePress}>{renderImage()}</Pressable>
-        </View>
-      )}
-      <View
-        style={[
-          styles.userInfo,
-          { flexDirection: userMobile === "Gust" ? "row" : "column" },
-        ]}
-      >
-        <Text>{userName || "No Name"}</Text>
+    const initial = userName ? userName.charAt(0).toUpperCase() : "N";
+    return (
+      <View style={styles.initialContainer}>
+        <Text style={styles.initialText}>{initial}</Text>
       </View>
-    </View>
+    );
+  }, [userAvatar, userName]);
+  // FIXME: check if login as guest
+  return (
+    <TouchableOpacity onPress={handlePress} style={styles.avatarContainer}>
+      <View style={styles.imageContainer}>{avatarContent}</View>
+
+      <View style={styles.userInfo}>
+        <Text style={styles.userName}>{userName || "No Name"}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -91,6 +56,19 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
+  },
+  initialContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  initialText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
   },
   userInfo: {
     alignItems: "center",

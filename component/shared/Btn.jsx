@@ -17,6 +17,7 @@ const Btn = ({
   loadingText = "Loading...",
   icon,
   type,
+  ...props
 }) => {
   const renderContent = () => {
     if (isLoading) {
@@ -41,6 +42,7 @@ const Btn = ({
       activeOpacity={0.7}
       style={[styles.btnStyle, containerStyles]}
       disabled={isLoading}
+      {...props}
     >
       <View style={styles.innerView}>{renderContent()}</View>
     </TouchableOpacity>

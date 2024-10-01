@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "@constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
+import { avatarUrl } from "@util/uploadImageToCloudnary";
 
 const ActionButtons = ({ mobile, password, loginFunction, loadAsGuest }) => {
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ const ActionButtons = ({ mobile, password, loginFunction, loadAsGuest }) => {
       name: DoLogin.name,
       email: DoLogin.email,
       mobile: DoLogin.mobile,
-      avatar: DoLogin.profile.avatar,
+      avatar: avatarUrl + DoLogin.profile.avatar,
       isLogin: true,
     };
 

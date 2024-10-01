@@ -8,6 +8,7 @@ import { pingServer, showToast } from "@lib/nadish";
 import Toast from "react-native-toast-message";
 import { ThemeProvider } from "@provider/themeProvider/useThemProvider";
 import { UserAuthProvider } from "@provider/userAuth/userAuthProvider";
+import { LoadingProvider } from "@provider/LoadingProvider/LoadingContext";
 
 const RootLayout = () => {
   const check = pingServer();
@@ -21,14 +22,22 @@ const RootLayout = () => {
       <UserAuthProvider>
         <ThemeProvider>
           <LanguageProvider>
-            <Stack>
-              <Stack.Screen name="index" options={indexBarStyle} />
-              {/* <Stack.Screen name="selectcar" options={carBarStyle} /> */}
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen name="(home)" options={{ headerShown: false }} />
-              <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-              <Stack.Screen name="(screens)" options={{ headerShown: false }} />
-            </Stack>
+            <LoadingProvider>
+              <Stack>
+                <Stack.Screen name="index" options={indexBarStyle} />
+                {/* <Stack.Screen name="selectcar" options={carBarStyle} /> */}
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                <Stack.Screen name="(home)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(profile)"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="(screens)"
+                  options={{ headerShown: false }}
+                />
+              </Stack>
+            </LoadingProvider>
           </LanguageProvider>
         </ThemeProvider>
         <Toast position="top" topOffset={50} visibilityTime={2000} />

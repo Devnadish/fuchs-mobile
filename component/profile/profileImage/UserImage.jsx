@@ -3,9 +3,8 @@ import { StyleSheet, View } from "react-native";
 
 import { colors } from "@constants";
 import ExpoImage from "@component/shared/ExpoImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
-import { cloudUrl } from "@constants/images";
 import Btn from "@component/shared/Btn";
 import ShowModal from "@component/shared/ShowModal";
 import ChangeProfile from "./ChangeProfile";
@@ -13,9 +12,11 @@ import ChangeProfile from "./ChangeProfile";
 const UserImage = () => {
   const { userAvatar } = useUserAuth();
 
-  const [avatar, setAvatar] = useState(cloudUrl + userAvatar);
+  const [avatar, setAvatar] = useState(userAvatar);
   const [showModal, setShowModal] = useState(false);
-
+  useEffect(() => {
+    setAvatar(userAvatar);
+  }, [userAvatar]);
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -31,7 +32,11 @@ const UserImage = () => {
         setVisible={setShowModal}
         header={"Change Profile Image"}
       >
-        <ChangeProfile setShowModal={setShowModal} setAvatar={setAvatar} />
+        <ChangeProfile
+          setShowModal={setShowModal}
+          setAvatar={setAvatar}
+          avatar={avatar}
+        />
       </ShowModal>
     </View>
   );

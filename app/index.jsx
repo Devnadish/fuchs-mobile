@@ -2,17 +2,21 @@ import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import * as Network from "expo-network";
+import { Alert } from "react-native";
 
 export default function Index() {
-  const { isLogin, loading } = useUserAuth(); // Access loading and isLogin
+  const { isLogin, loading } = useUserAuth();
   const [isConnected, setIsConnected] = useState(null);
   const [initialLoading, setInitialLoading] = useState(true);
-  // console.log({ isConnected });
+
   // Check network connection
   useEffect(() => {
     const checkNetwork = async () => {
       const { isConnected } = await Network.getNetworkStateAsync();
       setIsConnected(isConnected);
+      if (!isConnected) {
+        Alert.alert("Network Error", "You are not connected to the internet.");
+      }
     };
 
     checkNetwork();
@@ -40,38 +44,31 @@ export default function Index() {
 // import * as Network from "expo-network";
 
 // export default function Index() {
-//   const { isLogin, loading, userTheme } = useUserAuth(); // Access loading and isLogin
+//   const { isLogin, loading } = useUserAuth(); // Access loading and isLogin
+//   const [isConnected, setIsConnected] = useState(null);
 //   const [initialLoading, setInitialLoading] = useState(true);
-//    const [isConnected, setIsConnected] = useState(null);
-//   // console.log({ userTheme });
-
-// useEffect(() => {
-//   const checkNetwork = async () => {
-//     const networkState = await Network.getNetworkStateAsync();
-//     setIsConnected(networkState.isConnected);
-//   };
-
-//   checkNetwork();
-// }, []);
-
+//   // Check network connection
 //   useEffect(() => {
-//     // Debug log to check loading state
-//     // console.log("Loading state:", loading);
+//     const checkNetwork = async () => {
+//       const { isConnected } = await Network.getNetworkStateAsync();
+//       setIsConnected(isConnected);
+//     };
+
+//     checkNetwork();
+//   }, []);
+
+//   // Update initial loading state based on loading prop
+//   useEffect(() => {
 //     if (!loading) {
-//       setInitialLoading(false); // Set initial loading to false when loading is done
+//       setInitialLoading(false);
 //     }
 //   }, [loading]);
 
+//   // Show a loading state until the initial loading is complete
 //   if (initialLoading) {
-//     // console.log("Initial loading...");
-//     return null; // You can replace this with a loading spinner if desired
+//     return null; // Consider adding a loading spinner here
 //   }
 
-//   // console.log("isLogin state:", isLogin); // Debug log for isLogin
-
-//   if (isLogin) {
-//     return <Redirect href="/(home)/home" />;
-//   }
-
-//   return <Redirect href="/(auth)/home" />;
+//   // Redirect based on authentication status
+//   return <Redirect href={isLogin ? "/(home)/home" : "/(auth)/home"} />;
 // }
