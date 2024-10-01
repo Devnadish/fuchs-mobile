@@ -6,6 +6,7 @@ import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 
 const Branches = () => {
   const { userCityId, userCity } = useUserAuth();
+  console.log(userCityId, userCity);
   return (
     <Container>
       <ExtarList />

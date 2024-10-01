@@ -1,35 +1,32 @@
 import React, { useMemo } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-
 import { router } from "expo-router";
 import { useUserAuth } from "@provider/userAuth/userAuthProvider";
-import { colors } from "@constants";
 import ExpoImage from "@component/shared/ExpoImage";
+import LetterAsAvatar from "@component/shared/LetterAsAvatar";
 
 const UserAvatar = () => {
-  const { userAvatar, userName, userMobile } = useUserAuth();
+  const { userAvatar, userName } = useUserAuth();
 
   const handlePress = () => {
     router.push("/(profile)/home");
   };
 
   const avatarContent = useMemo(() => {
-    if (userAvatar) {
-      return <ExpoImage image={userAvatar} style={styles.image} />;
-    }
+    const hasValidAvatar = userAvatar && !userAvatar.endsWith("/");
 
     const initial = userName ? userName.charAt(0).toUpperCase() : "N";
-    return (
-      <View style={styles.initialContainer}>
-        <Text style={styles.initialText}>{initial}</Text>
-      </View>
+
+    return hasValidAvatar ? (
+      <ExpoImage image={userAvatar} style={styles.image} />
+    ) : (
+      <LetterAsAvatar letter={initial} primaryColor />
     );
   }, [userAvatar, userName]);
-  // FIXME: check if login as guest
+
   return (
     <TouchableOpacity onPress={handlePress} style={styles.avatarContainer}>
       <View style={styles.imageContainer}>{avatarContent}</View>
-
       <View style={styles.userInfo}>
         <Text style={styles.userName}>{userName || "No Name"}</Text>
       </View>
@@ -56,19 +53,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
-  },
-  initialContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 50,
-    backgroundColor: colors.primary,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  initialText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 18,
   },
   userInfo: {
     alignItems: "center",

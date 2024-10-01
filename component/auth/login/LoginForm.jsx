@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Btn from "@component/shared/Btn";
 import { showToast } from "@lib/nadish";
@@ -6,10 +6,7 @@ import Input from "@component/shared/Input";
 import colors from "@constants/colors";
 import TextLink from "@component/shared/TextLink";
 import { loginIcon, mobileIcon, passwordIcon } from "./loginLogic";
-import {
-  userAuthContext,
-  useUserAuth,
-} from "@provider/userAuth/userAuthProvider";
+import { useUserAuth } from "@provider/userAuth/userAuthProvider";
 import { userLogin } from "@api/login";
 import { router } from "expo-router";
 
@@ -35,23 +32,23 @@ const LoginForm = () => {
       }
 
       const userInformation = {
-        userId: response.id,
-        userName: response.name,
-        userEmail: response.email,
-        userMobile: response.mobile,
-        userAvatar: response.profile.avatar,
-        userRole: response.role,
+        userId: response?.id,
+        userName: response?.name,
+        userEmail: response?.email,
+        userMobile: response?.mobile,
+        userAvatar: response?.profile?.avatar,
+        userRole: response?.role,
 
-        userCity: response.profile.city,
-        userCityId: response.profile.cityId,
-        userLanguage: response.profile.language || "en",
-        userTheme: response.profile.theme || "light",
+        userCity: response?.profile?.city,
+        userCityId: response?.profile?.cityId,
+        userLanguage: response?.profile?.language || "en",
+        userTheme: response?.profile?.theme || "light",
 
-        userCar: response.car.car,
-        userCarId: response.car.carId,
-        userModelId: response.car.modelId,
-        userCarModel: response.car.carModel,
-        userCarYear: response.car.carYear,
+        userCar: response?.car?.car,
+        userCarId: response?.car?.carId,
+        userModelId: response?.car?.modelId,
+        userCarModel: response?.car?.carModel,
+        userCarYear: response?.car?.carYear,
 
         isLogin: true,
       };

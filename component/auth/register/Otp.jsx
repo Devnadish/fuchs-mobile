@@ -30,7 +30,7 @@ export default function Otp({
         password,
         isVerified: true,
         smsToken: SMSotp.toString(),
-        avatar: IMAGE_PLACE_HOLDER,
+        // avatar: IMAGE_PLACE_HOLDER,
       };
       const newUser = createNewuser(userData);
       if (newUser) {

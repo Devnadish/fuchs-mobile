@@ -10,6 +10,7 @@ import UpdateCityInstraction from "@component/instraction/UpdateCityInstraction"
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { showToast } from "@lib/nadish";
 import SaveAndCancel from "@component/shared/SaveAndCancel";
+import Container from "@component/shared/Containner";
 
 export default function City() {
   const { userMobile, updateProfile, userCity, userCityId } = useUserAuth();
@@ -18,13 +19,15 @@ export default function City() {
   const [updLoading, setUpdLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  console.log({ cityId });
+
   const handleSubmit = useCallback(async () => {
     setUpdLoading(true);
     try {
       const updateCity = await UpdateCity({
         mobile: userMobile,
         city,
-        cityId: city.cityId,
+        cityId: cityId,
       });
       if (updateCity) {
         await updateProfile({ userCity: city, userCityId: cityId });
@@ -36,14 +39,18 @@ export default function City() {
     } finally {
       setUpdLoading(false);
     }
-  }, [city, userMobile, updateProfile]);
+  }, [city, cityId, userMobile, updateProfile]);
 
   return (
-    <>
+    <Container>
       <Stack.Screen
         options={{ title: `Select City ${userMobile}`, headerShown: true }}
       />
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        activeOpacity={0.7}
+        onPress={() => setShowModal(true)}
+      >
         <UpdateCityInstraction />
         <View style={styles.cityContainer}>
           <MaterialCommunityIcons
@@ -66,7 +73,7 @@ export default function City() {
           </TouchableOpacity>
         </View>
         <SaveAndCancel handleSubmit={handleSubmit} indcator={updLoading} />
-      </View>
+      </TouchableOpacity>
       <ShowModal
         visible={showModal}
         setVisible={setShowModal}
@@ -78,7 +85,7 @@ export default function City() {
           setVisible={setShowModal}
         />
       </ShowModal>
-    </>
+    </Container>
   );
 }
 
@@ -105,18 +112,5 @@ const styles = StyleSheet.create({
   changeButton: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-  },
-  submitButton: {
-    width: "40%",
-    backgroundColor: colors.green,
-  },
-  cancelButton: {
-    width: "40%",
-    backgroundColor: colors.danger,
   },
 });
