@@ -1,10 +1,6 @@
-import axios from "axios";
-import {
-  UPDATE_PROFILE_IMAGE,
-  UPDATE_PROFILE,
-  UPDATE_USER_SETTINGS,
-} from "./endPoints";
-import { handleAxiosError } from "./errorHandling";
+import axios from 'axios';
+import { UPDATE_PROFILE_IMAGE, UPDATE_PROFILE, UPDATE_USER_SETTINGS } from './endPoints';
+import { handleAxiosError } from './errorHandling';
 export const UPDATE_PRIFILE_IMAGE = async (userData) => {
   try {
     const data = await axios.patch(UPDATE_PROFILE_IMAGE, userData);

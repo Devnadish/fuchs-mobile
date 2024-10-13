@@ -1,6 +1,6 @@
-import axios from "axios";
-import { GET_ALL_CITY, UPDATE_CITY } from "./endPoints";
-import { handleAxiosError } from "./errorHandling";
+import axios from 'axios';
+import { GET_ALL_CITY, UPDATE_CITY } from './endPoints';
+import { handleAxiosError } from './errorHandling';
 export const getAllCity = async (language) => {
   try {
     const { data } = await axios.get(GET_ALL_CITY, {

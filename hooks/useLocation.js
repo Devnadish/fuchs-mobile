@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import * as Location from "expo-location";
-import { Alert, Linking } from "react-native";
+import { useEffect, useState } from 'react';
+import * as Location from 'expo-location';
+import { Alert, Linking, Platform } from 'react-native';
 
 const useCurrentLocation = () => {
   const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null); // State to handle errors
 
   useEffect(() => {
     let isMounted = true; // Track if the component is mounted
@@ -15,20 +14,17 @@ const useCurrentLocation = () => {
         if (!supported) {
           if (isMounted) {
             Alert.alert(
-              "Location Services Disabled",
-              "This device does not support location services."
+              'Location Services Disabled',
+              'This device does not support location services.'
             );
           }
           return;
         }
 
         const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
+        if (status !== 'granted') {
           if (isMounted) {
-            Alert.alert(
-              "Permission Denied",
-              "Permission to access location was denied."
-            );
+            Alert.alert('Permission Denied', 'Permission to access location was denied.');
           }
           return;
         }
@@ -50,17 +46,17 @@ const useCurrentLocation = () => {
   }, []);
 
   const handleLocationError = (error) => {
-    if (error.code === "E_LOCATION_SERVICES_DISABLED") {
+    if (error.code === 'E_LOCATION_SERVICES_DISABLED') {
       Alert.alert(
-        "Location Services Disabled",
-        "Please enable location services in your settings.",
+        'Location Services Disabled',
+        'Please enable location services in your settings.',
         [
-          { text: "Settings", onPress: () => Linking.openSettings() },
-          { text: "Cancel", style: "cancel" },
+          { text: 'Settings', onPress: () => Linking.openSettings() },
+          { text: 'Cancel', style: 'cancel' },
         ]
       );
     } else {
-      Alert.alert("Error", "An unexpected error occurred: " + error.message);
+      Alert.alert('Error', 'An unexpected error occurred: ' + error.message);
     }
   };
 
@@ -69,14 +65,10 @@ const useCurrentLocation = () => {
 
 export default useCurrentLocation;
 
-export const openGoogleMapsForNavigation = (
-  latitude,
-  longitude,
-  branchName
-) => {
+export const openGoogleMapsForNavigation = (latitude, longitude, branchName) => {
   const scheme = Platform.select({
-    ios: "maps://app?daddr=",
-    android: "google.navigation:q=",
+    ios: 'maps://app?daddr=',
+    android: 'google.navigation:q=',
   });
 
   const latLng = `${latitude},${longitude}`;

@@ -1,13 +1,12 @@
 // ChangeProfile.js
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import React from "react";
-import ExpoImage from "@component/shared/ExpoImage";
-import Btn from "@component/shared/Btn";
-// Import styles
-import useChangeProfile from "@hooks/useChangeProfile";
-import styles from "@styles/ChangeProfileStyles";
-import colors from "@constants/colors";
-import { useUserAuth } from "@provider/userAuth/userAuthProvider";
+import { View, Text, ActivityIndicator } from 'react-native';
+import ExpoImage from '@component/shared/ExpoImage';
+import RNBtn from '@component/shared/RNBtn';
+import useChangeProfile from '@component/profile/profileImage/useChangeProfile';
+import styles from '@styles/ChangeProfileStyles';
+import colors from '@constants/colors';
+import { useUserAuth } from '@provider/userAuth/userAuthProvider';
+import { useTranslation } from 'react-i18next';
 
 export default function ChangeProfile({ setShowModal }) {
   const { contextUpdateLoading } = useUserAuth();
@@ -16,51 +15,51 @@ export default function ChangeProfile({ setShowModal }) {
 
   return (
     <View style={styles.container}>
-      {contextUpdateLoading && (
-        <Text style={styles.header}>Update Profile Image</Text>
-      )}
-      <View style={styles.imageContainerAndButton}>
-        <View style={styles.imageContainer}>
-          <ExpoImage image={avatar} style={styles.image} />
-        </View>
-        <ChangeButton
-          handlePress={pickImage}
-          loadfromGallary={loadFromGallery}
-        />
-      </View>
+      {contextUpdateLoading && <Header />}
+      <ImagePicker avatar={avatar} pickImage={pickImage} loadFromGallery={loadFromGallery} />
       <SaveButton
         handlePress={handleUpload}
-        updateContext={isUpdating}
-        disabled={loadFromGallery}
+        isUpdating={isUpdating}
+        loadFromGallery={loadFromGallery}
       />
     </View>
   );
 }
 
-const SaveButton = ({ handlePress, updateContext, disabled }) => {
+const Header = () => <Text style={styles.header}>Update Profile Image</Text>;
+
+const ImagePicker = ({ avatar, pickImage, loadFromGallery }) => (
+  <View style={styles.imageContainerAndButton}>
+    <View style={styles.imageContainer}>
+      <ExpoImage image={avatar} style={styles.image} />
+    </View>
+    <ChangeButton handlePress={pickImage} loadFromGallery={loadFromGallery} />
+  </View>
+);
+
+const SaveButton = ({ handlePress, isUpdating, loadFromGallery }) => {
+  const { t } = useTranslation();
   return (
-    <Btn
-      title="Save & Post"
+    <RNBtn
+      title={t('editBtn')}
       handlePress={handlePress}
       containerStyles={styles.button}
-      loadingText="Updateing..."
-      isLoading={updateContext}
-      disabled={updateContext || disabled}
+      loadingText={t('proccessing')}
+      isLoading={isUpdating}
+      disabled={isUpdating || loadFromGallery}
     />
   );
 };
 
-const ChangeButton = ({ handlePress, loadfromGallary, disabled }) => {
+const ChangeButton = ({ handlePress, loadFromGallery }) => {
+  const { t } = useTranslation();
   return (
     <View style={styles.ChangeButton}>
-      {loadfromGallary ? (
-        <View style={styles.Loadercontainer}>
-          <Text style={{ color: colors.primary }}>Loading Image...</Text>
-          <ActivityIndicator size="small" color={colors.primary} />
-        </View>
+      {loadFromGallery ? (
+        <LoadingIndicator />
       ) : (
-        <Btn
-          title="Change Image"
+        <RNBtn
+          title={t('changeImage')}
           handlePress={handlePress}
           containerStyles={styles.changeButton}
           textStyles={{ color: colors.primary }}
@@ -69,3 +68,21 @@ const ChangeButton = ({ handlePress, loadfromGallary, disabled }) => {
     </View>
   );
 };
+
+const LoadingIndicator = () => {
+  const { t } = useTranslation();
+  return (
+    <View style={styles.Loadercontainer}>
+      <Text style={{ color: colors.primary }}>{t('loading')}</Text>
+      <ActivityIndicator size="small" color={colors.primary} />
+    </View>
+  );
+};
+
+// Assign displayName for debugging
+ChangeProfile.displayName = 'ChangeProfile';
+Header.displayName = 'Header';
+ImagePicker.displayName = 'ImagePicker';
+SaveButton.displayName = 'SaveButton';
+ChangeButton.displayName = 'ChangeButton';
+LoadingIndicator.displayName = 'LoadingIndicator';

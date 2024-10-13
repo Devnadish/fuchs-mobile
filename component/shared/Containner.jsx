@@ -1,33 +1,29 @@
-import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import colors from "@constants/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
+// import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import PropTypes from 'prop-types'; // Import PropTypes
+import colors from '@constants/colors';
 
-const Container = ({
-  children,
-  style,
-  backgroundColor = colors.backgroundColor,
-}) => {
-  return (
-    // <SafeAreaView style={[styles.container, style]}>
-    <View style={[styles.content, { backgroundColor }]}>{children}</View>
-    // </SafeAreaView>
-  );
+const Container = ({ children, backgroundColor = colors.backgroundColor }) => {
+  return <View style={[styles.content, { backgroundColor }]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: Dimensions.get("window").width,
-    // alignItems: "center",
-    // justifyContent: "center",
+    width: Dimensions.get('window').width,
     backgroundColor: colors.green,
   },
   content: {
     flex: 1,
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
   },
 });
+
+// Define prop types for Container component
+// Container.propTypes = {
+//   children: PropTypes.node.isRequired, // Validate children prop as required
+//   backgroundColor: PropTypes.string, // Validate backgroundColor prop as optional string
+// };
 
 export default Container;

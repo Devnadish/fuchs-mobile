@@ -1,9 +1,65 @@
 {
-  "test": "بسم اللة",
-
-  "tab.home": "الرئيسية",
+  "tab.home": "الرئيسية",
   "tab.offers": "العروض",
   "tab.branches": "الفروع",
-  "tab.contact": "اتصل بنا",
-  "tab.booking": "حجز"
+  "tab.contact": "الاتصال",
+  "bookBtn": "احجز الآن",
+  "prfileMenuActiveBook_title": "الحجز النشط",
+  "prfileMenuActiveBook_description": "تحقق من حجزك النشط والمزيد",
+
+  "prfileFavorite_title": "الفروع المفضلة",
+  "prfileFavorite_description": "الفروع المفضلة",
+
+  "prfilePin_title": "تثبيت العرض",
+  "prfilePin_description": "تثبيت العرض الذي يعجبك",
+
+  "PageProfile_title": "الملف الشخصي",
+  "PageProfile_description": "سيساعدنا في إرسال عروضنا وهدايانا لك",
+
+  "passwordPageProfile_title": "كلمة المرور",
+  "passwordPageProfile_description": "احفظ بياناتك بأمان مع كلمة مرور قوية",
+
+  "cityProfile_title": "اختر مدينتك",
+  "cityProfile_description": "سيظهر لنا فروعنا وخدماتنا في مدينتك",
+
+  "carProfile_title": "اختر سيارتك",
+  "carProfile_description": "يمكن أن يتيح سرعة سهلة في الحجز والمزيد",
+
+  "settingProfile_title": "الإعدادات",
+  "settingProfile_description": "اختر السمة واللغة والمزيد",
+
+  "settingLogout_title": "تسجيل الخروج",
+  "settingLogout_description": "سيتم تسجيلك خارج حسابك",
+
+  "activity": "النشاط",
+  "profile": "الملف الشخصي",
+
+  "changeImage": "تغيير الصورة",
+  "Name": "الاسم",
+  "Email": "البريد الإلكتروني",
+
+  "Mobile": "الهاتف المحمول",
+  "City": "المدينة",
+  "Car": "السيارة",
+  "CarModel": "طراز السيارة",
+  "CarYear": "سنة السيارة",
+  "proccessing": "جاري المعالجة...",
+  "saveBtn": "حفظ",
+  "editBtn": "حفظ التحديث",
+  "deleteBtn": "حذف",
+  "loading": "جارٍ التحميل...",
+
+  "Change_Profile_Image": "تغيير صورة الملف الشخصي",
+  "activeBooking": "الحجز النشط",
+
+  "placeholder.name": "أدخل اسمك",
+  "placeholder.email": "أدخل عنوان بريدك الإلكتروني",
+  "placeholder.mobile": "أدخل رقم هاتفك المحمول",
+  "placeholder.city": "اختر مدينتك",
+  "placeholder.car": "اختر سيارتك",
+  "placeholder.carModel": "أدخل طراز سيارتك",
+  "placeholder.carYear": "أدخل سنة سيارتك",
+  "placeholder.password": "أدخل كلمة مرور قوية",
+  "trlanguage": "اللغة",
+  "contactUs": "تواصل معنا"
 }

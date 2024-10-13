@@ -1,0 +1,29 @@
+>>>> eslint <<<<
+/* eslint-disable */ >>>>>>>>>>>>>> top of the file
+/* eslint-disable no-undef */
+
+npx prettier --write .   // format all files
+npx eslint .           // lint all files
+npx eslint --fix .     // fix all files
+npx eslint --fix --ext .js --ext .ts --ext .jsx --ext .tsx .  // fix all files
+npx eslint --ext .js --ext .ts --ext .jsx --ext .tsx .  // lint all files
+--------------------------------------------
+>>>> install and check  <<<<
+npm install expo@latest
+expo upgrade
+npx expo install --fix
+./gradlew clean
+npx expo-doctor@latest
+
+--------------------------------------------
+>>>> building  <<<<
+eas build --platform android --profile development
+
+npx expo prebuild
+eas build --local
+
+npx expo prebuild  // to crate the initail prebuild
+eas build -p android --profile preview
+
+---------------------------------------
+npm cache clean --force

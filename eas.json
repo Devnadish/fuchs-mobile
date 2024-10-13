@@ -10,12 +10,17 @@
         "gradleCommand": ":app:assembleRelease"
       }
     },
-    "preview3": {
-      "developmentClient": true
+    "development": {
+      "developmentClient": true,
+      "autoIncrement": true,
+      "distribution": "internal"
     },
     "preview4": {
       "distribution": "internal"
     },
     "production": {}
+  },
+  "cli": {
+    "appVersionSource": "remote"
   }
 }

@@ -1,8 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getLocales } from "expo-localization";
-import i18next from "../../services/i18next";
-import { I18nManager, Alert } from "react-native";
+import React, { createContext, useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLocales } from 'expo-localization';
+import i18next from '../../services/i18next';
+import { I18nManager, Alert } from 'react-native';
+import PropTypes from 'prop-types'; // Import PropTypes for prop validation
 
 const LanguageContext = createContext(null);
 
@@ -13,15 +14,12 @@ const LanguageProvider = ({ children }) => {
   useEffect(() => {
     const fetchStoredLanguage = async () => {
       try {
-        const storedLanguage = await AsyncStorage.getItem("lang");
+        const storedLanguage = await AsyncStorage.getItem('lang');
         if (storedLanguage) {
           setLanguage(storedLanguage);
         }
       } catch (error) {
-        Alert.alert(
-          "Error",
-          "Failed to retrieve language preference: " + error.message
-        );
+        Alert.alert('Error', 'Failed to retrieve language preference: ' + error.message);
       }
     };
 
@@ -34,21 +32,18 @@ const LanguageProvider = ({ children }) => {
     }
   }, [language]);
 
-  const changeLang = async (languageParam) => {
+  const changeLang = async languageParam => {
     try {
       await i18next.changeLanguage(languageParam);
-      const isArabic = languageParam === "ar";
+      const isArabic = languageParam === 'ar';
       I18nManager.forceRTL(isArabic);
 
       // Optionally reload the app to apply changes
       // Updates.reloadAsync(); // Uncomment if using Expo Updates
 
-      await AsyncStorage.setItem("lang", languageParam);
+      await AsyncStorage.setItem('lang', languageParam);
     } catch (error) {
-      Alert.alert(
-        "Error",
-        "An error occurred while changing the language: " + error.message
-      );
+      Alert.alert('Error', 'An error occurred while changing the language: ' + error.message);
     }
   };
 
@@ -58,5 +53,10 @@ const LanguageProvider = ({ children }) => {
     </LanguageContext.Provider>
   );
 };
+
+// PropTypes validation for LanguageProvider
+// LanguageProvider.propTypes = {
+//   children: PropTypes.node.isRequired, // Validate that children is a node and is required
+// };
 
 export { LanguageProvider, LanguageContext };

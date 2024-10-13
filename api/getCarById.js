@@ -1,6 +1,6 @@
-import axios from "axios";
-import { GET_ALL_CARS, GET_CARS_BY_ID } from "./endPoints";
-import { handleAxiosError } from "./errorHandling";
+import axios from 'axios';
+import { GET_CARS_BY_ID } from './endPoints';
+import { handleAxiosError } from './errorHandling';
 export const getCarsById = async (carId) => {
   try {
     const data = await axios.get(`${GET_CARS_BY_ID}?carId=${carId}`);

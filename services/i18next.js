@@ -1,7 +1,7 @@
-import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
-import ar from "../locales/ar.json";
-import en from "../locales/en.json";
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import ar from '../locales/ar.json';
+import en from '../locales/en.json';
 
 export const languageResources = {
   ar: {
@@ -13,10 +13,10 @@ export const languageResources = {
 };
 
 i18next.use(initReactI18next).init({
-  compatibilityJSON: "v3",
+  compatibilityJSON: 'v3',
   resources: languageResources,
-  lng: "en",
-  fallbackLng: "en",
+  lng: 'en',
+  fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
   },

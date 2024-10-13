@@ -1,8 +1,8 @@
-import React from "react";
-import { Stack } from "expo-router";
+// import React from 'react';
+import { Stack } from 'expo-router';
 
 const ScreensLayout = () => {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return <Stack />;
 };
 
 export default ScreensLayout;

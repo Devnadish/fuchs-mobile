@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-// import { handleAxiosError } from "./errorHandling";
-import { handleAxiosError } from "./errorHandling"; // Corrected import
+import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { handleAxiosError } from './errorHandling'; // Corrected import
 
-const useAxios = (url, method = "GET", params = {}, initialData = null) => {
+const useAxios = (url, method = 'GET', params = {}, initialData = null) => {
   const [responseData, setResponseData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,8 +16,8 @@ const useAxios = (url, method = "GET", params = {}, initialData = null) => {
         const config = {
           method,
           url,
-          params: method === "GET" ? params : undefined,
-          data: method !== "GET" ? data : undefined,
+          params: method === 'GET' ? params : undefined,
+          data: method !== 'GET' ? data : undefined,
         };
         const { data: response } = await axios(config);
         setResponseData(response);
@@ -29,14 +28,14 @@ const useAxios = (url, method = "GET", params = {}, initialData = null) => {
         setLoading(false);
       }
     },
-    [method, url, params]
-  ); // Dependencies for fetchData
+    [method, url, params] // Include method in dependencies
+  );
 
   useEffect(() => {
-    if (method === "GET") {
+    if (method === 'GET') {
       fetchData();
     }
-  }, [fetchData]); // Only depend on fetchData
+  }, [fetchData, method]); // Include method in the dependency array
 
   return { responseData, loading, error, fetchData };
 };

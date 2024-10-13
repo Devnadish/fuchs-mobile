@@ -1,98 +1,80 @@
-import React from "react";
-import { Tabs } from "expo-router";
-import { colors } from "@constants";
-import { Entypo } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { Zocial } from "@expo/vector-icons";
-import { useTranslation } from "react-i18next";
-import { Homepage } from "@constants/headerBarStyle";
-import ActiveBooking from "@component/home/ActiveBookin";
-import UserAvatar from "@component/home/UserAvatar";
-import { ONESTOP } from "@constants/images";
-import ExpoImage from "@component/shared/ExpoImage";
+import { Tabs } from 'expo-router';
+import { colors } from '@constants';
+import { useTranslation } from 'react-i18next';
+import { ONESTOP } from '@constants/images';
+import ExpoImage from '@component/shared/ExpoImage';
+import useIcon from '@hooks/useIcon';
+import { View, Text } from 'react-native'; // Import View and Text
+import ActiveBooking from '@component/home/homeTab/bar/ActiveBookin';
+import UserAvatar from '@component/home/homeTab/bar/UserAvatar';
+
+const tabOptions = {
+  tabBarShowLabel: false,
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerTintColor: colors.linkColor,
+  tabBarStyle: { height: 60 },
+  headerStyle: { backgroundColor: colors.backgroundColor },
+  headerTitle: () => (
+    <ExpoImage
+      image={ONESTOP}
+      style={{ width: 60, height: 40 }}
+      width={40}
+      height={40}
+      radius={2}
+    />
+  ),
+  headerRight: () => <ActiveBooking />,
+  headerLeft: () => <UserAvatar />,
+};
+
+const CustomTabBarIcon = ({ icon, label }) => {
+  return (
+    <View style={{ alignItems: 'center', margin: 0 }}>
+      {icon}
+      <Text style={{ marginTop: 2, fontSize: 12 }}>{label}</Text>
+    </View>
+  );
+};
 
 const TabsLayout = () => {
   const { t } = useTranslation();
+
+  const renderTabIcon =
+    (iconName, label) =>
+    ({ focused }) => {
+      const icon = useIcon(iconName, 24, focused ? colors.danger : colors.primary);
+      return <CustomTabBarIcon icon={icon} label={label} />;
+    };
+
   return (
-    <Tabs
-      screenOptions={{
-        tabBarShowLabel: true,
-        headerShown: true,
-        headerTitleAlign: "center",
-        headerTintColor: colors.linkColor,
-        tabBarStyle: { height: 60 },
-        headerStyle: {
-          backgroundColor: colors.backgroundColor,
-        },
-
-        headerTitle: () => (
-          <ExpoImage
-            image={ONESTOP}
-            style={{ width: 60, height: 40 }}
-            width={40}
-            height={40}
-            radius={2}
-          />
-        ),
-        headerRight: () => <ActiveBooking />,
-        headerLeft: () => <UserAvatar />,
-      }}
-    >
+    <Tabs screenOptions={tabOptions}>
       <Tabs.Screen
-        name="home"
+        name="homeTab"
         options={{
-          title: t("tab.home"),
-          headerShown: true,
-          tabBarIcon: ({ color, focused }) => (
-            <Entypo
-              name="home"
-              size={focused ? 28 : 24}
-              color={focused ? colors.danger : colors.primary}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="branches"
-        options={{
-          title: t("tab.branches"),
-          // headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
-            <FontAwesome6
-              name="location-dot"
-              size={focused ? 28 : 24}
-              color={focused ? colors.danger : colors.primary}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="offers"
-        options={{
-          title: t("tab.offers"),
-          tabBarIcon: ({ color, focused }) => (
-            <MaterialIcons
-              name="local-offer"
-              size={focused ? 28 : 24}
-              color={focused ? colors.danger : colors.primary}
-            />
-          ),
+          title: t('tab.home'),
+          tabBarIcon: renderTabIcon('home', t('tab.home')),
         }}
       />
       <Tabs.Screen
-        name="contacts"
+        name="branchesTab"
         options={{
-          title: t("tab.contact"),
-          tabBarIcon: ({ color, focused }) => (
-            <Zocial
-              name="call"
-              size={focused ? 28 : 24}
-              color={focused ? colors.danger : colors.primary}
-            />
-          ),
+          title: t('tab.branches'),
+          tabBarIcon: renderTabIcon('location', t('tab.branches')),
+        }}
+      />
+      <Tabs.Screen
+        name="offersTab"
+        options={{
+          title: t('tab.offers'),
+          tabBarIcon: renderTabIcon('offer', t('tab.offers')),
+        }}
+      />
+      <Tabs.Screen
+        name="contactsTab"
+        options={{
+          title: t('tab.contact'),
+          tabBarIcon: renderTabIcon('call', t('tab.contact')),
         }}
       />
     </Tabs>

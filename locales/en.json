@@ -1,9 +1,66 @@
 {
-  "test": "khalid nadish",
-
   "tab.home": "Home",
   "tab.offers": "Offers",
   "tab.branches": "Branches",
   "tab.contact": "Contact",
-  "tab.booking": "Booking"
+  "bookBtn": "Book Now",
+  "prfileMenuActiveBook_title": "Active Book",
+  "prfileMenuActiveBook_description": "Check your active booking and more",
+
+  "prfileFavorite_title": "Favorite Branches",
+  "prfileFavorite_description": "Favorite Branches",
+
+  "prfilePin_title": "Pin Offer",
+  "prfilePin_description": "Pin offer you like",
+
+  "PageProfile_title": "Profile",
+  "PageProfile_description": "Will help us to send you our offers and gifts",
+
+  "passwordPageProfile_title": "Password",
+  "passwordPageProfile_description": "Keep your data secure with a strong password",
+
+  "cityProfile_title": "Select your City",
+  "cityProfile_description": "Will show our branches and services in your city",
+
+  "carProfile_title": "Select your Car",
+  "carProfile_description": "Enable fast speed and easy booking and more",
+
+  "settingProfile_title": "Settings",
+  "settingProfile_description": "Select theme and language and more",
+
+  "settingLogout_title": "Log Out",
+  "settingLogout_description": "Will log you out of your account",
+
+  "activity": "Activity",
+  "profile": "Profile",
+
+  "changeImage": "Change Image",
+  "Name": "Name",
+  "Email": "Email",
+
+  "Mobile": "Mobile",
+  "City": "City",
+  "Car": "Car",
+  "CarModel": "Car Model",
+  "CarYear": "Car Year",
+  "proccessing": "Processing...",
+  "saveBtn": "Save",
+  "editBtn": "Save Update",
+  "deleteBtn": "Delete",
+  "loading": "Loading...",
+
+  "Change_Profile_Image": "Change Profile Image",
+  "activeBooking": "Active Booking",
+
+  "placeholder.name": "Enter your name",
+  "placeholder.email": "Enter your email address",
+  "placeholder.mobile": "Enter your mobile number",
+  "placeholder.city": "Select your city",
+  "placeholder.car": "Select your car",
+  "placeholder.carModel": "Enter your car model",
+  "placeholder.carYear": "Enter your car year",
+  "placeholder.password": "Enter a strong password",
+  "trlanguage": "اللغة",
+  "trtheme": "المظهر",
+  "contactUs": "Contact Us"
 }

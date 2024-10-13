@@ -9,17 +9,17 @@ export const handleAxiosError = (error) => {
 };
 
 const logResponseError = (response) => {
-  console.error("Response Error:");
-  console.error("Data:", response.data);
-  console.error("Status:", response.status);
-  console.error("Headers:", response.headers);
+  console.error('Response Error:');
+  console.error('Data:', response.data);
+  console.error('Status:', response.status);
+  console.error('Headers:', response.headers);
 };
 
 const logRequestError = (request) => {
-  console.error("Request Error: No response received.");
-  console.error("Request data:", request);
+  console.error('Request Error: No response received.');
+  console.error('Request data:', request);
 };
 
 const logGeneralError = (message) => {
-  console.error("General Error:", message);
+  console.error('General Error:', message);
 };

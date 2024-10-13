@@ -1,6 +1,6 @@
-import axios from "axios";
-import { FAVORITE_BRANCHES } from "./endPoints";
-import { handleAxiosError } from "./errorHandling";
+import axios from 'axios';
+import { FAVORITE_BRANCHES } from './endPoints';
+import { handleAxiosError } from './errorHandling';
 export const addToFavorites = async (userData) => {
   try {
     const data = await axios.post(FAVORITE_BRANCHES, userData);

@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { colors } from "@constants";
+import { StyleSheet, Text, View } from 'react-native';
+// import React from 'react';
+import { colors } from '@constants';
+import PropTypes from 'prop-types';
 
 export default function LetterAsAvatar({ letter, primaryColor }) {
   return (
@@ -16,15 +17,20 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 15,
     backgroundColor: colors.muteColor, // Default background color
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   primaryAvatar: {
     backgroundColor: colors.primary, // Background color when primaryColor is true
   },
   avatarText: {
     color: colors.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 16,
   },
 });
+
+// LetterAsAvatar.propTypes = {
+//   letter: PropTypes.string.isRequired,
+//   primaryColor: PropTypes.bool,
+// };

@@ -1,52 +1,23 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
-import * as logic from "./registerLogic";
-import Btn from "@component/shared/Btn";
-import { colors } from "@constants";
-import { OtpInput } from "react-native-otp-entry";
-import { showToast } from "@lib/nadish";
-import { createNewuser } from "@api/createNewuser";
-import { IMAGE_PLACE_HOLDER } from "@constants/images";
+import React from 'react';
+import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import * as logic from './registerStyle';
+import { colors } from '@constants';
+import { OtpInput } from 'react-native-otp-entry';
+import RNBtn from '@component/shared/RNBtn';
+import { useOtp } from './useOtp'; // Import the custom hook
 
-export default function Otp({
-  mobile,
-  password,
-  userName,
-  setOtpModalVisible,
-}) {
-  const [otp, setOtp] = useState("");
-  const [SMSotp, setSMStOtp] = useState(logic.otpSms());
-  const [loading, setLoading] = useState(false);
+export default function Otp({ mobile, password, userName, setOtpModalVisible }) {
+  const { otp, setOtp, SMSotp, loading, handleOtpSubmit, handleResendOtp } = useOtp(
+    mobile,
+    password,
+    userName,
+    setOtpModalVisible
+  );
 
-  const handleOtpSubmit = () => {
-    // Handle OTP submission logic here
-    setLoading(true);
+  const handleSubmit = () => {};
 
-    if (otp.toString() === SMSotp.toString()) {
-      showToast("OTP Verified");
-      const userData = {
-        userName,
-        mobile,
-        password,
-        isVerified: true,
-        smsToken: SMSotp.toString(),
-        // avatar: IMAGE_PLACE_HOLDER,
-      };
-      const newUser = createNewuser(userData);
-      if (newUser) {
-        showToast("User created successfully");
-        setOtpModalVisible(false);
-      }
-    } else {
-      showToast("Invalid OTP");
-    }
-    setLoading(false);
-  };
-
-  const handleResendOtp = () => {
-    // Handle resend OTP logic here
-    setSMStOtp(logic.otpSms());
-  };
+  const handleOtp = () => {};
 
   return (
     <View style={logic.styles.modalContainer}>
@@ -55,57 +26,52 @@ export default function Otp({
           Hi, {userName} - {SMSotp}
         </Text>
         <Text style={logic.styles.modalTitle}>Enter OTP</Text>
-        <View
-          style={{
-            width: "100%",
-          }}
-        >
+        <View style={{ width: '100%' }}>
           <OtpInput
             numberOfDigits={4}
-            // onTextChange={(text) => handleOtpChange(text)}
             focusColor={colors.primary}
             focusStickBlinkingDuration={400}
             blurOnFilled
             autoFocus={false}
-            onFilled={(text) => setOtp(text)}
+            onFilled={handleOtp}
+            // onFilled={text => setOtp(text)}
             theme={{
               containerStyle: logic.styles.pinContainer,
               pinCodeContainerStyle: logic.styles.pinCodeContainerStyle,
             }}
+            onCodeFilled={handleSubmit}
           />
-          <Btn
-            handlePress={() => {
-              handleResendOtp();
-            }}
+          <RNBtn
+            handlePress={handleResendOtp}
             title="Resend"
             containerStyles={{
-              backgroundColor: "transparent",
+              backgroundColor: 'transparent',
               width: 80,
-              alignSelf: "flex-end",
+              alignSelf: 'flex-end',
             }}
             textStyles={{
               color: colors.linkColor,
-              textAlign: "right",
-              width: "100%",
+              textAlign: 'right',
+              width: '100%',
             }}
           />
         </View>
         <View style={logic.styles.modelOtpButtonContainer}>
-          <Btn
+          <RNBtn
             title="Submit"
             handlePress={handleOtpSubmit}
             containerStyles={{
-              width: "40%",
+              width: '40%',
               backgroundColor: colors.green,
             }}
             isLoading={loading}
             loadingText="Verifying OTP..."
           />
-          <Btn
+          <RNBtn
             title="Cancel"
             handlePress={() => setOtpModalVisible(false)}
             containerStyles={{
-              width: "40%",
+              width: '40%',
               backgroundColor: colors.danger,
             }}
           />
@@ -114,3 +80,11 @@ export default function Otp({
     </View>
   );
 }
+
+// Define prop types for Otp
+Otp.propTypes = {
+  mobile: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  setOtpModalVisible: PropTypes.func.isRequired,
+};

@@ -1,15 +1,18 @@
 // import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
+// import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import { colors } from "@constants";
-import ExpoImage from "@component/shared/ExpoImage";
-import { useEffect, useState } from "react";
-import { useUserAuth } from "@provider/userAuth/userAuthProvider";
-import Btn from "@component/shared/Btn";
-import ShowModal from "@component/shared/ShowModal";
-import ChangeProfile from "./ChangeProfile";
+import { colors } from '@constants';
+import ExpoImage from '@component/shared/ExpoImage';
+import { useEffect, useState } from 'react';
+import { useUserAuth } from '@provider/userAuth/userAuthProvider';
+import RNBtn from '@component/shared/RNBtn';
+import ShowModal from '@component/shared/ShowModal';
+import ChangeProfile from './ChangeProfile';
+import { useTranslation } from 'react-i18next';
 
 const UserImage = () => {
+  const { t } = useTranslation();
   const { userAvatar } = useUserAuth();
 
   const [avatar, setAvatar] = useState(userAvatar);
@@ -22,21 +25,13 @@ const UserImage = () => {
       <View style={styles.imageContainer}>
         <ExpoImage image={avatar} style={styles.image} />
       </View>
-      <Btn
-        title={"Change Image"}
+      <RNBtn
+        title={t('changeImage')}
         handlePress={() => setShowModal(true)}
         containerStyles={styles.changeButon}
       />
-      <ShowModal
-        visible={showModal}
-        setVisible={setShowModal}
-        header={"Change Profile Image"}
-      >
-        <ChangeProfile
-          setShowModal={setShowModal}
-          setAvatar={setAvatar}
-          avatar={avatar}
-        />
+      <ShowModal visible={showModal} setVisible={setShowModal} header={t('Change_Profile_Image')}>
+        <ChangeProfile setShowModal={setShowModal} setAvatar={setAvatar} avatar={avatar} />
       </ShowModal>
     </View>
   );
@@ -45,8 +40,8 @@ export default UserImage;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
   },
   imageContainer: {
@@ -54,8 +49,8 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 75,
     borderColor: colors.borderColor,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: colors.primary,
   },
   image: {
@@ -67,12 +62,12 @@ const styles = StyleSheet.create({
 
   changeButon: {
     marginTop: 10,
-    alignItems: "center",
+    alignItems: 'center',
     width: 120,
     height: 40,
   },
   changeText: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 16,
     color: colors.primary,
   },

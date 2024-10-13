@@ -1,38 +1,31 @@
-import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { useTheme } from "@provider/themeProvider/useThemProvider";
+// import React from 'react';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@provider/themeProvider/useThemProvider';
+import PropTypes from 'prop-types';
 
 const RadioButton = ({ options, selectedValue, onValueChange }) => {
   const { colors } = useTheme();
 
   return (
     <View style={styles.container}>
-      {options.map((option) => (
+      {options.map(option => (
         <TouchableOpacity
           key={option.value}
           onPress={() => onValueChange(option.value)}
-          style={styles.optionContainer}
-        >
+          style={styles.optionContainer}>
           <View
             style={[
               styles.radioCircle,
               {
                 borderColor:
-                  selectedValue === option.value
-                    ? colors.primary
-                    : colors.mutedForeground,
+                  selectedValue === option.value ? colors.primary : colors.mutedForeground,
               },
-            ]}
-          >
-            {selectedValue === option.value && (
-              <View style={styles.selectedDot} />
-            )}
+            ]}>
+            {selectedValue === option.value && <View style={styles.selectedDot} />}
           </View>
           <View style={styles.labelContainer}>
             {option.icon && option.icon}
-            <Text style={[styles.label, { color: colors.foreground }]}>
-              {option.label}
-            </Text>
+            <Text style={[styles.label, { color: colors.foreground }]}>{option.label}</Text>
           </View>
         </TouchableOpacity>
       ))}
@@ -40,34 +33,47 @@ const RadioButton = ({ options, selectedValue, onValueChange }) => {
   );
 };
 
+// // Define prop types
+// RadioButton.propTypes = {
+//   options: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       value: PropTypes.string.isRequired,
+//       label: PropTypes.string.isRequired,
+//       icon: PropTypes.element, // Optional icon prop
+//     })
+//   ).isRequired,
+//   selectedValue: PropTypes.string.isRequired,
+//   onValueChange: PropTypes.func.isRequired,
+// };
+
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
   },
   optionContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   radioCircle: {
     height: 24,
     width: 24,
     borderRadius: 12,
     borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   selectedDot: {
     height: 12,
     width: 12,
     borderRadius: 6,
-    backgroundColor: "blue", // Use colors.primary in the main circle
+    backgroundColor: 'blue', // Use colors.primary in the main circle
   },
   labelContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginLeft: 5,
   },
   label: {

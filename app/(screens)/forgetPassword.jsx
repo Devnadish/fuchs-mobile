@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Text, View } from 'react-native';
+// import React from 'react';
 
 export default function ForgetPassword() {
   return (
@@ -8,5 +8,3 @@ export default function ForgetPassword() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

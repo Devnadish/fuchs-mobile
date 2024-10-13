@@ -1,29 +1,29 @@
-import { StyleSheet, Dimensions } from "react-native";
-import colors from "@constants/colors";
+import { StyleSheet, Dimensions } from 'react-native';
+import colors from '@constants/colors';
 
 export const globalStyle = StyleSheet.create({
   container: {
     flex: 1,
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
     backgroundColor: colors.backgroundColor,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleText: {
     fontSize: 18,
     color: colors.textColor,
-    fontWeight: "bold",
-    textTransform: "capitalize",
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
   paragraph: {
     marginVertical: 8,
     lineHeight: 20,
   },
   scroll: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   badge: {
     backgroundColor: colors.primary,
@@ -31,7 +31,7 @@ export const globalStyle = StyleSheet.create({
 });
 
 export const shadowStyle = {
-  shadowColor: "#000",
+  shadowColor: '#000',
   shadowOffset: {
     width: 0,
     height: 1,
@@ -42,18 +42,18 @@ export const shadowStyle = {
 };
 export const borderRadius = 10;
 
-export const width = Dimensions.get("window").width;
-export const height = Dimensions.get("window").height;
+export const width = Dimensions.get('window').width;
+export const height = Dimensions.get('window').height;
 export const baseContainerStyle = {
-  width: "100%",
-  alignItems: "center",
-  justifyContent: "center",
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 export const SkeletonCommonProps = {
-  colorMode: "light",
+  colorMode: 'light',
   transition: {
-    type: "timing",
+    type: 'timing',
     duration: 1500,
   },
   backgroundColor: colors.muteColor,

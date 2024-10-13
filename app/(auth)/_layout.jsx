@@ -1,7 +1,7 @@
-import React from "react";
-import { Stack } from "expo-router";
+// import React from 'react';
+import { Stack } from 'expo-router';
 
-import { NewUserProvider } from "@provider/newUserProvider/newUserProvider";
+import { NewUserProvider } from '@provider/newUserProvider/newUserProvider';
 
 const AuthLayout = () => (
   <NewUserProvider>

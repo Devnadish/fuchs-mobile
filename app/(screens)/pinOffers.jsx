@@ -1,18 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
+import Container from '@component/shared/Containner';
+import ComeingSoon from '@component/shared/ComeingSoon';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function PinOffers() {
+  const { t } = useTranslation();
+  const translations = useMemo(
+    () => ({
+      title: t('prfilePin_title'),
+    }),
+    [t]
+  );
   return (
-    <>
-      <Stack.Screen
-        options={{ title: `Favorite Branches`, headerShown: true }}
-      />
-      <View>
-        <Text>PinOffers</Text>
-      </View>
-    </>
+    <Container>
+      <Stack.Screen options={{ title: translations.title, headerShown: true }} />
+      <ComeingSoon />
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({});
