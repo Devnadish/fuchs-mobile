@@ -66,7 +66,8 @@ const HomePage = () => {
 
 const ServiceCard = memo(({ item }) => (
   <View style={styles.card}>
-    <ServiceName title={item.title} description={item.description} />
+    <ServiceName title={item.title} />
+    <ServiceDescription description={item.description} />
     <ActionButtons
       serviceId={item.id}
       rate={item.rate}
@@ -76,9 +77,14 @@ const ServiceCard = memo(({ item }) => (
   </View>
 ));
 
-const ServiceName = memo(({ title, description }) => (
+const ServiceName = memo(({ title }) => (
   <View style={styles.nameContainer}>
     <Text style={styles.title}>{title}</Text>
+  </View>
+));
+
+const ServiceDescription = memo(({ description }) => (
+  <View style={styles.descriptionContainer}>
     <Text style={styles.description}>{description}</Text>
   </View>
 ));
@@ -170,16 +176,22 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.primary,
+  },
+  descriptionContainer: {
+    width: '100%',
+    minHeight: 50,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
     gap: 15,
   },
   title: {
     width: '100%',
     fontWeight: 'semibold',
     fontSize: 18,
-    color: colors.textColor,
+    color: colors.white,
     padding: 10,
-    borderBottomWidth: 1,
-    borderColor: colors.borderColor,
   },
   description: {
     color: colors.textColor,
