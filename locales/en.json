@@ -1,8 +1,9 @@
 {
-  "tab.home": "Home",
-  "tab.offers": "Offers",
-  "tab.branches": "Branches",
-  "tab.contact": "Contact",
+  "tabHome": "Home",
+  "tabOffers": "Offers",
+  "tabBranches": "Branches",
+  "tabContact": "Contact",
+  "tabMmore": "more",
   "bookBtn": "Book Now",
   "prfileMenuActiveBook_title": "Active Book",
   "prfileMenuActiveBook_description": "Check your active booking and more",

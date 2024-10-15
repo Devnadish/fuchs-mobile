@@ -1,12 +1,12 @@
 import { Tabs } from 'expo-router';
 import { colors } from '@constants';
-import { useTranslation } from 'react-i18next';
 import { ONESTOP } from '@constants/images';
 import ExpoImage from '@component/shared/ExpoImage';
 import useIcon from '@hooks/useIcon';
 import { View, Text } from 'react-native'; // Import View and Text
 import ActiveBooking from '@component/home/homeTab/bar/ActiveBookin';
 import UserAvatar from '@component/home/homeTab/bar/UserAvatar';
+import tr from '@hooks/tr';
 
 const tabOptions = {
   tabBarShowLabel: false,
@@ -38,7 +38,13 @@ const CustomTabBarIcon = ({ icon, label }) => {
 };
 
 const TabsLayout = () => {
-  const { t } = useTranslation();
+  const { tabHome, tabOffers, tabBranches, tabContact, tabMmore } = tr(
+    'tabHome',
+    'tabOffers',
+    'tabBranches',
+    'tabContact',
+    'tabMmore'
+  );
 
   const renderTabIcon =
     (iconName, label) =>
@@ -50,31 +56,38 @@ const TabsLayout = () => {
   return (
     <Tabs screenOptions={tabOptions}>
       <Tabs.Screen
-        name="homeTab"
-        options={{
-          title: t('tab.home'),
-          tabBarIcon: renderTabIcon('home', t('tab.home')),
-        }}
-      />
-      <Tabs.Screen
         name="branchesTab"
         options={{
-          title: t('tab.branches'),
-          tabBarIcon: renderTabIcon('location', t('tab.branches')),
+          title: tabBranches,
+          tabBarIcon: renderTabIcon('location', tabBranches),
         }}
       />
       <Tabs.Screen
         name="offersTab"
         options={{
-          title: t('tab.offers'),
-          tabBarIcon: renderTabIcon('offer', t('tab.offers')),
+          title: tabOffers,
+          tabBarIcon: renderTabIcon('offer', tabOffers),
+        }}
+      />
+      <Tabs.Screen
+        name="homeTab"
+        options={{
+          title: tabHome,
+          tabBarIcon: renderTabIcon('home', tabHome),
         }}
       />
       <Tabs.Screen
         name="contactsTab"
         options={{
-          title: t('tab.contact'),
-          tabBarIcon: renderTabIcon('call', t('tab.contact')),
+          title: tabContact,
+          tabBarIcon: renderTabIcon('call', tabContact),
+        }}
+      />
+      <Tabs.Screen
+        name="moreTab"
+        options={{
+          title: tabMmore,
+          tabBarIcon: renderTabIcon('more', tabMmore),
         }}
       />
     </Tabs>

@@ -16,6 +16,7 @@ const icons = {
   favorite: memo(({ size, color }) => <MaterialIcons name="favorite" size={size} color={color} />),
   pin: memo(({ size, color }) => <AntDesign name="pushpino" size={size} color={color} />),
   logout: memo(({ size, color }) => <MaterialIcons name="logout" size={size} color={color} />),
+  more: memo(({ size, color }) => <MaterialIcons name="more-horiz" size={size} color={color} />),
 
   city: memo(({ size, color }) => (
     <MaterialCommunityIcons name="home-city" size={size} color={color} />

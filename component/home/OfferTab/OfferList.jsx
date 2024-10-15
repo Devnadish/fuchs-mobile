@@ -2,8 +2,8 @@ import React, { memo, useCallback } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@constants';
 import { SkeletonBodyRow } from '@component/shared/SkeltonBody';
-import useOffers from './useOffers';
 import ExpoImage from '@component/shared/ExpoImage';
+import useOffers from '@hooks/useOffers';
 
 const ITEM_HEIGHT = 200; // Height of each item
 const ITEM_WIDTH = '48%'; // Width of each item (for two columns)
@@ -63,7 +63,7 @@ const RenderOfferItem = memo(
 
     return (
       <View style={styles.offerContainer}>
-        <ExpoImage image={item?.image} style={styles.offerImage} />
+        <ExpoImage image={item?.image} imageHash={item?.imageHash} style={styles.offerImage} />
         <Text style={styles.detailsText}>{detailText}</Text>
       </View>
     );

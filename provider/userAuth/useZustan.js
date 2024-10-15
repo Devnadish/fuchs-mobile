@@ -1,5 +1,7 @@
 import create from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18next from 'i18next';
+import { I18nManager } from 'react-native';
 import { cloudUrl } from '@constants/images';
 
 const useUserAuthStore = create((set, get) => ({
@@ -24,34 +26,29 @@ const useUserAuthStore = create((set, get) => ({
   loading: true,
   contextUpdateLoading: false,
 
-  checkLoginStatus: async () => {
+  initializeUser: async () => {
     const storedData = await AsyncStorage.getItem('userData');
-    set({
-      userData: storedData ? { ...JSON.parse(storedData), isLogin: true } : get().userData,
-      loading: false,
-    });
+    const userData = storedData ? JSON.parse(storedData) : {};
+    set({ userData: { ...userData, isLogin: !!storedData }, loading: false });
+    i18next.changeLanguage(userData.userLanguage || 'en');
+    I18nManager.forceRTL(userData.userLanguage === 'ar');
   },
 
-  updateUserData: async (newData) => {
+  updateUserData: async newData => {
     set({ contextUpdateLoading: true });
-    try {
-      const updatedData = {
-        ...get().userData,
-        ...newData,
-        userAvatar: newData.userAvatar ? cloudUrl + newData.userAvatar : get().userData.userAvatar,
-        isLogin: true,
-      };
-      await AsyncStorage.setItem('userData', JSON.stringify(updatedData));
-      set({ userData: updatedData });
-    } catch (error) {
-      console.error('Failed to update user data:', error);
-    } finally {
-      set({ contextUpdateLoading: false });
-    }
+    const { userData } = get();
+    const updatedData = {
+      ...userData,
+      ...newData,
+      userAvatar: newData.userAvatar ? cloudUrl + newData.userAvatar : userData.userAvatar,
+      isLogin: true,
+    };
+    await AsyncStorage.setItem('userData', JSON.stringify(updatedData));
+    set({ userData: updatedData });
+    set({ contextUpdateLoading: false });
   },
 
-  login: (userData) => get().updateUserData(userData),
-  loadAsGuest: () => get().updateUserData({ userId: 'Guest', isLogin: false }),
+  login: async userData => get().updateUserData(userData),
   logout: async () => {
     await AsyncStorage.clear();
     set({ userData: { ...get().userData, isLogin: false } });

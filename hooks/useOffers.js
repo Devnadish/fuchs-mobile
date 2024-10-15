@@ -17,6 +17,7 @@ const useOffers = selectedOffer => {
     try {
       const { allOffers, totalPage } = await getOffers(userLanguage, pageNum, LIMIT, selectedOffer);
       setOffers(prevOffers => [...prevOffers, ...allOffers]);
+      console.log(JSON.stringify(offers, null, 2));
       setPageCount(totalPage);
     } catch (error) {
       console.error('Error fetching offers:', error);

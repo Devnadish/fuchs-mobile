@@ -1,8 +1,9 @@
 {
-  "tab.home": "الرئيسية",
-  "tab.offers": "العروض",
-  "tab.branches": "الفروع",
-  "tab.contact": "الاتصال",
+  "tabHome": "الرئيسية",
+  "tabOffers": "العروض",
+  "tabBranches": "الفروع",
+  "tabContact": "الاتصال",
+  "tabMore": "المزيد",
   "bookBtn": "احجز الآن",
   "prfileMenuActiveBook_title": "الحجز النشط",
   "prfileMenuActiveBook_description": "تحقق من حجزك النشط والمزيد",

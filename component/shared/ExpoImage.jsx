@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Image } from 'expo-image';
-import { Skeleton } from 'moti/skeleton';
 import PropTypes from 'prop-types'; // Import PropTypes
-import { SkeletonCommonProps } from '@styles/globalStyle';
 
-const blurhash = 'LKN]Rv%2Tw=w]~RBVZRi};RPxuwH';
+const defaultBlurhash = 'LKN]Rv%2Tw=w]~RBVZRi};RPxuwH'; // Default blurhash
 
-export default function ExpoImage({ image, style, fit = 'cover', radius = 4 }) {
-  const [showSkeleton, setShowSkeleton] = useState(true); // Show skeleton initially
+const ExpoImage = ({ image, style, fit = 'cover', radius = 4, imageHash }) => {
+  const [isLoading, setIsLoading] = useState(true); // Track loading state
+  const [error, setError] = useState(false); // Track image loading errors
 
   return (
     <>
@@ -16,29 +15,44 @@ export default function ExpoImage({ image, style, fit = 'cover', radius = 4 }) {
         style={style}
         transition={200}
         contentFit={fit}
-        placeholder={{ blurhash }}
-        onLoadEnd={() => {
-          setShowSkeleton(false); // Hide skeleton when image loads
-        }}
+        placeholder={{ imageHash: imageHash || defaultBlurhash }} // Use provided hash or default
+        // onLoadEnd={() => {
+        //   setIsLoading(false); // Set loading to false when image loads
+        // }}
+        // onError={() => {
+        //   setError(true); // Set error state if image fails to load
+        //   setIsLoading(false); // Also stop loading
+        // }}
       />
-      {showSkeleton && (
-        <Skeleton
-          show={showSkeleton}
+      {/* {isLoading && !error && (
+        <Image
+          source={{ uri: imageHash || defaultBlurhash }} // Show blurhash if image is loading
           style={{
             ...style,
             borderRadius: radius, // Explicitly set the border radius
           }}
-          {...SkeletonCommonProps}
         />
       )}
+      {error && (
+        <Image
+          source={{ uri: defaultBlurhash }} // Show default blurhash on error
+          style={{
+            ...style,
+            borderRadius: radius, // Explicitly set the border radius
+          }}
+        />
+      )} */}
     </>
   );
-}
+};
 
-// Define prop types for ExpoImage component
-// ExpoImage.propTypes = {
-//   image: PropTypes.string.isRequired, // Validate image prop
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]), // Validate style prop
-//   fit: PropTypes.oneOf(['cover', 'contain']), // Validate fit prop
-//   radius: PropTypes.number, // Validate radius prop
-// };
+// PropTypes for type checking
+ExpoImage.propTypes = {
+  image: PropTypes.string.isRequired,
+  style: PropTypes.object,
+  fit: PropTypes.string,
+  radius: PropTypes.number,
+  imageHash: PropTypes.string,
+};
+
+export default ExpoImage;
